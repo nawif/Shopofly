@@ -1,5 +1,6 @@
 import React from 'react'
 import { createTabNavigator, createStackNavigator } from 'react-navigation'
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Cart from './screens/Cart'
 import Login from './screens/Login'
 import Register from './screens/Register'
@@ -65,7 +66,7 @@ const CartNavigator = createStackNavigator({
 * This is the Tab Navigator of our app,
 * Which contains all tabs and related screens and configs
 */
-const tabNavigator = createTabNavigator({
+const tabNavigator = createBottomTabNavigator({
   Scan: {
     screen: ScanNavigator,
     navigationOptions: {
