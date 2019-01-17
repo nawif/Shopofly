@@ -85,6 +85,24 @@ export default class Cart extends Component {
 		this.setState({ showAlert: false }, () => this.deleteItemFromStorage(this.state.itemToBeDeleted))
 	}
 
+	isEmpty = () => {
+		if(!this.state.cart) {
+			return true
+		}
+
+		// This flag is assigned as false if the cart is NOT empty
+		let flag = true
+
+		this.state.cart.forEach(function(item){
+			if(item !== null) {
+				flag = false
+				return
+			}
+		})
+
+		return flag
+	}
+
 	render() {
 		return (
 			<ScrollView
@@ -115,7 +133,7 @@ export default class Cart extends Component {
 					}) : <Text style={{ color: 'black', alignSelf: 'center', marginTop: 200 }}>Your cart is empty.</Text>
 				}
 				{
-					this.state.cart && this.state.cart.length > 0 ? <Button label='Checkout' borderRadius={5} onClick={() => this.props.navigation.navigate('CheckoutAddress')} /> : null
+					!this.isEmpty() ? <Button label='Checkout' borderRadius={5} onClick={() => this.props.navigation.navigate('CheckoutAddress')} /> : null
 				}
 				<AwesomeAlert
 					show={this.state.showAlert}
