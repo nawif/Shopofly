@@ -116,7 +116,7 @@ export default class Cart extends Component {
 				}
 			>
 				{
-					this.state.cart ? this.state.cart.map((item, index) => {
+					!this.isEmpty() ? this.state.cart.map((item, index) => {
 						return (
 							item ? <CartItem
 								item={item}
