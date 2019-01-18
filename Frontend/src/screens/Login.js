@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage, Spinner } from 'react-native'
+import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage, Spinner,Image } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Hideo } from 'react-native-textinput-effects';
+
+import { TextField } from 'react-native-material-textfield';
 import { Button } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -80,13 +81,15 @@ export default class Login extends Component {
 
 				<View>
 					<View style={inputContainer}>
-						<Hideo
-							iconClass={MaterialCommunityIcons}
-							iconName={'email'}
-							iconColor={'white'}
-							iconBackgroundColor={'#1fb19c'}
+						<TextField
+							label={'Phone Number'}
+							labelFontSize={12}
+							fontSize={16}
+							textColor={'#FFFFFF'}
+							tintColor={'#FFFFFF'}
+							baseColor={'#FFFFFF'}
+							characterRestriction={10}
 							inputStyle={inputStyle}
-							placeholder='email address...'
 							value={email}
 							onChangeText={(email) => this.setState({ email })}
 							autoCapitalize='none'
@@ -94,13 +97,16 @@ export default class Login extends Component {
 					</View>
 
 					<View style={inputContainer}>
-						<Hideo
-							iconClass={MaterialCommunityIcons}
-							iconName={'key'}
-							iconColor={'white'}
-							iconBackgroundColor={'#1fb19c'}
+						<TextField
+							label={'Password'}
+							labelFontSize={12}
+							fontSize={16}
+							title={'Password must be at least 8 characters'}
+							textColor={'#FFFFFF'}
+							tintColor={'#FFFFFF'}
+							baseColor={'#FFFFFF'}
+							characterRestriction={50}
 							inputStyle={inputStyle}
-							placeholder='password...'
 							value={password}
 							onChangeText={(password) => this.setState({ password })}
 							secureTextEntry
@@ -121,7 +127,7 @@ export default class Login extends Component {
 					style={signUpButton}
 					onPress={this.onRegister}
 				>
-          <Text style={signUpText}>or <Text style={boldText}>Sign Up</Text></Text>
+          <Text style={signUpText}>Do not have an account? <Text style={boldText}>Sign Up</Text></Text>
         </TouchableOpacity>
 
       </View>
@@ -129,11 +135,16 @@ export default class Login extends Component {
   }
 
 	render() {
+		const { logo }=styles
 		return (
 	      <ImageBackground
 	        source={require('../../assets/splash.png')}
 	        style={{width: '100%', height: '100%' }}
 	      >
+				<Image 
+				source={require('../../assets/logo.png')} 
+				style={logo} 
+				/>
 	        { this.renderForm() }
 					{ this.renderAlert() }
 	      </ImageBackground>
@@ -143,11 +154,15 @@ export default class Login extends Component {
 }
 
 const styles = {
+	logo: {
+		marginTop: '40%',
+		alignSelf: 'center',
+	},
   formContainer: {
-    top: '40%'
+    top: '8%'
   },
   buttonContainer: {
-    marginTop: 10
+    marginTop: 50
   },
   signUpButton: {
     alignItems: 'center',
@@ -156,9 +171,9 @@ const styles = {
   },
   signUpText: {
     color: 'white',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'Roboto-Light',
     opacity: 1,
-    fontSize: 16,
+    fontSize: 15,
     alignSelf: 'center'
   },
   dividerContainer: {
@@ -167,8 +182,7 @@ const styles = {
     alignSelf: 'center',
   },
   boldText: {
-    fontFamily: 'Roboto-Medium',
-    fontWeight: '900'
+    fontFamily: 'Roboto-Bold',
   },
 	inputStyle: {
 		color: '#464949',
