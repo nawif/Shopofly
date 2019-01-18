@@ -19,17 +19,15 @@ export default class CheckoutAddress extends React.Component {
      }
 
     componentDidMount() {
-      console.log("COMPONENT DID MOUNT")
-
       AsyncStorage.getItem('token')
       .then((token) => {
-        console.log("ENTERED TOKEN AUTH ME")
         API.getAddress(token)
         .then((data) => {
-          console.log("GOT DATA!!!")
           const { name, address, mobile_number } = data
 
-          this.setState({ name: name, address: address, mobile_number: mobile_number })
+          this.setState(
+            { name: name, address: address, mobile_number: mobile_number }
+          )
 
           let selectedAddress = {
             name: name,

@@ -133,7 +133,14 @@ export default class Cart extends Component {
 					}) : <Text style={{ color: 'black', alignSelf: 'center', marginTop: 200 }}>Your cart is empty.</Text>
 				}
 				{
-					!this.isEmpty() ? <Button label='Checkout' borderRadius={5} onClick={() => this.props.navigation.navigate('CheckoutAddress')} /> : null
+					!this.isEmpty() ? <Button
+															label='Checkout'
+															borderRadius={5}
+															onClick={() => {
+																	this.props.navigation.navigate('CheckoutAddress')
+																}
+															}
+														/> : null
 				}
 				<AwesomeAlert
 					show={this.state.showAlert}
