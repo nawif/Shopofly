@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage } from 'react-native'
+import { ImageBackground, View, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Text, AsyncStorage, Image } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Hideo } from 'react-native-textinput-effects';
+import { TextField } from 'react-native-material-textfield';
 import { Button, Alert } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -69,56 +69,45 @@ export default class Register extends Component {
 		const { email, password, address, name, phoneNumber, isEmailValid, isPassValid } = this.state
 		const { buttonContainer, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redShadow } = styles
 		return (
-      <View style={formContainer}>
+      <KeyboardAvoidingView style={formContainer}>
 
 				<View>
           <View style={inputContainer}>
-            <Hideo
-              iconClass={MaterialCommunityIcons}
-              iconName={'account'}
-              iconColor={'white'}
-              iconBackgroundColor={'#1fb19c'}
+            <TextField
+							label={'Phone Number'}
+							labelFontSize={12}
+							fontSize={16}
+							textColor={'#FFFFFF'}
+							tintColor={'#FFFFFF'}
+							baseColor={'#FFFFFF'}
+							characterRestriction={10}
               inputStyle={inputStyle}
-              placeholder='full name...'
               value={name}
               onChangeText={(name) => this.setState({ name })}
             />
           </View>
 
-					<View style={[inputContainer, !isEmailValid ? redShadow : null ]}>
-						<Hideo
-							iconClass={MaterialCommunityIcons}
-							iconName={'email'}
-							iconColor={'white'}
-							iconBackgroundColor={'#1fb19c'}
-							inputStyle={inputStyle}
-							placeholder='email address...'
-							value={email}
-							onChangeText={(email) => this.setState({ email })}
-							onEndEditing={(e) => this.validateEmail(e.nativeEvent.text)}
-							autoCapitalize='none'
+					<View style={[inputContainer, !isPassValid ? redShadow : null ]}>
+						<TextField
+						label={'Password'}
+						labelFontSize={12}
+						fontSize={16}
+						title={'Password must be at least 8 characters'}
+						textColor={'#FFFFFF'}
+						tintColor={'#FFFFFF'}
+						baseColor={'#FFFFFF'}
+						characterRestriction={50}
+						inputStyle={inputStyle}
+						value={password}
+						onChangeText={(password) => this.setState({ password })}
+						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
+						secureTextEntry
+						autoCapitalize='none'
 						/>
 					</View>
 					{
-						!isEmailValid ? <Alert text={'Email is not valid! e.g. ex@ex.com'} /> : null
+							!isPassValid ? <Alert text={'Password should be at least 6 characters'} /> : null
 					}
-
-
-					<View style={[inputContainer, !isPassValid ? redShadow : null ]}>
-						<Hideo
-							iconClass={MaterialCommunityIcons}
-							iconName={'key'}
-							iconColor={'white'}
-							iconBackgroundColor={'#1fb19c'}
-							inputStyle={inputStyle}
-							placeholder='password...'
-							value={password}
-							onChangeText={(password) => this.setState({ password })}
-							onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
-							secureTextEntry
-							autoCapitalize='none'
-						/>
-					</View>
 				</View>
 				{
 					!isPassValid ? <Alert text={'Password should be at least 6 characters'} /> : null
@@ -140,7 +129,7 @@ export default class Register extends Component {
           <Text style={signUpText}>Already have an account? <Text style={boldText}>Login</Text></Text>
         </TouchableOpacity>
 
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 
@@ -163,11 +152,16 @@ export default class Register extends Component {
 	}
 
 	render() {
+		const { logo }=styles
 		return (
       <ImageBackground
         source={require('../../assets/splash.png')}
         style={{width: '100%', height: '100%' }}
       >
+			<Image 
+				source={require('../../assets/logo.png')} 
+				style={logo} 
+			/>
         { this.renderForm() }
 				{ this.renderAlert() }
       </ImageBackground>
@@ -177,11 +171,15 @@ export default class Register extends Component {
 }
 
 const styles = {
+	logo: {
+		marginTop: '40%',
+		alignSelf: 'center',
+	},
   formContainer: {
-    top: '40%'
+    top: '8%'
   },
   buttonContainer: {
-    marginTop: 10
+    marginTop: 50
   },
   signUpButton: {
     alignItems: 'center',
@@ -190,9 +188,9 @@ const styles = {
   },
   signUpText: {
     color: 'white',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'Roboto-Light',
     opacity: 1,
-    fontSize: 16,
+    fontSize: 15,
     alignSelf: 'center'
   },
   dividerContainer: {
@@ -201,8 +199,7 @@ const styles = {
     alignSelf: 'center',
   },
   boldText: {
-    fontFamily: 'Roboto-Medium',
-    fontWeight: '900'
+    fontFamily: 'Roboto-Bold',
   },
 	inputStyle: {
 		color: '#464949',
