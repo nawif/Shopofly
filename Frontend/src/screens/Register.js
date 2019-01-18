@@ -121,7 +121,9 @@ export default class Register extends Component {
 					</View>
 				</View>
 				{
-					!isPassValid ? <Alert text={'Password should be at least 6 characters'} /> : null
+					!isPassValid ? <Alert
+														text={'Password should be at least 6 characters'}
+													/> : null
 				}
 
 

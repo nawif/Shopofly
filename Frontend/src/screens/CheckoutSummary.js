@@ -20,7 +20,11 @@ export default class CheckoutAddress extends React.Component {
     componentWillMount() {
         this.loadItems()
 
-        const { name, address, mobile_number } = this.props.navigation.state.params.selectedAddress
+        const {
+          name,
+          address,
+          mobile_number
+        } = this.props.navigation.state.params.selectedAddress
 
         this.setState({ name, address, mobile_number })
 
@@ -51,8 +55,8 @@ export default class CheckoutAddress extends React.Component {
 
         for (let item of this.state.cart) {
             if (item.price) {
-                 subtotal = subtotal + parseInt(item.price.substring(1)) * parseInt(item.quantity)
-
+                const itemPrice = item.price.substring(1)
+                subtotal += parseInt(itemPrice) * parseInt(item.quantity)
             }
         }
 
@@ -66,9 +70,9 @@ export default class CheckoutAddress extends React.Component {
     }
 
     placeOrder = async () => {
-		await AsyncStorage.setItem('cart', JSON.stringify([]))
-        this.props.navigation.navigate('OrderPlaced')
-	}
+  		await AsyncStorage.setItem('cart', JSON.stringify([]))
+      this.props.navigation.navigate('OrderPlaced')
+  	}
 
   showPicker = () => {
 		this.setState({ singlePickerVisible: true })

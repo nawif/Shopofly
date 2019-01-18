@@ -26,52 +26,53 @@ export default class Item extends Component {
             supplier,
             description,
             imageUrl } = this.props.navigation.state.params
-    const itemToBeAdded = { itemName, price, supplier, description, quantity: this.state.quantity.value, imageUrl }
 
-    // try {
-      let items = await AsyncStorage.getItem('cart')
-      items = JSON.parse(items)
-      if (items == null || items == [] || !items) {
-        items = []
-        items.push(itemToBeAdded)
-        await AsyncStorage.setItem('cart', JSON.stringify(items))
-        .then(() => this.showAlert())
-        return
+    const itemToBeAdded = { itemName,
+                            price,
+                            supplier,
+                            description,
+                            quantity: this.state.quantity.value,
+                            imageUrl }
+
+    let items = await AsyncStorage.getItem('cart')
+    items = JSON.parse(items)
+    if (items == null || items == [] || !items) {
+      items = []
+      items.push(itemToBeAdded)
+      await AsyncStorage.setItem('cart', JSON.stringify(items))
+      .then(() => this.showAlert())
+      return
+    }
+
+    // itemIsInCart = items.filter(e => e.itemName === itemToBeAdded.itemName).length > 0
+    itemIsInCart = false
+    for (let i in items) {
+      if (items[i] != null) {
+        if (items[i].itemName == itemToBeAdded.itemName) {
+          itemIsInCart = true;
+          break;
+        }
       }
+    }
 
-      // itemIsInCart = items.filter(e => e.itemName === itemToBeAdded.itemName).length > 0
-      itemIsInCart = false
+    if (itemIsInCart) {
       for (let i in items) {
         if (items[i] != null) {
-          if (items[i].itemName == itemToBeAdded.itemName) {
-            itemIsInCart = true;
+          if (items[i].itemName === itemToBeAdded.itemName) {
+            items[i].quantity = parseInt(items[i].quantity) + 1
+            await AsyncStorage.setItem('cart', JSON.stringify(items))
+            .then(() => this.showAlert())
             break;
           }
         }
       }
-      console.log(items)
-      if (itemIsInCart) {
-        for (let i in items) {
-          if (items[i] != null) {
-            if (items[i].itemName === itemToBeAdded.itemName) {
-              items[i].quantity = parseInt(items[i].quantity) + 1
-              await AsyncStorage.setItem('cart', JSON.stringify(items))
-              .then(() => this.showAlert())
-              break;
-            }
-          }
-        }
-      } else {
-        items.push(itemToBeAdded)
-        await AsyncStorage.setItem('cart', JSON.stringify(items))
-        .then(() => this.showAlert())
-      }
+    } else {
+      items.push(itemToBeAdded)
       await AsyncStorage.setItem('cart', JSON.stringify(items))
       .then(() => this.showAlert())
-    // } catch (error) {
-    //   // error handling. TODO.
-    //   console.log('ERROR')
-    // }
+    }
+    await AsyncStorage.setItem('cart', JSON.stringify(items))
+    .then(() => this.showAlert())
   }
 
   showAlert = () => {
@@ -88,9 +89,8 @@ export default class Item extends Component {
 
 
   render() {
-    const { navigation } = this.props;
+    const { navigation } = this.props
     const { container } = styles
-    console.log("NAVIGATION: " + navigation);
 
     const { itemName,
             price,
