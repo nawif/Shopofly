@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ImageBackground, View, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Text, AsyncStorage, Image } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
-import { Button, Alert } from '../components'
+import { Alert, GradientButton } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
 
@@ -67,7 +67,7 @@ export default class Register extends Component {
 
   renderForm() {
 		const { email, password, address, name, phoneNumber, isEmailValid, isPassValid } = this.state
-		const { buttonContainer, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redShadow } = styles
+		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redShadow } = styles
 		return (
       <KeyboardAvoidingView style={formContainer}>
 
@@ -109,25 +109,19 @@ export default class Register extends Component {
 							!isPassValid ? <Alert text={'Password should be at least 6 characters'} /> : null
 					}
 				</View>
-				{
-					!isPassValid ? <Alert
-														text={'Password should be at least 6 characters'}
-													/> : null
-				}
 
 
-        <View style={buttonContainer}>
-          <Button
+				<View style={submitButton}>
+					<GradientButton
 						label={'Register'}
 						onClick={this.onRegister}
 						isLoading={this.state.isLoading}
 					/>
-        </View>
+				</View>
 
         <TouchableOpacity
 					style={signUpButton}
-					onPress={() => this.props.navigation.navigate('Login')}
-				>
+					onPress={() => this.props.navigation.navigate('Login')}>
           <Text style={signUpText}>Already have an account? <Text style={boldText}>Login</Text></Text>
         </TouchableOpacity>
 
@@ -160,10 +154,10 @@ export default class Register extends Component {
         source={require('../../assets/splash.png')}
         style={{width: '100%', height: '100%' }}
       >
-			<Image 
-				source={require('../../assets/logo.png')} 
-				style={logo} 
-			/>
+				<Image
+					source={require('../../assets/logo.png')}
+					style={logo}
+				/>
         { this.renderForm() }
 				{ this.renderAlert() }
       </ImageBackground>
@@ -180,8 +174,9 @@ const styles = {
   formContainer: {
     top: '8%'
   },
-  buttonContainer: {
-    marginTop: 50
+  submitButton: {
+    marginTop: 50,
+		marginBottom: 15
   },
   signUpButton: {
     alignItems: 'center',
@@ -205,7 +200,8 @@ const styles = {
   },
 	inputStyle: {
 		color: '#464949',
-		fontFamily: 'Roboto-Medium'
+		fontFamily: 'Roboto-Medium',
+		height: '100%'
 	},
 	inputContainer: {
 		width: '80%',
