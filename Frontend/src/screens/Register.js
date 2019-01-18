@@ -168,7 +168,7 @@ export default class Register extends Component {
 
 const styles = {
 	logo: {
-		marginTop: '40%',
+		marginTop: '35%',
 		alignSelf: 'center',
 	},
   formContainer: {

@@ -3,7 +3,7 @@ import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStora
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { TextField } from 'react-native-material-textfield';
-import { Button } from '../components'
+import { Button, GradientButton } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
 
@@ -75,7 +75,7 @@ export default class Login extends Component {
 
   renderForm() {
 		const { email, password } = this.state
-		const { buttonContainer, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redBg } = styles
+		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redBg } = styles
     return (
       <View style={formContainer}>
 
@@ -115,13 +115,13 @@ export default class Login extends Component {
 					</View>
 				</View>
 
-					<View style={buttonContainer}>
-						<Button
-							label={'Login'}
-							onClick={this.onLogin}
-							isLoading={this.state.loading}
-							/>
-					</View>
+				<View style={submitButton}>
+					<GradientButton
+						label={'Login'}
+						onClick={this.onLogin}
+						isLoading={this.state.isLoading}
+					/>
+				</View>
 
         <TouchableOpacity
 					style={signUpButton}
@@ -141,9 +141,9 @@ export default class Login extends Component {
 	        source={require('../../assets/splash.png')}
 	        style={{width: '100%', height: '100%' }}
 	      >
-				<Image 
-				source={require('../../assets/logo.png')} 
-				style={logo} 
+				<Image
+				source={require('../../assets/logo.png')}
+				style={logo}
 				/>
 	        { this.renderForm() }
 					{ this.renderAlert() }
@@ -155,14 +155,15 @@ export default class Login extends Component {
 
 const styles = {
 	logo: {
-		marginTop: '40%',
+		marginTop: '35%',
 		alignSelf: 'center',
 	},
   formContainer: {
     top: '8%'
   },
-  buttonContainer: {
-    marginTop: 50
+  submitButton: {
+    marginTop: 50,
+		marginBottom: 15
   },
   signUpButton: {
     alignItems: 'center',
