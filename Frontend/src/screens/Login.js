@@ -162,13 +162,14 @@ const styles = {
     top: '8%'
   },
   submitButton: {
-    marginTop: 50,
+    marginTop: '15%',
 		marginBottom: 15
   },
   signUpButton: {
     alignItems: 'center',
     height: 50,
-    justifyContent: 'center'
+		justifyContent: 'center',
+		marginTop: '4%'
   },
   signUpText: {
     color: 'white',
@@ -194,6 +195,6 @@ const styles = {
 		height: 48,
 		alignSelf: 'center',
 		opacity: 0.8,
-		marginBottom: 10
+		marginBottom: 20
 	},
 }

@@ -105,8 +105,27 @@ export default class Register extends Component {
 						autoCapitalize='none'
 						/>
 					</View>
+
+					<View style={[inputContainer, !isPassValid ? redShadow : null ]}>
+						<TextField
+						label={'Confirm Password'}
+						labelFontSize={12}
+						fontSize={16}
+						textColor={'#FFFFFF'}
+						tintColor={'#FFFFFF'}
+						baseColor={'#FFFFFF'}
+						characterRestriction={50}
+						inputStyle={inputStyle}
+						value={password}
+						onChangeText={(password) => this.setState({ password })}
+						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
+						secureTextEntry
+						autoCapitalize='none'
+						/>
+					</View>
 					{
-							!isPassValid ? <Alert text={'Password should be at least 6 characters'} /> : null
+							//TODO: Campare the Password field with the confirm password 
+							//TODO: Error Massage, Should be fit with the whole app style.
 					}
 				</View>
 
@@ -175,13 +194,14 @@ const styles = {
     top: '8%'
   },
   submitButton: {
-    marginTop: 50,
+    marginTop: '15%',
 		marginBottom: 15
   },
   signUpButton: {
     alignItems: 'center',
     height: 50,
-    justifyContent: 'center'
+		justifyContent: 'center',
+		marginTop: '4%'
   },
   signUpText: {
     color: 'white',
@@ -208,7 +228,7 @@ const styles = {
 		height: 48,
 		alignSelf: 'center',
 		opacity: 0.8,
-		marginBottom: 10
+		marginBottom: 20
 	},
 	redShadow: {
 		shadowColor: 'red',
