@@ -8,11 +8,11 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 
 export default class Register extends Component {
 	state = {
-		email: '',
+		phone: '',
 		password: '',
-    name: '',
-		isEmailValid: true,
+		isPhoneValid: true,
 		isPassValid: true,
+		isConfirmValid: true,
 		showAlert: false,
 		isLoading: false
 	}
@@ -31,9 +31,9 @@ export default class Register extends Component {
 
 
   onRegister = () => {
-    const { email, password } = this.state
+    const { phone, password } = this.state
 		this.setState({ isLoading: true })
-    API.register(email, password)
+    API.register(phone, password)
     .then(async (data) => {
 			this.setState({ isLoading: false })
 			console.log(data.token);
@@ -46,18 +46,18 @@ export default class Register extends Component {
 		})
   }
 
-	validateEmail = (email) => {
-		const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		console.log(email , re.test(String(email).toLowerCase()));
-		if (re.test(String(email).toLowerCase())) {
-			this.setState({ isEmailValid: true })
+	validatePhone = (phone) => {
+		const re = /^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/;
+		console.log(phone, re.test(String(phone)));
+		if (re.test(String(phone))) {
+			this.setState({ isPhoneValid: true })
 		} else {
-			this.setState({ isEmailValid: false })
+			this.setState({ isPhoneValid: false })
 		}
 	}
 
 	validatePassword = (password) => {
-		console.log(password);
+		console.log(password)
 		if (password.length >= 6) {
 			this.setState({ isPassValid: true })
 		} else {
@@ -65,14 +65,28 @@ export default class Register extends Component {
 		}
 	}
 
+	validateConfirm = (confirmPassword) => {
+		console.log(confirmPassword)
+		if (confirmPassword.length >= 6 && confirmPassword === this.state.password) {
+			this.setState({ isConfirmValid: true })
+		} else {
+			this.setState({ isConfirmValid: false })
+		}
+	}
+
   renderForm() {
-		const { email, password, address, name, phoneNumber, isEmailValid, isPassValid } = this.state
+		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
 		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redShadow } = styles
+
+		console.log("isPhoneValid: ", isPhoneValid);
+		console.log("isPassValid: ", isPassValid);
+		console.log("isConfirmValid: ", isConfirmValid);
+
 		return (
       <KeyboardAvoidingView style={formContainer}>
 
 				<View>
-          <View style={inputContainer}>
+          <View style={[inputContainer, !isPhoneValid ? redShadow : null ]}>
             <TextField
 							label={'Phone Number'}
 							labelFontSize={12}
@@ -82,8 +96,9 @@ export default class Register extends Component {
 							baseColor={'#FFFFFF'}
 							characterRestriction={10}
               inputStyle={inputStyle}
-              value={name}
-              onChangeText={(name) => this.setState({ name })}
+              value={phone}
+              onChangeText={(phone) => this.setState({ phone })}
+							onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
             />
           </View>
 
@@ -106,7 +121,7 @@ export default class Register extends Component {
 						/>
 					</View>
 
-					<View style={[inputContainer, !isPassValid ? redShadow : null ]}>
+					<View style={[inputContainer, !isConfirmValid ? redShadow : null]}>
 						<TextField
 						label={'Confirm Password'}
 						labelFontSize={12}
@@ -116,15 +131,15 @@ export default class Register extends Component {
 						baseColor={'#FFFFFF'}
 						characterRestriction={50}
 						inputStyle={inputStyle}
-						value={password}
-						onChangeText={(password) => this.setState({ password })}
-						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
+						value={confirmPassword}
+						onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+						onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
 						secureTextEntry
 						autoCapitalize='none'
 						/>
 					</View>
 					{
-							//TODO: Campare the Password field with the confirm password 
+							//TODO: Campare the Password field with the confirm password
 							//TODO: Error Massage, Should be fit with the whole app style.
 					}
 				</View>

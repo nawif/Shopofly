@@ -15,13 +15,13 @@ export const login = (email, password) => {
   .then((res) => res.data.access_token)
 }
 
-export const register = (email, password) => {
+export const register = (phone, password) => {
   return axios({
     method: 'POST',
     url: `${url}/users/register`,
     headers: { 'Content-type': 'application/json' },
     data: {
-      "email": email,
+      "phone": phone,
       "password": password,
     }
   })
