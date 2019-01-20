@@ -93,55 +93,60 @@ export default class Login extends Component {
 		)
 	}
 
-  renderForm() {
+	renderLogo() {
+		const { logo } = styles
+
+		return 	<Image
+							source={require('../../assets/logo.png')}
+							style={logo}
+						/>
+	}
+
+	renderInput() {
 		const { phone, password } = this.state
-		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redBg } = styles
-    return (
-      <View style={formContainer}>
+		const { inputContainer, inputStyle, labelTextStyle } = styles
 
-				<View>
-					<View style={inputContainer}>
-						<TextField
-							label={'Phone Number'}
-							labelFontSize={12}
-							fontSize={16}
-							textColor={'#FFFFFF'}
-							tintColor={'#FFFFFF'}
-							baseColor={'#FFFFFF'}
-							characterRestriction={10}
-							inputStyle={inputStyle}
-							value={phone}
-							onChangeText={(phone) => this.setState({ phone })}
-							autoCapitalize='none'
-						/>
-					</View>
+		return (
+			<View style={inputContainer}>
+				<TextField
+					label={'Phone Number'}
+					labelFontSize={12}
+					fontSize={16}
+					textColor={'#FFFFFF'}
+					tintColor={'#FFFFFF'}
+					baseColor={'#FFFFFF'}
+					characterRestriction={10}
+					inputStyle={inputStyle}
+					labelTextStyle={labelTextStyle}
+					value={phone}
+					onChangeText={(phone) => this.setState({ phone })}
+					autoCapitalize='none'
+				/>
 
-					<View style={inputContainer}>
-						<TextField
-							label={'Password'}
-							labelFontSize={12}
-							fontSize={16}
-							title={'Password must be at least 8 characters'}
-							textColor={'#FFFFFF'}
-							tintColor={'#FFFFFF'}
-							baseColor={'#FFFFFF'}
-							characterRestriction={50}
-							inputStyle={inputStyle}
-							value={password}
-							onChangeText={(password) => this.setState({ password })}
-							secureTextEntry
-							autoCapitalize='none'
-						/>
-					</View>
-				</View>
+				<TextField
+					label={'Password'}
+					labelFontSize={12}
+					fontSize={16}
+					textColor={'#FFFFFF'}
+					tintColor={'#FFFFFF'}
+					baseColor={'#FFFFFF'}
+					characterRestriction={50}
+					inputStyle={inputStyle}
+					labelTextStyle={labelTextStyle}
+					value={password}
+					onChangeText={(password) => this.setState({ password })}
+					secureTextEntry
+					autoCapitalize='none'
+				/>
+			</View>
+		)
+	}
 
-				<TouchableOpacity
-					style={signUpButton}
-					onPress={this.onRegister}
-				>
-          <Text style={signUpText}>Do not have an account? <Text style={boldText}>Sign Up</Text></Text>
-        </TouchableOpacity>
+	renderClickables() {
+		const { submitButton, signUpButton, signUpText, boldText } = styles
 
+		return (
+			<View>
 				<View style={submitButton}>
 					<GradientButton
 						label={'Login'}
@@ -150,27 +155,33 @@ export default class Login extends Component {
 					/>
 				</View>
 
-
-
-      </View>
-    )
-  }
+				<TouchableOpacity style={signUpButton} onPress={() => this.props.navigation.navigate('Register')}>
+					<Text style={signUpText}>Do not have an account? <Text style={boldText}>Sign Up</Text></Text>
+				</TouchableOpacity>
+			</View>
+		)
+	}
 
 	render() {
-		const { logo }=styles
+		const { logoSection, inputSection, clickablesSection } = styles
 		return (
 	      <ImageBackground
 	        source={require('../../assets/splash.png')}
-	        style={{width: '100%', height: '100%' }}
+	        style={{ width: '100%', height: '100%' }}
 	      >
-					<ScrollView>
-						<Image
-						source={require('../../assets/logo.png')}
-						style={logo}
-						/>
-						{ this.renderForm() }
-						{ this.renderAlert() }
-					</ScrollView>
+					<View style={logoSection}>
+						{ this.renderLogo() }
+					</View>
+
+					<View style={inputSection}>
+						{ this.renderInput() }
+					</View>
+
+					<View style={clickablesSection}>
+						{ this.renderClickables() }
+					</View>
+
+					{ this.renderAlert() }
 	      </ImageBackground>
 
 		)
@@ -178,15 +189,28 @@ export default class Login extends Component {
 }
 
 const styles = {
+	logoSection: {
+		height: '40%',
+		justifyContent: 'center'
+	},
+	inputSection: {
+		height: '30%',
+		justifyContent: 'center'
+	},
+	clickablesSection: {
+		height: '30%',
+		alignContent: 'center'
+	},
 	logo: {
-		marginTop: '35%',
 		alignSelf: 'center'
 	},
-  formContainer: {
-    top: '8%'
-  },
+	inputContainer: {
+		alignSelf: 'center',
+		alignContent: 'space-around',
+		width: '80%'
+	},
   submitButton: {
-    marginTop: '15%',
+    marginTop: '10%',
 		marginBottom: 15
   },
   signUpButton: {
@@ -202,11 +226,6 @@ const styles = {
     fontSize: 15,
     alignSelf: 'center'
   },
-  dividerContainer: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
   boldText: {
     fontFamily: 'Roboto-Bold',
   },
@@ -214,10 +233,7 @@ const styles = {
 		color: '#464949',
 		fontFamily: 'Roboto-Medium'
 	},
-	inputContainer: {
-		width: '80%',
-		alignSelf: 'center',
-		opacity: 0.8,
-		marginBottom: 20
-	},
+	labelTextStyle: {
+		opacity: 0.5
+	}
 }

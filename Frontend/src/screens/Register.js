@@ -115,91 +115,6 @@ export default class Register extends Component {
 		}
 	}
 
-  renderForm() {
-		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
-		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redShadow } = styles
-
-		return (
-      <KeyboardAvoidingView style={formContainer}>
-
-				<View>
-          <View style={[inputContainer, !isPhoneValid ? redShadow : null ]}>
-            <TextField
-							label={'Phone Number'}
-							labelFontSize={12}
-							fontSize={16}
-							textColor={'#FFFFFF'}
-							tintColor={'#FFFFFF'}
-							baseColor={'#FFFFFF'}
-							characterRestriction={10}
-              inputStyle={inputStyle}
-              value={phone}
-              onChangeText={(phone) => this.setState({ phone })}
-							onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
-            />
-          </View>
-
-					<View style={[inputContainer, !isPassValid ? redShadow : null ]}>
-						<TextField
-						label={'Password'}
-						labelFontSize={12}
-						fontSize={16}
-						title={'Password must be at least 8 characters'}
-						textColor={'#FFFFFF'}
-						tintColor={'#FFFFFF'}
-						baseColor={'#FFFFFF'}
-						characterRestriction={50}
-						inputStyle={inputStyle}
-						value={password}
-						onChangeText={(password) => this.setState({ password })}
-						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
-						secureTextEntry
-						autoCapitalize='none'
-						/>
-					</View>
-
-					<View style={[inputContainer, !isConfirmValid ? redShadow : null]}>
-						<TextField
-						label={'Confirm Password'}
-						labelFontSize={12}
-						fontSize={16}
-						textColor={'#FFFFFF'}
-						tintColor={'#FFFFFF'}
-						baseColor={'#FFFFFF'}
-						characterRestriction={50}
-						inputStyle={inputStyle}
-						value={confirmPassword}
-						onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-						onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
-						secureTextEntry
-						autoCapitalize='none'
-						/>
-					</View>
-					{
-							//TODO: Campare the Password field with the confirm password
-							//TODO: Error Massage, Should be fit with the whole app style.
-					}
-				</View>
-
-
-				<View style={submitButton}>
-					<GradientButton
-						label={'Register'}
-						onClick={this.onRegister}
-						isLoading={this.state.isLoading}
-					/>
-				</View>
-
-        <TouchableOpacity
-					style={signUpButton}
-					onPress={() => this.props.navigation.navigate('Login')}>
-          <Text style={signUpText}>Already have an account? <Text style={boldText}>Login</Text></Text>
-        </TouchableOpacity>
-
-      </KeyboardAvoidingView>
-    )
-  }
-
 	renderAlert() {
 		const { showAlert } = this.state
 		return (
@@ -218,37 +133,144 @@ export default class Register extends Component {
 		)
 	}
 
-	render() {
-		const { logo }=styles
+	renderLogo() {
+		const { logo } = styles
+
+		return 	<Image
+							source={require('../../assets/logo.png')}
+							style={logo}
+						/>
+	}
+
+	renderInput() {
+		const { phone, password, confirmPassword } = this.state
+		const { inputContainer, inputStyle, labelTextStyle } = styles
+
 		return (
-      <ImageBackground
-        source={require('../../assets/splash.png')}
-        style={{width: '100%', height: '100%' }}
-      >
-				<ScrollView style={{flex: 1}}>
-					<Image
-						source={require('../../assets/logo.png')}
-						style={logo}
+			<View style={inputContainer}>
+				<TextField
+					label={'Phone Number'}
+					labelFontSize={12}
+					fontSize={16}
+					textColor={'#FFFFFF'}
+					tintColor={'#FFFFFF'}
+					baseColor={'#FFFFFF'}
+					characterRestriction={10}
+					inputStyle={inputStyle}
+					labelTextStyle={labelTextStyle}
+					value={phone}
+					onChangeText={(phone) => this.setState({ phone })}
+					onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
+				/>
+
+				<TextField
+					label={'Password'}
+					labelFontSize={12}
+					fontSize={16}
+					textColor={'#FFFFFF'}
+					tintColor={'#FFFFFF'}
+					baseColor={'#FFFFFF'}
+					characterRestriction={50}
+					inputStyle={inputStyle}
+					labelTextStyle={labelTextStyle}
+					value={password}
+					onChangeText={(password) => this.setState({ password })}
+					onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
+					secureTextEntry
+					autoCapitalize='none'
+				/>
+
+				<TextField
+					label={'Confirm Password'}
+					labelFontSize={12}
+					fontSize={16}
+					textColor={'#FFFFFF'}
+					tintColor={'#FFFFFF'}
+					baseColor={'#FFFFFF'}
+					characterRestriction={50}
+					inputStyle={inputStyle}
+					labelTextStyle={labelTextStyle}
+					value={confirmPassword}
+					onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
+					onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
+					secureTextEntry
+					autoCapitalize='none'
+				/>
+			</View>
+		)
+	}
+
+	renderClickables() {
+		const { submitButton, signUpButton, signUpText, boldText } = styles
+
+		return (
+			<View>
+				<View style={submitButton}>
+					<GradientButton
+						label={'Register'}
+						onClick={this.onRegister}
+						isLoading={this.state.isLoading}
 					/>
-					{ this.renderForm() }
-					{ this.renderAlert() }
-				</ScrollView>
-      </ImageBackground>
+				</View>
+
+				<TouchableOpacity
+					style={signUpButton}
+					onPress={() => this.props.navigation.navigate('Login')}>
+					<Text style={signUpText}>Already have an account? <Text style={boldText}>Login</Text></Text>
+				</TouchableOpacity>
+			</View>
+		)
+	}
+
+	render() {
+		const { logoSection, inputSection, clickablesSection } = styles
+		return (
+			<ImageBackground
+				source={require('../../assets/splash.png')}
+				style={{ width: '100%', height: '100%' }}
+			>
+				<View style={logoSection}>
+					{ this.renderLogo() }
+				</View>
+
+				<View style={inputSection}>
+					{ this.renderInput() }
+				</View>
+
+				<View style={clickablesSection}>
+					{ this.renderClickables() }
+				</View>
+
+				{ this.renderAlert() }
+			</ImageBackground>
 
 		)
 	}
 }
 
 const styles = {
-	logo: {
-		marginTop: '35%',
-		alignSelf: 'center',
+	logoSection: {
+		height: '40%',
+		justifyContent: 'center'
 	},
-  formContainer: {
-    top: '8%'
-  },
+	inputSection: {
+		height: '30%',
+		justifyContent: 'center'
+	},
+	clickablesSection: {
+		height: '30%',
+		alignContent: 'center'
+	},
+	logo: {
+		alignSelf: 'center'
+	},
+	inputContainer: {
+		alignSelf: 'center',
+		alignContent: 'space-around',
+		width: '80%'
+	},
   submitButton: {
-    marginTop: '5%',
+    marginTop: '20%',
 		marginBottom: 15
   },
   signUpButton: {
@@ -264,29 +286,14 @@ const styles = {
     fontSize: 15,
     alignSelf: 'center'
   },
-  dividerContainer: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
   boldText: {
     fontFamily: 'Roboto-Bold',
   },
 	inputStyle: {
 		color: '#464949',
-		fontFamily: 'Roboto-Medium',
-		height: '100%'
+		fontFamily: 'Roboto-Medium'
 	},
-	inputContainer: {
-		width: '80%',
-		alignSelf: 'center',
-		opacity: 0.8,
-		marginBottom: 20
-	},
-	redShadow: {
-		shadowColor: 'red',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 1,
-		shadowRadius: 10,
+	labelTextStyle: {
+		opacity: 0.5
 	}
 }
