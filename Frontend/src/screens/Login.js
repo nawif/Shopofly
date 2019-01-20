@@ -9,7 +9,7 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 
 export default class Login extends Component {
 	state = {
-		email: 'osamalfaify@gmail.com',
+		phone: '0504444444',
 		password: '123456',
 		loading: false,
 		showAlert: false,
@@ -17,11 +17,31 @@ export default class Login extends Component {
 		alertMessage: '',
 	}
 
+	isValidInput = () => {
+		const { phone, password } = this.state
+
+		if (!phone || !password) {
+			this.setState({
+				showAlert: true,
+				alertMessage: 'Sorry, you can not submit without filling all the required fields.'
+			})
+
+			return false
+		}
+
+		return true
+	}
+
   onLogin = () => {
-		const { email, password } = this.state
+		const { phone, password } = this.state
+
+		if(!this.isValidInput()) {
+			return
+		}
+
 		this.setState({ loading: true })
 
-    API.login(email, password)
+    API.login(phone, password)
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
@@ -32,7 +52,7 @@ export default class Login extends Component {
 			}
     })
     .catch((error) => {
-			this.showAlert('Login Failed', 'Please make sure you submitted the correct email and password')
+			this.showAlert('Login Failed', 'Please make sure you submitted the correct phone and password')
 			this.setState({ loading: false })
 		})
   }
@@ -74,7 +94,7 @@ export default class Login extends Component {
 	}
 
   renderForm() {
-		const { email, password } = this.state
+		const { phone, password } = this.state
 		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redBg } = styles
     return (
       <View style={formContainer}>
@@ -90,8 +110,8 @@ export default class Login extends Component {
 							baseColor={'#FFFFFF'}
 							characterRestriction={10}
 							inputStyle={inputStyle}
-							value={email}
-							onChangeText={(email) => this.setState({ email })}
+							value={phone}
+							onChangeText={(phone) => this.setState({ phone })}
 							autoCapitalize='none'
 						/>
 					</View>
