@@ -14,6 +14,7 @@ export default class Register extends Component {
 		isPassValid: true,
 		isConfirmValid: true,
 		showAlert: false,
+		alertMessage: '',
 		isLoading: false
 	}
 
@@ -29,9 +30,44 @@ export default class Register extends Component {
 		})
 	}
 
+	isValidInput = () => {
+		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
+
+		if (!phone || !password || !confirmPassword) {
+			return this.setState({
+				showAlert: true,
+				alertMessage: 'Sorry, you can not submit if you have empty field(s).'
+			})
+		} else if (!isPhoneValid) {
+			return this.setState({
+				showAlert: true,
+				alertMessage: 'Sorry, the phone number format you entered is incorrect.'
+			})
+		} else if (!isPassValid) {
+			// TODO: check this condition
+			return this.setState({
+				showAlert: true,
+				alertMessage: 'Sorry, the password must be at least 6 characters.'
+			})
+		} else if (!isConfirmValid) {
+			return this.setState({
+				showAlert: true,
+				alertMessage: 'Sorry, the password and confirm password fields must be the same.'
+			})
+		} else {
+			return true
+		}
+
+		return false
+	}
 
   onRegister = () => {
     const { phone, password } = this.state
+
+		if(!this.isValidInput()) {
+			return
+		}
+
 		this.setState({ isLoading: true })
     API.register(phone, password)
     .then(async (data) => {
@@ -41,8 +77,13 @@ export default class Register extends Component {
 				this.props.navigation.navigate('Home', { token: data.token })
     })
     .catch((error) => {
-			this.setState({ isLoading: false, showAlert: true })
-			console.log(error.response);
+			this.setState({
+				isLoading: false,
+				showAlert: true,
+				alertMessage: error.response.data['cause by']
+			})
+
+			console.log("ERROR: " + error.response.data['cause by']);
 		})
   }
 
@@ -77,10 +118,6 @@ export default class Register extends Component {
   renderForm() {
 		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
 		const { submitButton, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redShadow } = styles
-
-		console.log("isPhoneValid: ", isPhoneValid);
-		console.log("isPassValid: ", isPassValid);
-		console.log("isConfirmValid: ", isConfirmValid);
 
 		return (
       <KeyboardAvoidingView style={formContainer}>
@@ -169,7 +206,7 @@ export default class Register extends Component {
 			<AwesomeAlert
 				show={showAlert}
 				title={'Registeration Failed'}
-				message={'Please make sure you have a good connection and try again.'}
+				message={this.state.alertMessage}
 				closeOnTouchOutside={true}
 				closeOnHardwareBackPress={true}
 				showConfirmButton={true}
