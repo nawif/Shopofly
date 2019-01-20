@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage, Spinner,Image } from 'react-native'
+import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage, Spinner,Image, ScrollView } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { TextField } from 'react-native-material-textfield';
@@ -135,6 +135,13 @@ export default class Login extends Component {
 					</View>
 				</View>
 
+				<TouchableOpacity
+					style={signUpButton}
+					onPress={this.onRegister}
+				>
+          <Text style={signUpText}>Do not have an account? <Text style={boldText}>Sign Up</Text></Text>
+        </TouchableOpacity>
+
 				<View style={submitButton}>
 					<GradientButton
 						label={'Login'}
@@ -143,12 +150,7 @@ export default class Login extends Component {
 					/>
 				</View>
 
-        <TouchableOpacity
-					style={signUpButton}
-					onPress={this.onRegister}
-				>
-          <Text style={signUpText}>Do not have an account? <Text style={boldText}>Sign Up</Text></Text>
-        </TouchableOpacity>
+
 
       </View>
     )
@@ -161,12 +163,14 @@ export default class Login extends Component {
 	        source={require('../../assets/splash.png')}
 	        style={{width: '100%', height: '100%' }}
 	      >
-				<Image
-				source={require('../../assets/logo.png')}
-				style={logo}
-				/>
-	        { this.renderForm() }
-					{ this.renderAlert() }
+					<ScrollView>
+						<Image
+						source={require('../../assets/logo.png')}
+						style={logo}
+						/>
+						{ this.renderForm() }
+						{ this.renderAlert() }
+					</ScrollView>
 	      </ImageBackground>
 
 		)
@@ -176,7 +180,7 @@ export default class Login extends Component {
 const styles = {
 	logo: {
 		marginTop: '35%',
-		alignSelf: 'center',
+		alignSelf: 'center'
 	},
   formContainer: {
     top: '8%'
@@ -212,7 +216,6 @@ const styles = {
 	},
 	inputContainer: {
 		width: '80%',
-		height: 48,
 		alignSelf: 'center',
 		opacity: 0.8,
 		marginBottom: 20

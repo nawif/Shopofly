@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Text, AsyncStorage, Image } from 'react-native'
+import { ImageBackground, View, SafeAreaView, KeyboardAvoidingView, TouchableOpacity, Text, AsyncStorage, Image, ScrollView } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextField } from 'react-native-material-textfield';
 import { Alert, GradientButton } from '../components'
@@ -225,12 +225,14 @@ export default class Register extends Component {
         source={require('../../assets/splash.png')}
         style={{width: '100%', height: '100%' }}
       >
-				<Image
-					source={require('../../assets/logo.png')}
-					style={logo}
-				/>
-        { this.renderForm() }
-				{ this.renderAlert() }
+				<ScrollView style={{flex: 1}}>
+					<Image
+						source={require('../../assets/logo.png')}
+						style={logo}
+					/>
+					{ this.renderForm() }
+					{ this.renderAlert() }
+				</ScrollView>
       </ImageBackground>
 
 		)
@@ -246,7 +248,7 @@ const styles = {
     top: '8%'
   },
   submitButton: {
-    marginTop: '15%',
+    marginTop: '5%',
 		marginBottom: 15
   },
   signUpButton: {
@@ -277,7 +279,6 @@ const styles = {
 	},
 	inputContainer: {
 		width: '80%',
-		height: 48,
 		alignSelf: 'center',
 		opacity: 0.8,
 		marginBottom: 20
