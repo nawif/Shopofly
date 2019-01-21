@@ -274,7 +274,7 @@ const styles = {
 	},
   submitButton: {
     marginTop: '20%',
-		marginBottom: 15
+		marginBottom: '11%'
   },
   signUpButton: {
     alignItems: 'center',

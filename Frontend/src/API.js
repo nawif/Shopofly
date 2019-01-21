@@ -21,7 +21,7 @@ export const register = (phone, password) => {
     url: `${url}/users/register`,
     headers: { 'Content-type': 'application/json' },
     data: {
-      "phone": phone,
+      "mobile_number": phone,
       "password": password,
     }
   })
