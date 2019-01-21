@@ -7,7 +7,8 @@ const GradientButton = (props) => {
 
 	const containerStyles = {
 		width: props.width || '80%',
-    height: props.height || 50
+		height: props.height || 50,
+		opacity: props.isValid ? 1.0 : 0.7  
 	}
 
   const gradientStyles = {
@@ -32,7 +33,8 @@ const GradientButton = (props) => {
 	return (
 		<View style={mainContainer}>
 			<TouchableOpacity
-	      onPress={props.onClick}
+				onPress={props.onClick}
+				disabled={!props.isValid}
 				style={containerStyles}
 	    >
 	      {

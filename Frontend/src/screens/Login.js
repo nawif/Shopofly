@@ -21,14 +21,8 @@ export default class Login extends Component {
 		const { phone, password } = this.state
 
 		if (!phone || !password) {
-			this.setState({
-				showAlert: true,
-				alertMessage: 'Sorry, you can not submit without filling all the required fields.'
-			})
-
 			return false
 		}
-
 		return true
 	}
 
@@ -41,7 +35,7 @@ export default class Login extends Component {
 
 		this.setState({ loading: true })
 
-    API.login(phone, password)
+    API.login(phone, password) 
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
@@ -144,7 +138,7 @@ export default class Login extends Component {
 
 	renderClickables() {
 		const { submitButton, signUpButton, signUpText, boldText } = styles
-
+		const isValid = this.isValidInput()
 		return (
 			<View>
 				<View style={submitButton}>
@@ -152,6 +146,7 @@ export default class Login extends Component {
 						label={'Login'}
 						onClick={this.onLogin}
 						isLoading={this.state.isLoading}
+						isValid={isValid}
 					/>
 				</View>
 
@@ -211,9 +206,7 @@ const styles = {
 	},
   submitButton: {
     marginTop: '10%',
-	marginBottom: '11
-	
-	%'
+	marginBottom: '11%',
   },
   signUpButton: {
     alignItems: 'center',
