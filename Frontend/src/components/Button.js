@@ -7,8 +7,8 @@ const Button = (props) => {
   const propsStyles = {
     width: props.width || '80%',
     height: props.height || 50,
-    backgroundColor: props.color || '#1fb19c',
-		borderRadius: props.borderRadius || 20,
+    backgroundColor: props.color || '#A9A9A9',
+		borderRadius: props.borderRadius || 10,
 		alignSelf: props.align || 'center',
 		justifyContent: 'center',
   }

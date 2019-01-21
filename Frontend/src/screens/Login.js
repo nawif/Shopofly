@@ -1,26 +1,39 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage, Spinner } from 'react-native'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Hideo } from 'react-native-textinput-effects';
-import { Button } from '../components'
+import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
+
+import { GradientButton, ClickablesSection, InputSection, LogoSection, TextInput } from '../components'
 import * as API from '../API'
-import AwesomeAlert from 'react-native-awesome-alerts';
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 export default class Login extends Component {
 	state = {
-		email: 'osamalfaify@gmail.com',
-		password: '123456',
+		phone: '',
+		password: '',
 		loading: false,
 		showAlert: false,
 		alertTitle: '',
 		alertMessage: '',
 	}
 
+	isValidInput = () => {
+		const { phone, password } = this.state
+
+		if (!phone || !password) {
+			return false
+		}
+		return true
+	}
+
   onLogin = () => {
-		const { email, password } = this.state
+		const { phone, password } = this.state
+
+		if(!this.isValidInput()) {
+			return
+		}
+
 		this.setState({ loading: true })
 
-    API.login(email, password)
+    API.login(phone, password) 
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
@@ -31,7 +44,7 @@ export default class Login extends Component {
 			}
     })
     .catch((error) => {
-			this.showAlert('Login Failed', 'Please make sure you submitted the correct email and password')
+			this.showAlert('Login Failed', 'Please make sure you submitted the correct phone and password')
 			this.setState({ loading: false })
 		})
   }
@@ -72,113 +85,48 @@ export default class Login extends Component {
 		)
 	}
 
-  renderForm() {
-		const { email, password } = this.state
-		const { buttonContainer, formContainer, signUpButton, signUpText, boldText, inputContainer, inputStyle, redBg } = styles
-    return (
-      <View style={formContainer}>
+	render() {
+		const { phone, password } = this.state
 
-				<View>
-					<View style={inputContainer}>
-						<Hideo
-							iconClass={MaterialCommunityIcons}
-							iconName={'email'}
-							iconColor={'white'}
-							iconBackgroundColor={'#1fb19c'}
-							inputStyle={inputStyle}
-							placeholder='email address...'
-							value={email}
-							onChangeText={(email) => this.setState({ email })}
+		return (
+	      <ImageBackground
+	        source={require('../../assets/splash.png')}
+	        style={{ width: '100%', height: '100%' }}
+	      >
+					<LogoSection />
+
+					<InputSection>
+						<TextInput
+							label={'Phone Number'}
+							characterRestriction={14}
+							value={phone}
+							onChangeText={(phone) => this.setState({ phone })}
 							autoCapitalize='none'
 						/>
-					</View>
 
-					<View style={inputContainer}>
-						<Hideo
-							iconClass={MaterialCommunityIcons}
-							iconName={'key'}
-							iconColor={'white'}
-							iconBackgroundColor={'#1fb19c'}
-							inputStyle={inputStyle}
-							placeholder='password...'
+						<TextInput
+							label={'Password'}
+							characterRestriction={50}
 							value={password}
 							onChangeText={(password) => this.setState({ password })}
 							secureTextEntry
 							autoCapitalize='none'
 						/>
-					</View>
-				</View>
+					</InputSection>
 
-					<View style={buttonContainer}>
-						<Button
-							label={'Login'}
-							onClick={this.onLogin}
-							isLoading={this.state.loading}
-							/>
-					</View>
+					<ClickablesSection
+						label={'Login'}
+						marginTop={'10%'}
+						onClick={this.onLogin}
+						isLoading={this.state.isLoading}
+						anchorText="Do not have an account?"
+						anchorHook="Sign Up"
+						onPress={() => this.props.navigation.navigate('Register')}
+					/>
 
-        <TouchableOpacity
-					style={signUpButton}
-					onPress={this.onRegister}
-				>
-          <Text style={signUpText}>or <Text style={boldText}>Sign Up</Text></Text>
-        </TouchableOpacity>
-
-      </View>
-    )
-  }
-
-	render() {
-		return (
-	      <ImageBackground
-	        source={require('../../assets/splash.png')}
-	        style={{width: '100%', height: '100%' }}
-	      >
-	        { this.renderForm() }
 					{ this.renderAlert() }
 	      </ImageBackground>
 
 		)
 	}
-}
-
-const styles = {
-  formContainer: {
-    top: '40%'
-  },
-  buttonContainer: {
-    marginTop: 10
-  },
-  signUpButton: {
-    alignItems: 'center',
-    height: 50,
-    justifyContent: 'center'
-  },
-  signUpText: {
-    color: 'white',
-    fontFamily: 'Roboto-Medium',
-    opacity: 1,
-    fontSize: 16,
-    alignSelf: 'center'
-  },
-  dividerContainer: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignSelf: 'center',
-  },
-  boldText: {
-    fontFamily: 'Roboto-Medium',
-    fontWeight: '900'
-  },
-	inputStyle: {
-		color: '#464949',
-		fontFamily: 'Roboto-Medium'
-	},
-	inputContainer: {
-		width: '80%',
-		height: 48,
-		alignSelf: 'center',
-		opacity: 0.8,
-		marginBottom: 10
-	},
 }
