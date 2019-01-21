@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, SafeAreaView, TouchableOpacity, Text, AsyncStorage, Spinner,Image, ScrollView } from 'react-native'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
 
-import { TextField } from 'react-native-material-textfield';
-import { Button, GradientButton } from '../components'
+import { GradientButton, ClickablesSection, InputSection, LogoSection, TextInput } from '../components'
 import * as API from '../API'
-import AwesomeAlert from 'react-native-awesome-alerts';
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 export default class Login extends Component {
 	state = {
-		phone: '0504444444',
-		password: '123456',
+		phone: '',
+		password: '',
 		loading: false,
 		showAlert: false,
 		alertTitle: '',
@@ -87,148 +85,48 @@ export default class Login extends Component {
 		)
 	}
 
-	renderLogo() {
-		const { logo } = styles
-
-		return 	<Image
-							source={require('../../assets/logo.png')}
-							style={logo}
-						/>
-	}
-
-	renderInput() {
-		const { phone, password } = this.state
-		const { inputContainer, inputStyle, labelTextStyle } = styles
-
-		return (
-			<View style={inputContainer}>
-				<TextField
-					label={'Phone Number'}
-					labelFontSize={12}
-					fontSize={16}
-					textColor={'#FFFFFF'}
-					tintColor={'#FFFFFF'}
-					baseColor={'#FFFFFF'}
-					characterRestriction={10}
-					inputStyle={inputStyle}
-					labelTextStyle={labelTextStyle}
-					value={phone}
-					onChangeText={(phone) => this.setState({ phone })}
-					autoCapitalize='none'
-				/>
-
-				<TextField
-					label={'Password'}
-					labelFontSize={12}
-					fontSize={16}
-					textColor={'#FFFFFF'}
-					tintColor={'#FFFFFF'}
-					baseColor={'#FFFFFF'}
-					characterRestriction={50}
-					inputStyle={inputStyle}
-					labelTextStyle={labelTextStyle}
-					value={password}
-					onChangeText={(password) => this.setState({ password })}
-					secureTextEntry
-					autoCapitalize='none'
-				/>
-			</View>
-		)
-	}
-
-	renderClickables() {
-		const { submitButton, signUpButton, signUpText, boldText } = styles
-		const isValid = this.isValidInput()
-		return (
-			<View>
-				<View style={submitButton}>
-					<GradientButton
-						label={'Login'}
-						onClick={this.onLogin}
-						isLoading={this.state.isLoading}
-						isValid={isValid}
-					/>
-				</View>
-
-				<TouchableOpacity style={signUpButton} onPress={() => this.props.navigation.navigate('Register')}>
-					<Text style={signUpText}>Do not have an account? <Text style={boldText}>Sign Up</Text></Text>
-				</TouchableOpacity>
-			</View>
-		)
-	}
-
 	render() {
-		const { logoSection, inputSection, clickablesSection } = styles
+		const { phone, password } = this.state
+
 		return (
 	      <ImageBackground
 	        source={require('../../assets/splash.png')}
 	        style={{ width: '100%', height: '100%' }}
 	      >
-					<View style={logoSection}>
-						{ this.renderLogo() }
-					</View>
+					<LogoSection />
 
-					<View style={inputSection}>
-						{ this.renderInput() }
-					</View>
+					<InputSection>
+						<TextInput
+							label={'Phone Number'}
+							characterRestriction={14}
+							value={phone}
+							onChangeText={(phone) => this.setState({ phone })}
+							autoCapitalize='none'
+						/>
 
-					<View style={clickablesSection}>
-						{ this.renderClickables() }
-					</View>
+						<TextInput
+							label={'Password'}
+							characterRestriction={50}
+							value={password}
+							onChangeText={(password) => this.setState({ password })}
+							secureTextEntry
+							autoCapitalize='none'
+						/>
+					</InputSection>
+
+					<ClickablesSection
+						label={'Login'}
+						marginTop={'10%'}
+						onClick={this.onLogin}
+						isLoading={this.state.isLoading}
+						anchorText="Do not have an account?"
+						anchorHook="Sign Up"
+						onPress={() => this.props.navigation.navigate('Register')}
+					/>
 
 					{ this.renderAlert() }
 	      </ImageBackground>
 
 		)
-	}
-}
-
-const styles = {
-	logoSection: {
-		height: '40%',
-		justifyContent: 'center'
-	},
-	inputSection: {
-		height: '30%',
-		justifyContent: 'center'
-	},
-	clickablesSection: {
-		height: '30%',
-		alignContent: 'center'
-	},
-	logo: {
-		alignSelf: 'center'
-	},
-	inputContainer: {
-		alignSelf: 'center',
-		alignContent: 'space-around',
-		width: '80%'
-	},
-  submitButton: {
-    marginTop: '10%',
-	marginBottom: '11%',
-  },
-  signUpButton: {
-    alignItems: 'center',
-    height: 50,
-		justifyContent: 'center',
-		marginTop: '4%'
-  },
-  signUpText: {
-    color: 'white',
-    fontFamily: 'Roboto-Light',
-    opacity: 1,
-    fontSize: 15,
-    alignSelf: 'center'
-  },
-  boldText: {
-    fontFamily: 'Roboto-Bold',
-  },
-	inputStyle: {
-		color: '#464949',
-		fontFamily: 'Roboto-Medium'
-	},
-	labelTextStyle: {
-		opacity: 0.5
 	}
 }
