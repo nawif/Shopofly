@@ -98,7 +98,7 @@ export default class Login extends Component {
 					<InputSection>
 						<TextInput
 							label={'Phone Number'}
-							characterRestriction={14}
+							characterRestriction={10}
 							value={phone}
 							onChangeText={(phone) => this.setState({ phone })}
 							autoCapitalize='none'
@@ -106,7 +106,7 @@ export default class Login extends Component {
 
 						<TextInput
 							label={'Password'}
-							characterRestriction={50}
+							characterRestriction={15}
 							value={password}
 							onChangeText={(password) => this.setState({ password })}
 							secureTextEntry
@@ -119,7 +119,7 @@ export default class Login extends Component {
 						marginTop={'10%'}
 						onClick={this.onLogin}
 						isLoading={this.state.isLoading}
-						anchorText="Do not have an account?"
+						anchorText="Don't have an account?"
 						anchorHook="Sign Up"
 						onPress={() => this.props.navigation.navigate('Register')}
 					/>

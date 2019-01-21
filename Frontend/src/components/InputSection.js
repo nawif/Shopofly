@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, KeyboardAvoidingView } from 'react-native'
 
 const InputSection = (props) => {
   const propsStyles = {
@@ -11,9 +11,11 @@ const InputSection = (props) => {
   }
 
 	return (
-    <View style={propsStyles}>
+    <KeyboardAvoidingView 
+    style={propsStyles}
+    behavior={"padding"}>
       { props.children }
-    </View>
+    </KeyboardAvoidingView>
 	)
 }
 

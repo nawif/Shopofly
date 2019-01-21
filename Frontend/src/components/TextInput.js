@@ -24,6 +24,7 @@ const TextInput = (props) => {
       label={props.label || 'Input'}
       labelFontSize={props.labelFontSize || 12}
       fontSize={props.fontSize || 16}
+      title={props.title}
       textColor={props.textColor || '#FFFFFF'}
       tintColor={props.tintColor || '#FFFFFF'}
       baseColor={props.baseColor || '#FFFFFF'}

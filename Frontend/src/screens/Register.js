@@ -128,33 +128,33 @@ export default class Register extends Component {
 				<InputSection>
 					<TextInput
 						label={'Phone Number'}
-						characterRestriction={14}
+						characterRestriction={10}
 						value={phone}
 						onChangeText={(phone) => this.setState({ phone })}
 						onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
-						error={!this.state.isPhoneValid ? 'The phone number format you entered is incorrect' : null}
+						error={!this.state.isPhoneValid ? 'Oh no! Please enter a valid phone number.' : null}
 					/>
 
 					<TextInput
 						label={'Password'}
-						characterRestriction={50}
+						characterRestriction={15}
 						value={password}
 						onChangeText={(password) => this.setState({ password })}
 						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
 						secureTextEntry
 						autoCapitalize='none'
-						error={!this.state.isPassValid ? 'The password must be at least 8 characters.' : null}
+						error={!this.state.isPassValid ? 'Hold up, this field requiers at least 8 characters.' : null}
 					/>
 
 					<TextInput
 						label={'Confirm Password'}
-						characterRestriction={50}
+						characterRestriction={15}
 						value={confirmPassword}
 						onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
 						onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
 						secureTextEntry
 						autoCapitalize='none'
-						error={!this.state.isConfirmValid ? 'The password and confirmation must be the same.' : null}
+						error={!this.state.isConfirmValid ? 'The password and confirmation arn\'t the same.' : null}
 					/>
 				</InputSection>
 
