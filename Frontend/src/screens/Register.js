@@ -14,7 +14,7 @@ export default class Register extends Component {
 		isConfirmValid: true,
 		showAlert: false,
 		alertMessage: '',
-		isLoading: false
+		isLoading: false,
 	}
 
 	showAlert = () => {
@@ -32,28 +32,11 @@ export default class Register extends Component {
 	isValidInput = () => {
 		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
 
-		if (!phone || !password || !confirmPassword) {
-			return this.setState({
-				showAlert: true,
-				alertMessage: 'Sorry, you can not submit if you have empty field(s).'
-			})
-		} else if (!isPhoneValid) {
-			return this.setState({
-				showAlert: true,
-				alertMessage: 'Sorry, the phone number format you entered is incorrect.'
-			})
-		} else if (!isPassValid) {
-			// TODO: check this condition
-			return this.setState({
-				showAlert: true,
-				alertMessage: 'Sorry, the password must be at least 8 characters.'
-			})
-		} else if (!isConfirmValid) {
-			return this.setState({
-				showAlert: true,
-				alertMessage: 'Sorry, the password and confirm password fields must be the same.'
-			})
-		} else {
+		if (!phone || !password || !confirmPassword ) {
+			return false
+		} else if (!isPassValid || !isConfirmValid || !isPhoneValid) {
+			return false
+		}  else {
 			return true
 		}
 
@@ -64,7 +47,7 @@ export default class Register extends Component {
     const { phone, password } = this.state
 
 		if(!this.isValidInput()) {
-			return
+			return 
 		}
 
 		this.setState({ isLoading: true })
@@ -98,7 +81,7 @@ export default class Register extends Component {
 
 	validatePassword = (password) => {
 		console.log(password)
-		if (password.length >= 6) {
+		if (password.length >= 8) {
 			this.setState({ isPassValid: true })
 		} else {
 			this.setState({ isPassValid: false })
@@ -107,7 +90,7 @@ export default class Register extends Component {
 
 	validateConfirm = (confirmPassword) => {
 		console.log(confirmPassword)
-		if (confirmPassword.length >= 6 && confirmPassword === this.state.password) {
+		if (confirmPassword === this.state.password) {
 			this.setState({ isConfirmValid: true })
 		} else {
 			this.setState({ isConfirmValid: false })
@@ -134,7 +117,7 @@ export default class Register extends Component {
 
 	render() {
 		const { phone, password, confirmPassword } = this.state
-
+    
 		return (
 			<ImageBackground
 				source={require('../../assets/splash.png')}

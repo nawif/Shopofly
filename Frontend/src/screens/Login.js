@@ -21,7 +21,6 @@ export default class Login extends Component {
 		if (!phone || !password) {
 			return false
 		}
-
 		return true
 	}
 
@@ -34,7 +33,7 @@ export default class Login extends Component {
 
 		this.setState({ loading: true })
 
-    API.login(phone, password)
+    API.login(phone, password) 
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
@@ -88,14 +87,6 @@ export default class Login extends Component {
 
 	render() {
 		const { phone, password } = this.state
-
-		// ----- Mostly Changed -----
-		// label
-		// characterRestriction
-		// value
-		// onChangeText
-		// onEndEditing
-		// error
 
 		return (
 	      <ImageBackground
