@@ -47,7 +47,7 @@ export default class Register extends Component {
 			// TODO: check this condition
 			return this.setState({
 				showAlert: true,
-				alertMessage: 'Sorry, the password must be at least 6 characters.'
+				alertMessage: 'Sorry, the password must be at least 8 characters.'
 			})
 		} else if (!isConfirmValid) {
 			return this.setState({
@@ -161,6 +161,7 @@ export default class Register extends Component {
 					value={phone}
 					onChangeText={(phone) => this.setState({ phone })}
 					onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
+					error={!this.state.isPhoneValid ? 'The phone number format you entered is incorrect' : null}
 				/>
 
 				<TextField
@@ -178,6 +179,7 @@ export default class Register extends Component {
 					onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
 					secureTextEntry
 					autoCapitalize='none'
+					error={!this.state.isPassValid ? 'The password must be at least 8 characters.' : null}
 				/>
 
 				<TextField
@@ -195,6 +197,7 @@ export default class Register extends Component {
 					onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
 					secureTextEntry
 					autoCapitalize='none'
+					error={!this.state.isConfirmValid ? 'The password and confirmation must be the same.' : null}
 				/>
 			</View>
 		)
