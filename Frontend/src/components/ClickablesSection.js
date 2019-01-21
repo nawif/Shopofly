@@ -17,6 +17,7 @@ const ClickablesSection = (props) => {
           label={props.label}
           onClick={props.onClick}
           isLoading={props.isLoading}
+          isValid={props.isValid}
         />
       </View>
 

@@ -33,7 +33,7 @@ export default class Login extends Component {
 
 		this.setState({ loading: true })
 
-    API.login(phone, password) 
+    API.login(phone, password)
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
@@ -87,6 +87,7 @@ export default class Login extends Component {
 
 	render() {
 		const { phone, password } = this.state
+		const isValid = this.isValidInput()
 
 		return (
 	      <ImageBackground
@@ -122,6 +123,7 @@ export default class Login extends Component {
 						anchorText="Do not have an account?"
 						anchorHook="Sign Up"
 						onPress={() => this.props.navigation.navigate('Register')}
+						isValid={isValid}
 					/>
 
 					{ this.renderAlert() }
