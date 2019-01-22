@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
 
-import { Alert, GradientButton, LogoSection, InputSection, ClickablesSection, TextInput } from '../components'
+import { Alert, GradientButton, LogoSection, InputSection, ClickablesSection, TextInput, RegisterFormInputs } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
 
@@ -126,38 +126,14 @@ export default class Register extends Component {
 			>
 				<LogoSection />
 
-				<InputSection>
-					<TextInput
-						label={'Phone Number'}
-						characterRestriction={10}
-						value={phone}
-						onChangeText={(phone) => this.setState({ phone })}
-						onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
-						error={!this.state.isPhoneValid ? 'Oh no! Please enter a valid phone number.' : null}
-					/>
-
-					<TextInput
-						label={'Password'}
-						characterRestriction={15}
-						value={password}
-						onChangeText={(password) => this.setState({ password })}
-						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
-						secureTextEntry
-						autoCapitalize='none'
-						error={!this.state.isPassValid ? 'Hold up, this field requiers at least 8 characters.' : null}
-					/>
-
-					<TextInput
-						label={'Confirm Password'}
-						characterRestriction={15}
-						value={confirmPassword}
-						onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-						onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
-						secureTextEntry
-						autoCapitalize='none'
-						error={!this.state.isConfirmValid ? 'The password and confirmation aren\'t the same.' : null}
-					/>
-				</InputSection>
+				<RegisterFormInputs
+					phone={phone}
+					password={password}
+					confirmPassword={confirmPassword}
+					onChangePhone={(phone) => this.setState({ phone })}
+					onChangePassword={(password) => this.setState({ password })}
+					onChangeConfirmPassword={(confirmPassword) => this.setState({ confirmPassword })}
+				/>
 
 				<ClickablesSection
 					label={'Register'}
