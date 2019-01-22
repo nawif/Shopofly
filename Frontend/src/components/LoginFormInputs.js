@@ -1,21 +1,3 @@
-// <InputSection>
-//   <TextInput
-//     label={'Phone Number'}
-//     characterRestriction={10}
-//     value={phone}
-//     onChangeText={(phone) => this.setState({ phone })}
-//     autoCapitalize='none'
-//   />
-//
-//   <TextInput
-//     label={'Password'}
-//     characterRestriction={15}
-//     value={password}
-//     onChangeText={(password) => this.setState({ password })}
-//     secureTextEntry
-//     autoCapitalize='none'
-//   />
-// </InputSection>
 import React, { Component } from 'react'
 import { InputSection, TextInput } from './'
 import * as Utility from '../Utility.js'
