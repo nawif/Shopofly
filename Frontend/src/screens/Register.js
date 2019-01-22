@@ -69,34 +69,6 @@ export default class Register extends Component {
 		})
   }
 
-	validatePhone = (phone) => {
-		const re = /^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/;
-		console.log(phone, re.test(String(phone)));
-		if (re.test(String(phone))) {
-			this.setState({ isPhoneValid: true })
-		} else {
-			this.setState({ isPhoneValid: false })
-		}
-	}
-
-	validatePassword = (password) => {
-		console.log(password)
-		if (password.length >= 8) {
-			this.setState({ isPassValid: true })
-		} else {
-			this.setState({ isPassValid: false })
-		}
-	}
-
-	validateConfirm = (confirmPassword) => {
-		console.log(confirmPassword)
-		if (confirmPassword === this.state.password) {
-			this.setState({ isConfirmValid: true })
-		} else {
-			this.setState({ isConfirmValid: false })
-		}
-	}
-
 	renderAlert() {
 		const { showAlert } = this.state
 		return (
