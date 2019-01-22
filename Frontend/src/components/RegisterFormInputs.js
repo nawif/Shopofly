@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { InputSection, TextInput } from './'
+
 import * as Utility from '../Utility.js'
+import * as Global from '../Global.js'
 
 export default class RegisterFormInputs extends Component {
 		state = {
@@ -16,7 +18,7 @@ export default class RegisterFormInputs extends Component {
 				<InputSection>
 					<TextInput
 						label={'Phone Number'}
-						characterRestriction={10}
+						characterRestriction={Global.MAX_PHONE_LENGTH}
 						value={phone}
 						onChangeText={this.props.onChangePhone}
 						onEndEditing={(e) => {
@@ -29,7 +31,7 @@ export default class RegisterFormInputs extends Component {
 
 					<TextInput
 						label={'Password'}
-						characterRestriction={15}
+						characterRestriction={Global.MAX_PASSWORD_LENGTH}
 						value={password}
 						onChangeText={this.props.onChangePassword}
 						onEndEditing={(e) => {
@@ -44,7 +46,7 @@ export default class RegisterFormInputs extends Component {
 
 					<TextInput
 						label={'Confirm Password'}
-						characterRestriction={15}
+						characterRestriction={Global.MAX_PASSWORD_LENGTH}
 						value={confirmPassword}
 						onChangeText={this.props.onChangeConfirmPassword}
 						onEndEditing={(e) => {
