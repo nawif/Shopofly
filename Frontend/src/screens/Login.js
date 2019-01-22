@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
 
-import { GradientButton, ClickablesSection, InputSection, LogoSection, TextInput } from '../components'
+import { ClickablesSection, LogoSection, LoginFormInputs } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
@@ -96,24 +96,12 @@ export default class Login extends Component {
 	      >
 					<LogoSection />
 
-					<InputSection>
-						<TextInput
-							label={'Phone Number'}
-							characterRestriction={10}
-							value={phone}
-							onChangeText={(phone) => this.setState({ phone })}
-							autoCapitalize='none'
-						/>
-
-						<TextInput
-							label={'Password'}
-							characterRestriction={15}
-							value={password}
-							onChangeText={(password) => this.setState({ password })}
-							secureTextEntry
-							autoCapitalize='none'
-						/>
-					</InputSection>
+					<LoginFormInputs
+						phone={phone}
+						password={password}
+						onChangePhone={(phone) => this.setState({ phone })}
+						onChangePassword={(password) => this.setState({ password })}
+					/>
 
 					<ClickablesSection
 						label={'Login'}
