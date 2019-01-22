@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
+import { ImageBackground, AsyncStorage } from 'react-native'
 
 import { ClickablesSection, LogoSection, LoginFormInputs } from '../components'
 import * as API from '../API'
