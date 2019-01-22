@@ -51,7 +51,7 @@ export default class RegisterFormInputs extends Component {
 						onChangeText={this.props.onChangeConfirmPassword}
 						onEndEditing={(e) => {
 							this.setState({
-								isConfirmValid: Utility.validateConfirm(this.state.password, e.nativeEvent.text)
+								isConfirmValid: Utility.validateConfirm(password, e.nativeEvent.text)
 							})
 						}}
 						secureTextEntry
