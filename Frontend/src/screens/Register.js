@@ -4,6 +4,7 @@ import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'rea
 import { Alert, GradientButton, LogoSection, InputSection, ClickablesSection, TextInput, RegisterFormInputs } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import * as Utility from '../Utility.js'
 
 export default class Register extends Component {
 	state = {
@@ -30,17 +31,14 @@ export default class Register extends Component {
 	}
 
 	isValidInput = () => {
-		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
+		const { phone, password, confirmPassword } = this.state
 
-		if (!phone || !password || !confirmPassword ) {
-			return false
-		} else if (!isPassValid || !isConfirmValid || !isPhoneValid) {
-			return false
-		}  else {
-			return true
-		}
-
-		return false
+		return (
+			phone && password && confirmPassword
+			&& Utility.validatePhone(phone)
+			&& Utility.validatePassword(password)
+			&& Utility.validateConfirm(password, confirmPassword)
+		)
 	}
 
   onRegister = () => {
