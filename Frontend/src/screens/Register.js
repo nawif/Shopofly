@@ -47,7 +47,7 @@ export default class Register extends Component {
     const { phone, password } = this.state
 
 		if(!this.isValidInput()) {
-			return 
+			return
 		}
 
 		this.setState({ isLoading: true })
@@ -117,7 +117,8 @@ export default class Register extends Component {
 
 	render() {
 		const { phone, password, confirmPassword } = this.state
-    
+		const isValid = this.isValidInput()
+
 		return (
 			<ImageBackground
 				source={require('../../assets/splash.png')}
@@ -154,7 +155,7 @@ export default class Register extends Component {
 						onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
 						secureTextEntry
 						autoCapitalize='none'
-						error={!this.state.isConfirmValid ? 'The password and confirmation arn\'t the same.' : null}
+						error={!this.state.isConfirmValid ? 'The password and confirmation aren\'t the same.' : null}
 					/>
 				</InputSection>
 
@@ -166,6 +167,7 @@ export default class Register extends Component {
 					anchorText="Already have an account?"
 					anchorHook="Login"
 					onPress={() => this.props.navigation.navigate('Login')}
+					isValid={isValid}
 				/>
 
 				{ this.renderAlert() }
