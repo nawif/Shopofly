@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { ImageBackground, AsyncStorage } from 'react-native'
+import { ImageBackground, AsyncStorage, KeyboardAvoidingView } from 'react-native'
 
 import { ClickablesSection, LogoSection, LoginFormInputs } from '../components'
 import * as API from '../API'
+import * as styles from '../Styles'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
 export default class Login extends Component {
@@ -11,7 +12,6 @@ export default class Login extends Component {
 		password: '',
 		loading: false,
 		showAlert: false,
-		alertTitle: '',
 		alertMessage: '',
 	}
 
@@ -44,7 +44,7 @@ export default class Login extends Component {
 			}
     })
     .catch((error) => {
-			this.showAlert('Login Failed', 'Please make sure you submitted the correct phone and password')
+			this.showAlert('Please make sure you submitted the correct phone and password')
 			this.setState({ loading: false })
 		})
   }
@@ -53,10 +53,9 @@ export default class Login extends Component {
 		this.props.navigation.navigate('Register')
 	}
 
-	showAlert = (alertTitle, alertMessage) => {
+	showAlert = (alertMessage) => {
 		this.setState({
 			alertMessage,
-			alertTitle,
 			showAlert: true
 		})
 	}
@@ -68,11 +67,11 @@ export default class Login extends Component {
 	}
 
 	renderAlert() {
-		const { showAlert, alertTitle, alertMessage } = this.state
+		const { showAlert, alertMessage } = this.state
 		return (
 			<AwesomeAlert
 				show={showAlert}
-				title={alertTitle}
+				title={'Login Failed'}
 				message={alertMessage}
 				closeOnTouchOutside={true}
 				closeOnHardwareBackPress={true}
@@ -88,32 +87,35 @@ export default class Login extends Component {
 	render() {
 		const { phone, password } = this.state
 		const isValid = this.isValidInput()
+		const { container } = styles
 
 		return (
 	      <ImageBackground
 	        source={require('../../assets/splash.png')}
-	        style={{ width: '100%', height: '100%' }}
+	        style={container}
 	      >
-					<LogoSection />
 
-					<LoginFormInputs
-						phone={phone}
-						password={password}
-						onChangePhone={(phone) => this.setState({ phone })}
-						onChangePassword={(password) => this.setState({ password })}
-					/>
+					<KeyboardAvoidingView style={container} behavior="padding">
+						<LogoSection />
 
-					<ClickablesSection
-						label={'Login'}
-						marginTop={'10%'}
-						onClick={this.onLogin}
-						isLoading={this.state.isLoading}
-						anchorText="Don't have an account?"
-						anchorHook="Sign Up"
-						onPress={() => this.props.navigation.navigate('Register')}
-						isValid={isValid}
-					/>
+						<LoginFormInputs
+							phone={phone}
+							password={password}
+							onChangePhone={(phone) => this.setState({ phone })}
+							onChangePassword={(password) => this.setState({ password })}
+						/>
 
+						<ClickablesSection
+							label={'Login'}
+							marginTop={'10%'}
+							onClick={this.onLogin}
+							isLoading={this.state.isLoading}
+							anchorText="Don't have an account?"
+							anchorHook="Sign Up"
+							onPress={() => this.props.navigation.navigate('Register')}
+							isValid={isValid}
+						/>
+					</KeyboardAvoidingView>
 					{ this.renderAlert() }
 	      </ImageBackground>
 

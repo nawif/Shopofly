@@ -5,6 +5,7 @@ import { Alert, GradientButton, LogoSection, InputSection, ClickablesSection, Te
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Utility from '../Utility.js'
+import * as styles from '../Styles'
 
 export default class Register extends Component {
 	state = {
@@ -88,11 +89,12 @@ export default class Register extends Component {
 	render() {
 		const { phone, password, confirmPassword } = this.state
 		const isValid = this.isValidInput()
+		const { container } = styles
 
 		return (
 			<ImageBackground
 				source={require('../../assets/splash.png')}
-				style={{ width: '100%', height: '100%' }}
+				style={container}
 			>
 				<LogoSection />
 
