@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 
-import { Alert, GradientButton, LogoSection, InputSection, ClickablesSection, TextInput, RegisterFormInputs } from '../components'
+import { LogoSection, ClickablesSection, RegisterFormInputs, FormContainer } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Utility from '../Utility.js'
-import * as styles from '../Styles'
 
 export default class Register extends Component {
 	state = {
@@ -89,13 +88,10 @@ export default class Register extends Component {
 	render() {
 		const { phone, password, confirmPassword } = this.state
 		const isValid = this.isValidInput()
-		const { container } = styles
 
 		return (
-			<ImageBackground
-				source={require('../../assets/splash.png')}
-				style={container}
-			>
+			<FormContainer>
+
 				<LogoSection />
 
 				<RegisterFormInputs
@@ -119,7 +115,8 @@ export default class Register extends Component {
 				/>
 
 				{ this.renderAlert() }
-			</ImageBackground>
+
+			</FormContainer>
 
 		)
 	}

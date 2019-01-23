@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { ImageBackground, AsyncStorage, KeyboardAvoidingView } from 'react-native'
+import { AsyncStorage } from 'react-native'
 
-import { ClickablesSection, LogoSection, LoginFormInputs } from '../components'
+import { FormContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
 import * as API from '../API'
-import * as styles from '../Styles'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
 export default class Login extends Component {
@@ -87,37 +86,32 @@ export default class Login extends Component {
 	render() {
 		const { phone, password } = this.state
 		const isValid = this.isValidInput()
-		const { container } = styles
 
 		return (
-	      <ImageBackground
-	        source={require('../../assets/splash.png')}
-	        style={container}
-	      >
+	      <FormContainer>
 
-					<KeyboardAvoidingView style={container} behavior="padding">
-						<LogoSection />
+					<LogoSection />
 
-						<LoginFormInputs
-							phone={phone}
-							password={password}
-							onChangePhone={(phone) => this.setState({ phone })}
-							onChangePassword={(password) => this.setState({ password })}
-						/>
+					<LoginFormInputs
+						phone={phone}
+						password={password}
+						onChangePhone={(phone) => this.setState({ phone })}
+						onChangePassword={(password) => this.setState({ password })}
+					/>
 
-						<ClickablesSection
-							label={'Login'}
-							marginTop={'10%'}
-							onClick={this.onLogin}
-							isLoading={this.state.isLoading}
-							anchorText="Don't have an account?"
-							anchorHook="Sign Up"
-							onPress={() => this.props.navigation.navigate('Register')}
-							isValid={isValid}
-						/>
-					</KeyboardAvoidingView>
+					<ClickablesSection
+						label={'Login'}
+						marginTop={'10%'}
+						onClick={this.onLogin}
+						isLoading={this.state.isLoading}
+						anchorText="Don't have an account?"
+						anchorHook="Sign Up"
+						onPress={() => this.props.navigation.navigate('Register')}
+						isValid={isValid}
+					/>
+
 					{ this.renderAlert() }
-	      </ImageBackground>
+	      </FormContainer>
 
 		)
 	}

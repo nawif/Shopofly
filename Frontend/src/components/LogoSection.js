@@ -8,8 +8,7 @@ const LogoSection = (props) => {
   }
 
   const logo = {
-    alignSelf: 'center',
-    marginBottom: props.isAvoiding ? '25%' : null
+    alignSelf: 'center'
   }
 
 	return (
