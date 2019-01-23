@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, Image } from 'react-native'
+import { connect } from 'react-redux'
 
-const LogoSection = (props) => {
+const LogoSectionComponent = (props) => {
   const propsStyles = {
     height: props.height || '40%',
-		justifyContent: props.justifyContent || 'center'
+		justifyContent: props.justifyContent || 'center',
+    marginBottom: props.keyboardState ? '15%' : null
   }
 
   const logo = {
@@ -20,5 +22,12 @@ const LogoSection = (props) => {
     </View>
 	)
 }
+
+const mapStateToProps = (state) => {
+  const keyboardState = state.keyboardState
+  return { keyboardState: state.keyboardState }
+}
+
+const LogoSection = connect(mapStateToProps)(LogoSectionComponent)
 
 export { LogoSection }
