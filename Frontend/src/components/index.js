@@ -6,4 +6,4 @@ export * from './ClickablesSection'
 
 export * from './common/GradientButton'
 export * from './common/TextInput'
-export * from './common/MainContainer.js'
+export * from './common/MainContainer'
