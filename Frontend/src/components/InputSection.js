@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 
 const InputSectionComponent = (props) => {
   const propsStyles = {
-    height: props.height || '30%',
-    width: props.width || '80%',
-		justifyContent: props.justifyContent || 'center',
+    height: '30%',
+    width: '85%',
+    flexDirection: 'column',
+		justifyContent: 'space-around',
     alignContent: props.alignContent || 'space-around',
     alignSelf: 'center',
-    marginTop: props.keyboardState ? '10%' : null
+    marginTop: props.keyboardState ? 30 : null
   }
 
 	return (

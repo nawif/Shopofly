@@ -35,9 +35,7 @@ class FormContainerComponent extends Component {
         source={require('../../assets/splash.png')}
         style={container}
       >
-        <KeyboardAvoidingView style={container} behavior="padding">
-          { this.props.children }
-        </KeyboardAvoidingView>
+        { this.props.children }
       </ImageBackground>
   	)
   }

@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 const LogoSectionComponent = (props) => {
   const propsStyles = {
-    height: props.height || '40%',
-		justifyContent: props.justifyContent || 'center',
-    marginBottom: props.keyboardState ? '15%' : null
+    height: props.keyboardState ? '20%' : '40%',
+    flexDirection: 'column',
+		justifyContent: props.keyboardState ? 'flex-start' : 'center'
   }
 
   const logo = {
