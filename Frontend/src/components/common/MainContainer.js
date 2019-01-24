@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { ImageBackground, KeyboardAvoidingView, Keyboard } from 'react-native'
-import * as styles from '../Styles'
+import * as styles from '../../Styles'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import * as actions from '../../actions'
 
-class FormContainerComponent extends Component {
+class MainContainerComponent extends Component {
   state = {
     setKeyboardState: null
   }
@@ -32,7 +32,7 @@ class FormContainerComponent extends Component {
 
   	return (
       <ImageBackground
-        source={require('../../assets/splash.png')}
+        source={require('../../../assets/splash.png')}
         style={container}
       >
         { this.props.children }
@@ -45,6 +45,6 @@ const mapStateToProps = (state, ownProps) => {
   return { action: ownProps.setKeyboardState }
 }
 
-const FormContainer = connect(mapStateToProps, actions)(FormContainerComponent)
+const MainContainer = connect(mapStateToProps, actions)(MainContainerComponent)
 
-export { FormContainer }
+export { MainContainer }

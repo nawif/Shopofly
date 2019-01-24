@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 
-import { FormContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
+import { MainContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
@@ -88,7 +88,7 @@ export default class Login extends Component {
 		const isValid = this.isValidInput()
 
 		return (
-	      <FormContainer>
+	      <MainContainer>
 
 					<LogoSection />
 
@@ -111,7 +111,7 @@ export default class Login extends Component {
 					/>
 
 					{ this.renderAlert() }
-	      </FormContainer>
+	      </MainContainer>
 
 		)
 	}
