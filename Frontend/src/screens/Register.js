@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 
-import { Alert, GradientButton, LogoSection, InputSection, ClickablesSection, TextInput } from '../components'
+import { LogoSection, ClickablesSection, RegisterFormInputs, FormContainer } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
+import * as Utility from '../Utility.js'
 
 export default class Register extends Component {
 	state = {
@@ -30,17 +31,14 @@ export default class Register extends Component {
 	}
 
 	isValidInput = () => {
-		const { phone, password, confirmPassword, isPhoneValid, isPassValid, isConfirmValid } = this.state
+		const { phone, password, confirmPassword } = this.state
 
-		if (!phone || !password || !confirmPassword ) {
-			return false
-		} else if (!isPassValid || !isConfirmValid || !isPhoneValid) {
-			return false
-		}  else {
-			return true
-		}
-
-		return false
+		return (
+			phone && password && confirmPassword
+			&& Utility.validatePhone(phone)
+			&& Utility.validatePassword(password)
+			&& Utility.validateConfirm(password, confirmPassword)
+		)
 	}
 
   onRegister = () => {
@@ -69,34 +67,6 @@ export default class Register extends Component {
 		})
   }
 
-	validatePhone = (phone) => {
-		const re = /^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/;
-		console.log(phone, re.test(String(phone)));
-		if (re.test(String(phone))) {
-			this.setState({ isPhoneValid: true })
-		} else {
-			this.setState({ isPhoneValid: false })
-		}
-	}
-
-	validatePassword = (password) => {
-		console.log(password)
-		if (password.length >= 8) {
-			this.setState({ isPassValid: true })
-		} else {
-			this.setState({ isPassValid: false })
-		}
-	}
-
-	validateConfirm = (confirmPassword) => {
-		console.log(confirmPassword)
-		if (confirmPassword === this.state.password) {
-			this.setState({ isConfirmValid: true })
-		} else {
-			this.setState({ isConfirmValid: false })
-		}
-	}
-
 	renderAlert() {
 		const { showAlert } = this.state
 		return (
@@ -120,44 +90,18 @@ export default class Register extends Component {
 		const isValid = this.isValidInput()
 
 		return (
-			<ImageBackground
-				source={require('../../assets/splash.png')}
-				style={{ width: '100%', height: '100%' }}
-			>
+			<FormContainer>
+
 				<LogoSection />
 
-				<InputSection>
-					<TextInput
-						label={'Phone Number'}
-						characterRestriction={10}
-						value={phone}
-						onChangeText={(phone) => this.setState({ phone })}
-						onEndEditing={(e) => this.validatePhone(e.nativeEvent.text)}
-						error={!this.state.isPhoneValid ? 'Oh no! Please enter a valid phone number.' : null}
-					/>
-
-					<TextInput
-						label={'Password'}
-						characterRestriction={15}
-						value={password}
-						onChangeText={(password) => this.setState({ password })}
-						onEndEditing={(e) => this.validatePassword(e.nativeEvent.text)}
-						secureTextEntry
-						autoCapitalize='none'
-						error={!this.state.isPassValid ? 'Hold up, this field requiers at least 8 characters.' : null}
-					/>
-
-					<TextInput
-						label={'Confirm Password'}
-						characterRestriction={15}
-						value={confirmPassword}
-						onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-						onEndEditing={(e) => this.validateConfirm(e.nativeEvent.text)}
-						secureTextEntry
-						autoCapitalize='none'
-						error={!this.state.isConfirmValid ? 'The password and confirmation aren\'t the same.' : null}
-					/>
-				</InputSection>
+				<RegisterFormInputs
+					phone={phone}
+					password={password}
+					confirmPassword={confirmPassword}
+					onChangePhone={(phone) => this.setState({ phone })}
+					onChangePassword={(password) => this.setState({ password })}
+					onChangeConfirmPassword={(confirmPassword) => this.setState({ confirmPassword })}
+				/>
 
 				<ClickablesSection
 					label={'Register'}
@@ -171,7 +115,8 @@ export default class Register extends Component {
 				/>
 
 				{ this.renderAlert() }
-			</ImageBackground>
+
+			</FormContainer>
 
 		)
 	}

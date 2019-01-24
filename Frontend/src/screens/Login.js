@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { ImageBackground, View, TouchableOpacity, Text, AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 
-import { GradientButton, ClickablesSection, InputSection, LogoSection, TextInput } from '../components'
+import { FormContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
@@ -11,7 +11,6 @@ export default class Login extends Component {
 		password: '',
 		loading: false,
 		showAlert: false,
-		alertTitle: '',
 		alertMessage: '',
 	}
 
@@ -44,7 +43,7 @@ export default class Login extends Component {
 			}
     })
     .catch((error) => {
-			this.showAlert('Login Failed', 'Please make sure you submitted the correct phone and password')
+			this.showAlert('Please make sure you submitted the correct phone and password')
 			this.setState({ loading: false })
 		})
   }
@@ -53,10 +52,9 @@ export default class Login extends Component {
 		this.props.navigation.navigate('Register')
 	}
 
-	showAlert = (alertTitle, alertMessage) => {
+	showAlert = (alertMessage) => {
 		this.setState({
 			alertMessage,
-			alertTitle,
 			showAlert: true
 		})
 	}
@@ -68,11 +66,11 @@ export default class Login extends Component {
 	}
 
 	renderAlert() {
-		const { showAlert, alertTitle, alertMessage } = this.state
+		const { showAlert, alertMessage } = this.state
 		return (
 			<AwesomeAlert
 				show={showAlert}
-				title={alertTitle}
+				title={'Login Failed'}
 				message={alertMessage}
 				closeOnTouchOutside={true}
 				closeOnHardwareBackPress={true}
@@ -90,30 +88,16 @@ export default class Login extends Component {
 		const isValid = this.isValidInput()
 
 		return (
-	      <ImageBackground
-	        source={require('../../assets/splash.png')}
-	        style={{ width: '100%', height: '100%' }}
-	      >
+	      <FormContainer>
+
 					<LogoSection />
 
-					<InputSection>
-						<TextInput
-							label={'Phone Number'}
-							characterRestriction={10}
-							value={phone}
-							onChangeText={(phone) => this.setState({ phone })}
-							autoCapitalize='none'
-						/>
-
-						<TextInput
-							label={'Password'}
-							characterRestriction={15}
-							value={password}
-							onChangeText={(password) => this.setState({ password })}
-							secureTextEntry
-							autoCapitalize='none'
-						/>
-					</InputSection>
+					<LoginFormInputs
+						phone={phone}
+						password={password}
+						onChangePhone={(phone) => this.setState({ phone })}
+						onChangePassword={(password) => this.setState({ password })}
+					/>
 
 					<ClickablesSection
 						label={'Login'}
@@ -127,7 +111,7 @@ export default class Login extends Component {
 					/>
 
 					{ this.renderAlert() }
-	      </ImageBackground>
+	      </FormContainer>
 
 		)
 	}
