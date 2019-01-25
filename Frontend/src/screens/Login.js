@@ -7,8 +7,8 @@ import AwesomeAlert from 'react-native-awesome-alerts'
 
 export default class Login extends Component {
 	state = {
-		phone: '',
-		password: '',
+		phone: '0504244460',
+		password: '12345678',
 		loading: false,
 		showAlert: false,
 		alertMessage: '',
@@ -36,14 +36,15 @@ export default class Login extends Component {
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
-				this.props.navigation.navigate('Scan', { token })
-				this.setState({ loading: false })
+				this.props.navigation.navigate('Item', { token })
 			} else {
-				alert('Could not get token, please check your connection and try again.')
+				this.showAlert('Could not get token, please check your connection and try again.')
 			}
+			this.setState({ loading: false })
     })
     .catch((error) => {
-			this.showAlert('Please make sure you submitted the correct phone and password')
+			console.log(error.response);
+			this.showAlert(error.response.data['error'])
 			this.setState({ loading: false })
 		})
   }

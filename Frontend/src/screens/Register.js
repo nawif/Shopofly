@@ -60,7 +60,7 @@ export default class Register extends Component {
 			this.setState({ isLoading: false })
 			console.log(data.token);
 				await AsyncStorage.setItem('token', data.token)
-				this.props.navigation.navigate('Home', { token: data.token })
+				this.props.navigation.navigate('Item', { token: data.token })
     })
     .catch((error) => {
 			this.setState({

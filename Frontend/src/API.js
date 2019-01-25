@@ -2,13 +2,13 @@ import axios from 'axios'
 
 const url = 'http://shopofly.xyz/api'
 
-export const login = (email, password) => {
+export const login = (phone, password) => {
   return axios({
     method: 'POST',
     url: `${url}/auth/login`,
     headers: { 'Content-type': 'application/json' },
     data: {
-      "email": email,
+      "mobile_number": phone,
       "password": password
     }
   })
