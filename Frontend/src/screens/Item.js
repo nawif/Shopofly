@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 
-import { Container, Swiper } from '../components'
+import { Container, MySwiper, ItemContent } from '../components'
 import * as API from '../API'
 
 export default class Login extends Component {
@@ -13,9 +13,11 @@ export default class Login extends Component {
 
 		return (
       <Container>
-        <Swiper
+        <MySwiper
           images={images}
         />
+
+				<ItemContent />
       </Container>
 		)
 	}
