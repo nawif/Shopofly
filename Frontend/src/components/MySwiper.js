@@ -31,8 +31,7 @@ export default class MySwiper extends Component {
 
 const styles = {
   container: {
-    flex: 1,
-    height: '40%'
+    flex: 1
   },
   slide: {
     flex: 1,

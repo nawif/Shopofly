@@ -19,7 +19,7 @@ const ItemInfo = ({}) => {
       <Text style={titleStyle}>{item.title}</Text>
       <Text>TODO: Add rating/reviews here</Text>
       <Text style={priceStyle}>SAR {item.price} <Text style={infoStyle}>(inclusive of vat)</Text></Text>
-      <Text style={oldPriceStyle}>{item.price}</Text>
+      <Text style={oldPriceStyle}>SAR {item.price}</Text>
     </View>
   )
 }
@@ -50,7 +50,8 @@ const styles = {
   },
   oldPriceStyle: {
     color: 'grey',
-    fontSize: 14,
+    fontSize: 12,
+    fontFamily: 'Roboto-Light',
     textDecorationLine: 'line-through',
     marginTop: '1%',
   }
