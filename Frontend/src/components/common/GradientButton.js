@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native'
 import { LinearGradient } from 'expo';
+import * as Global from '../../Global'
 
 const GradientButton = (props) => {
 	const { mainContainer } = styles
@@ -8,11 +9,10 @@ const GradientButton = (props) => {
 	const containerStyles = {
 		width: props.width || '80%',
 		height: props.height || 50,
-		opacity: props.isValid ? 1.0 : 0.7  
+		opacity: props.isValid ? 1.0 : 0.7
 	}
 
   const gradientStyles = {
-    backgroundColor: props.color || '#A9A9A9',
 		alignSelf: props.align || 'center',
 		justifyContent: 'center',
 		borderRadius: props.borderRadius || 10,
@@ -27,8 +27,8 @@ const GradientButton = (props) => {
 		fontSize: 20,
 	}
 
-	const firstColor = props.firstColor || '#6171b6'
-	const secondColor = props.secondColor || '#26877a'
+	const firstColor = props.firstColor || Global.FIRST_COLOR
+	const secondColor = props.secondColor || Global.SECOND_COLOR
 
 	return (
 		<View style={mainContainer}>
@@ -43,7 +43,7 @@ const GradientButton = (props) => {
 														/> : <LinearGradient
 															colors={[firstColor, secondColor]}
 															start={[1.0, 0]}
-															end={[0.1, 0]}
+															end={[0.0, 0]}
 															style={gradientStyles}
 														>
 															<Text style={labelStyle}>{ props.label }</Text>
