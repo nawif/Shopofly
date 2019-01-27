@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-const Divider = (props) => {
+export const Divider = (props) => {
   const propsStyles = {
     width: props.width
   }
@@ -19,5 +19,3 @@ const Divider = (props) => {
     <View style={[propsStyles, divider]} />
 	)
 }
-
-export { Divider }

@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native'
 import { LinearGradient } from 'expo';
 
-const GradientButton = (props) => {
+export const GradientButton = (props) => {
 	const { mainContainer } = styles
 
 	const containerStyles = {
@@ -61,5 +61,3 @@ const styles = {
     alignItems: 'center'
 	}
 }
-
-export { GradientButton }

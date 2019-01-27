@@ -2,7 +2,7 @@ import React from 'react'
 import { ImageBackground, KeyboardAvoidingView } from 'react-native'
 import * as styles from '../Styles'
 
-const FormContainer = (props) => {
+export const FormContainer = (props) => {
   const { container } = styles
 
 	return (
@@ -16,5 +16,3 @@ const FormContainer = (props) => {
     </ImageBackground>
 	)
 }
-
-export { FormContainer }

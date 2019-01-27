@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField } from 'react-native-material-textfield'
 
-const TextInput = (props) => {
+export const TextInput = (props) => {
   const inputStyle = {
     color: props.color || '#464949',
     fontFamily: props.fontFamily || 'Roboto-Medium'
@@ -40,5 +40,3 @@ const TextInput = (props) => {
     />
 	)
 }
-
-export { TextInput }

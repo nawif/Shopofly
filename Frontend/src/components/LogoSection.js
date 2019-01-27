@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Image } from 'react-native'
 
-const LogoSection = (props) => {
+export const LogoSection = (props) => {
   const propsStyles = {
     height: props.height || '40%',
 		justifyContent: props.justifyContent || 'center'
@@ -20,5 +20,3 @@ const LogoSection = (props) => {
     </View>
 	)
 }
-
-export { LogoSection }

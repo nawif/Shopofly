@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-const InputSection = (props) => {
+export const InputSection = (props) => {
   const propsStyles = {
     height: props.height || '30%',
     width: props.width || '80%',
@@ -16,5 +16,3 @@ const InputSection = (props) => {
     </View>
 	)
 }
-
-export { InputSection }
