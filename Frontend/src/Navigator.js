@@ -5,12 +5,30 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import Login from './screens/Login'
 import Register from './screens/Register'
 import Item from './screens/Item'
-
+import Scan from './screens/Scan'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 const scanNavigator = createStackNavigator({
-  Item: {
+  Scan: {
+    screen: Scan,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Profile: {
+    screen: Item,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Wishlist: {
+    screen: Item,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Cart: {
     screen: Item,
     navigationOptions: {
       header: null
@@ -24,7 +42,43 @@ const tabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => (
         <Ionicons
-          name={focused ? 'ios-home' : 'ios-home-outline'}
+          name={focused ? "ios-qr-scanner" :  "ios-qr-scanner-outline"}
+          size={26}
+          style={{ color: tintColor }}
+        />
+      )
+    }
+  },
+  Profile: {
+    screen: scanNavigator,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? "ios-person" : "ios-person-outline"}
+          size={26}
+          style={{ color: tintColor }}
+        />
+      )
+    }
+  },
+  Wishlist: {
+    screen: scanNavigator,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? "ios-heart" : "ios-heart-outline"}
+          size={26}
+          style={{ color: tintColor }}
+        />
+      )
+    }
+  },
+  Cart: {
+    screen: scanNavigator,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Ionicons
+          name={focused ? 'ios-cart' : 'ios-cart-outline'}
           size={26}
           style={{ color: tintColor }}
         />

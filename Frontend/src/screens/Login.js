@@ -36,7 +36,7 @@ export default class Login extends Component {
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
-				this.props.navigation.navigate('Item', { token })
+				this.props.navigation.navigate('Scan', { token })
 			} else {
 				this.showAlert('Could not get token, please check your connection and try again.')
 			}
