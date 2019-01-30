@@ -9,7 +9,7 @@ import { LinearGradient } from 'expo'
 import * as Global from '../Global'
 
 const SaleBadge = ({ percentage, marginLeft }) => {
-  const { container, badgeStyle, offerStyle } = styles
+  const { container, badgeStyle, offerStyle, imageStyle } = styles
 
   container.marginLeft = marginLeft || null
 
@@ -23,6 +23,7 @@ const SaleBadge = ({ percentage, marginLeft }) => {
       <View style={badgeStyle}>
         <Image
           source={require('../../assets/percentage.png')}
+          style={imageStyle}
         />
         <Text style={offerStyle}>{percentage}% OFF</Text>
       </View>
@@ -49,6 +50,10 @@ const styles = {
   badgeStyle: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  imageStyle: {
+    height: 10,
+    width: 10
   }
 }
 
