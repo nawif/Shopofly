@@ -2,21 +2,32 @@ import React from 'react'
 import {
   View,
   Text,
+  Image
 } from 'react-native'
 
- import { SaleBadge, ItemSpecs } from './'
+ import { SaleBadge, CoreItemSpecs } from './'
 
 const ItemInfo = ({}) => {
   const item = {
     seller:'Apple',
     title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
+    rating: 4.8,
+    reviews: 4,
     specification:{ dimensions:{width:'10',height:'10'} },
-    price: '2,890.00' }
+    price: '2,890.00',
+    coreItemSpecs: [
+      { specKey: 'Color', specValue: 'Black' },
+      { specKey: 'Size', specValue: '64 GB'}
+    ]
+  }
 
   const {
     container,
     sellerStyle,
     titleStyle,
+    reviewStyle,
+    ratingStyle,
+    reviewCountStyle,
     priceStyle,
     infoStyle,
     oldPriceStyle,
@@ -29,7 +40,13 @@ const ItemInfo = ({}) => {
 
       <Text style={titleStyle}>{item.title}</Text>
 
-      <Text>TODO: Add rating/reviews here</Text>
+      <View style={reviewStyle}>
+        <Image
+          source={require('../../assets/star.png')}
+        />
+        <Text style={ratingStyle}>{item.rating}</Text>
+        <Text style={reviewCountStyle}>{item.reviews} reviews</Text>
+      </View>
 
       <Text style={priceStyle}>SAR {item.price} <Text style={infoStyle}>(inclusive of vat)</Text></Text>
 
@@ -38,7 +55,7 @@ const ItemInfo = ({}) => {
         <SaleBadge percentage={22} marginLeft={'2%'}/>
       </View>
 
-      <ItemSpecs />
+      <CoreItemSpecs specs={item.coreItemSpecs} />
     </View>
   )
 }
@@ -59,6 +76,23 @@ const styles = {
     marginTop: '2%',
     marginBottom: '1%',
     fontFamily: 'Roboto-Medium'
+  },
+  reviewStyle: {
+    marginTop: '1%',
+    marginBottom: '1%',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  ratingStyle: {
+    marginLeft: '1%',
+    fontSize: 10,
+    fontFamily: 'Roboto-Bold',
+    color: '#F3C60B'
+  },
+  reviewCountStyle: {
+    marginLeft: '1%',
+    fontSize: 10,
+    color: '#A1A1A1'
   },
   priceStyle: {
     fontSize: 20,

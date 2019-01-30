@@ -4,18 +4,15 @@ import { AsyncStorage } from 'react-native'
 import { Container, MySwiper, ItemInfo } from '../components'
 import * as API from '../API'
 
-export default class Login extends Component {
+export default class Item extends Component {
 	state = {
 	}
 
 	render() {
-		const { images } = this.state
-
 		return (
       <Container>
-        <MySwiper
-          images={images}
-        />
+				<MySwiper
+				/>
 
 				<ItemInfo />
       </Container>
