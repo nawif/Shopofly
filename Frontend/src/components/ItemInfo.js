@@ -4,7 +4,7 @@ import {
   Text,
 } from 'react-native'
 
- import { SaleBadge } from './'
+ import { SaleBadge, ItemSpecs } from './'
 
 const ItemInfo = ({}) => {
   const item = {
@@ -37,13 +37,17 @@ const ItemInfo = ({}) => {
         <Text style={oldPriceStyle}>SAR {item.price}</Text>
         <SaleBadge percentage={22} marginLeft={'2%'}/>
       </View>
+
+      <ItemSpecs />
     </View>
   )
 }
 
 const styles = {
   container: {
-    flex: 1
+    flex: 1,
+    width: '90%',
+    alignSelf: 'center'
   },
   sellerStyle: {
     color: '#295ff2',

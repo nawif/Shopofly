@@ -5,7 +5,7 @@ export * from './InputSection'
 export * from './ClickablesSection'
 export * from './MySwiper'
 export * from './ItemInfo'
-export * from './ItemContent'
+export * from './ItemSpecs'
 export * from './SaleBadge'
 
 export * from './common/GradientButton'
