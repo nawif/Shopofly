@@ -1,4 +1,5 @@
 import React from 'react'
+import { Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
@@ -6,7 +7,8 @@ import Login from './screens/Login'
 import Register from './screens/Register'
 import Item from './screens/Item'
 import Scan from './screens/Scan'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import { Icon } from 'react-native-elements'
+import { Entypo, Octicons, FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 
 const scanNavigator = createStackNavigator({
@@ -41,9 +43,9 @@ const tabNavigator = createBottomTabNavigator({
     screen: scanNavigator,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? "ios-qr-scanner" :  "ios-qr-scanner-outline"}
-          size={26}
+        <MaterialCommunityIcons
+          name={focused ? "qrcode-scan" : "qrcode-scan"}
+          size={24}
           style={{ color: tintColor }}
         />
       )
@@ -53,9 +55,9 @@ const tabNavigator = createBottomTabNavigator({
     screen: scanNavigator,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? "ios-person" : "ios-person-outline"}
-          size={26}
+        <Octicons
+          name={focused ? "person" : "person"}
+          size={24}
           style={{ color: tintColor }}
         />
       )
@@ -64,10 +66,10 @@ const tabNavigator = createBottomTabNavigator({
   Wishlist: {
     screen: scanNavigator,
     navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? "ios-heart" : "ios-heart-outline"}
-          size={26}
+      tabBarIcon: ({ tintColor, focused }) => (   
+        <FontAwesome
+          name={focused ? 'heart' : 'heart'}
+          size={24}
           style={{ color: tintColor }}
         />
       )
@@ -77,9 +79,9 @@ const tabNavigator = createBottomTabNavigator({
     screen: scanNavigator,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? 'ios-cart' : 'ios-cart-outline'}
-          size={26}
+        <Entypo
+          name={focused ? 'shopping-cart' : 'shopping-cart'}
+          size={24}
           style={{ color: tintColor }}
         />
       )
