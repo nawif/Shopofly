@@ -15,7 +15,7 @@ export const CartOptions = (props) => {
         borderRadius={size}
         width={'93%'}
         height={size}
-        fontFamily={'Cairo-Bold'}
+        fontFamily={'Cairo-SemiBold'}
         label={'ADD TO CART'}
         isValid={true}
       />

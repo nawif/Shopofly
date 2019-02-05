@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
+import { ScrollView, View } from 'react-native'
 
-import { Container, MySwiper, ItemInfo } from '../components'
+import { MySwiper, ItemInfo, ItemDetails } from '../components'
 import * as API from '../API'
 
 export default class Item extends Component {
@@ -9,13 +9,25 @@ export default class Item extends Component {
 	}
 
 	render() {
+		const { container } = styles;
+
 		return (
-      <Container>
-				<MySwiper
-				/>
+      <ScrollView style={container}>
+				<MySwiper />
 
 				<ItemInfo />
-      </Container>
+
+				<ItemDetails />
+      </ScrollView>
 		)
+	}
+}
+
+const styles = {
+	container: {
+		width: '100%',
+	  height: '100%',
+	  flex: 1,
+	  backgroundColor: 'white'
 	}
 }

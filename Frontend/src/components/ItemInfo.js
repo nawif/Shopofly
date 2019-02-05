@@ -73,7 +73,8 @@ const styles = {
   container: {
     flex: 1,
     width: '90%',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: '5%'
   },
   sellerStyle: {
     color: '#3061E9',
