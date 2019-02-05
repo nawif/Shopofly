@@ -22,9 +22,11 @@ const GradientButton = (props) => {
 
 	const labelStyle = {
 		alignSelf: 'center',
-		fontFamily: 'Roboto-Medium',
+		fontFamily: props.fontFamily || 'Roboto-Medium',
 		color: props.labelColor || 'white',
 		fontSize: 20,
+		paddingTop: props.padding || null,
+		paddingBottom: props.padding || null,
 	}
 
 	const firstColor = props.firstColor || Global.FIRST_COLOR

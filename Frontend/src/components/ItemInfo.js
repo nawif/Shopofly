@@ -5,9 +5,15 @@ import {
   Image
 } from 'react-native'
 
- import { SaleBadge, CoreItemSpecs } from './'
+import {
+  SaleBadge,
+  CoreItemSpecs,
+  Circle,
+  GradientButton,
+  CartOptions
+} from './'
 
-const ItemInfo = ({}) => {
+export const ItemInfo = ({}) => {
   const item = {
     seller:'Apple',
     title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
@@ -31,7 +37,8 @@ const ItemInfo = ({}) => {
     priceStyle,
     infoStyle,
     oldPriceStyle,
-    saleStyle
+    saleStyle,
+    cartOptionsStyle
   } = styles
 
   return (
@@ -56,6 +63,8 @@ const ItemInfo = ({}) => {
       </View>
 
       <CoreItemSpecs specs={item.coreItemSpecs} />
+
+      <CartOptions currentQuantity={1} />
     </View>
   )
 }
@@ -113,7 +122,5 @@ const styles = {
     fontSize: 12,
     fontFamily: 'Cairo-SemiBold',
     textDecorationLine: 'line-through',
-  }
+  },
 }
-
-export { ItemInfo }
