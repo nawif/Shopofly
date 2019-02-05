@@ -11,7 +11,7 @@ export default class Login extends Component {
 		password: '',
 		loading: false,
 		showAlert: false,
-		alertMessage: '',
+		alertMessage: ''
 	}
 
 	isValidInput = () => {
@@ -23,30 +23,30 @@ export default class Login extends Component {
 		return true
 	}
 
-  onLogin = () => {
-		const { phone, password } = this.state
+	onLogin = () => {
+			const { phone, password } = this.state
 
-		if(!this.isValidInput()) {
-			return
-		}
-
-		this.setState({ loading: true })
-
-    API.login(phone, password)
-    .then(async (token) => {
-			if(token){
-				await AsyncStorage.setItem('token', token)
-				this.props.navigation.navigate('Scan', { token })
-				this.setState({ loading: false })
-			} else {
-				alert('Could not get token, please check your connection and try again.')
+			if(!this.isValidInput()) {
+				return
 			}
-    })
-    .catch((error) => {
-			this.showAlert('Please make sure you submitted the correct phone and password')
-			this.setState({ loading: false })
+
+			this.setState({ loading: true })
+
+		API.login(phone, password)
+		.then(async (token) => {
+				if(token){
+					await AsyncStorage.setItem('token', token)
+					this.props.navigation.navigate('Scan', { token })
+					this.setState({ loading: false })
+				} else {
+					alert('Could not get token, please check your connection and try again.')
+				}
 		})
-  }
+		.catch((error) => {
+				this.showAlert('Please make sure you submitted the correct phone and password')
+				this.setState({ loading: false })
+			})
+	}
 
 	onRegister = () => {
 		this.props.navigation.navigate('Register')

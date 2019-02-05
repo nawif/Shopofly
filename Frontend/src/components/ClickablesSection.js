@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import { GradientButton } from './'
 
-const ClickablesSection = (props) => {
+export const ClickablesSection = (props) => {
   const { container, anchor, anchorText, boldText } = styles
 
   const submitButton = {
@@ -50,5 +50,3 @@ const styles = {
     fontFamily: 'Roboto-Bold',
   }
 }
-
-export { ClickablesSection }

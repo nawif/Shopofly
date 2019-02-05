@@ -4,7 +4,7 @@ import { SinglePickerMaterialDialog } from 'react-native-material-dialog'
 import { Button } from './Button'
 import { Ionicons } from '@expo/vector-icons';
 
-const CartItem = (props) => {
+export const CartItem = (props) => {
   const { imageUrl, itemName, price, quantity, supplier } = props.item
 	const { itemContainer, imgContainer, img, nameStyle, infoContainer, supplierStyle, priceStyle } = styles
 	return (
@@ -105,5 +105,3 @@ const styles = {
     marginBottom: 20
   },
 }
-
-export { CartItem }

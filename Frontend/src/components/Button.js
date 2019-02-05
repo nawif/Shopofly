@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, ActivityIndicator } from 'react-native'
 
-const Button = (props) => {
+export const Button = (props) => {
 	const { container } = styles
 
   const propsStyles = {
@@ -43,5 +43,3 @@ const styles = {
 		fontSize: 20,
 	}
 }
-
-export { Button }

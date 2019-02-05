@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Hideo } from 'react-native-textinput-effects';
 
-const LoginForm = (props) => {
+export const LoginForm = (props) => {
 
 		const { inputContainer, inputStyle } = styles
 		return (
@@ -53,5 +53,3 @@ const styles = {
     marginBottom: 10
   },
 }
-
-export { LoginForm }

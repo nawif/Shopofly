@@ -3,7 +3,6 @@ import { View } from 'react-native'
 import { connect } from 'react-redux'
 
 const InputSectionComponent = (props) => {
-  const propsStyles = {
     height: '30%',
     width: '85%',
     flexDirection: 'column',
