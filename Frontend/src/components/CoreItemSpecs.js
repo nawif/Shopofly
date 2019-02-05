@@ -18,8 +18,9 @@ const getSpecifications = (specs) => {
 
   let Specifications = []
 
+  // This for loop adds a row for 2 labels to make 2 specifications (at most)
+  // appear in 1 row.
   for(let i = 0; i < specs.length; i++) {
-    console.log("I is: " + i)
     Specifications.push(
       <View style={row} key={i}>
         <CoreSpec

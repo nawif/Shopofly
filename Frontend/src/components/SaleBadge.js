@@ -20,40 +20,35 @@ const SaleBadge = ({ percentage, marginLeft }) => {
       end={[0.0, 0]}
       style={container}
     >
-      <View style={badgeStyle}>
-        <Image
-          source={require('../../assets/percentage.png')}
-          style={imageStyle}
-        />
-        <Text style={offerStyle}>{percentage}% OFF</Text>
-      </View>
+      <Image
+        source={require('../../assets/percentage.png')}
+        style={imageStyle}
+      />
+      <Text style={offerStyle}>{percentage}% OFF</Text>
     </LinearGradient>
   )
 }
 
 const styles = {
   container: {
-    borderRadius:40,
+    borderRadius:20,
     paddingLeft: 7,
     paddingRight: 7,
-    paddingTop: 2,
-    paddingBottom: 2,
-    flexDirection: 'column',
-    justifyContent: 'center'
+    paddingTop: 1,
+    paddingBottom: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   offerStyle: {
     color: 'white',
     fontSize: 10,
-    fontFamily: 'Roboto-Medium',
-    marginLeft: 3
-  },
-  badgeStyle: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    fontFamily: 'Cairo-SemiBold',
+    marginLeft: 3,
+    alignSelf: 'center'
   },
   imageStyle: {
-    height: 10,
-    width: 10
+    height: 12,
+    width: 12
   }
 }
 

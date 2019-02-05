@@ -67,15 +67,15 @@ const styles = {
     alignSelf: 'center'
   },
   sellerStyle: {
-    color: '#295ff2',
+    color: '#3061E9',
     fontSize: 12,
   },
   titleStyle: {
     color: 'black',
-    fontSize: 17,
+    fontSize: 16,
     marginTop: '2%',
     marginBottom: '1%',
-    fontFamily: 'Roboto-Medium'
+    fontFamily: 'Cairo-Bold'
   },
   reviewStyle: {
     marginTop: '1%',
@@ -86,33 +86,33 @@ const styles = {
   ratingStyle: {
     marginLeft: '1%',
     fontSize: 10,
-    fontFamily: 'Roboto-Bold',
+    fontFamily: 'Cairo-Bold',
     color: '#F3C60B'
   },
   reviewCountStyle: {
     marginLeft: '1%',
     fontSize: 10,
-    color: '#A1A1A1'
+    color: '#A1A1A1',
+    fontFamily: 'Cairo-Bold'
   },
   priceStyle: {
     fontSize: 20,
-    fontFamily: 'Roboto-Bold',
-    marginTop: '2%'
+    fontFamily: 'Cairo-Bold',
   },
   infoStyle: {
-    color: '#dddddd',
-    fontSize: 12
+    color: '#CFCFCF',
+    fontSize: 9,
+    fontFamily: 'Cairo-Bold'
   },
   saleStyle: {
     flexDirection: 'row',
-    marginTop: '2%'
+    marginTop: '1%'
   },
   oldPriceStyle: {
-    color: 'grey',
+    color: '#A1A1A1',
     fontSize: 12,
-    fontFamily: 'Roboto-Light',
+    fontFamily: 'Cairo-SemiBold',
     textDecorationLine: 'line-through',
-    marginTop: '1%',
   }
 }
 

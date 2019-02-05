@@ -31,11 +31,11 @@ const styles = {
   },
   keyStyle: {
     color: '#2B2B2B',
-    fontFamily: 'Roboto-Regular'
+    fontFamily: 'Cairo-Regular'
   },
   valueStyle: {
     color: '#2B2B2B',
-    fontFamily: 'Roboto-Bold'
+    fontFamily: 'Cairo-Bold'
   }
 }
 
