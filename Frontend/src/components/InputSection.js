@@ -1,13 +1,15 @@
 import React from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
-export const InputSection = (props) => {
-  const propsStyles = {
-    height: props.height || '30%',
-    width: props.width || '80%',
-		justifyContent: props.justifyContent || 'center',
+const InputSectionComponent = (props) => {
+    height: '30%',
+    width: '85%',
+    flexDirection: 'column',
+		justifyContent: 'space-around',
     alignContent: props.alignContent || 'space-around',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: props.keyboardState ? 30 : null
   }
 
 	return (
@@ -16,3 +18,11 @@ export const InputSection = (props) => {
     </View>
 	)
 }
+
+const mapStateToProps = (state) => {
+  const keyboardState = state.keyboardState
+  return { keyboardState }
+}
+const InputSection = connect(mapStateToProps)(InputSectionComponent)
+
+export { InputSection }

@@ -3,6 +3,10 @@ import { StyleSheet, SafeAreaView, AsyncStorage } from 'react-native';
 import MyApp from './src/Navigator'
 import { Font } from 'expo';
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducers from './src/reducers'
+
 export default class App extends React.Component {
   state = {
     fontLoaded: false,
@@ -28,7 +32,9 @@ export default class App extends React.Component {
   render() {
     this.clearAsyncStorage()
     return (
-      this.state.fontLoaded ? <MyApp /> : null
+      this.state.fontLoaded ? <Provider store={createStore(reducers)}>
+                                <MyApp />
+                              </Provider> : null
     );
   }
 }
