@@ -17,6 +17,7 @@ export const CartOptions = (props) => {
         height={size}
         fontFamily={'Cairo-Bold'}
         label={'ADD TO CART'}
+        isValid={true}
       />
 
     </View>
