@@ -8,9 +8,6 @@ import {
 import {
   SaleBadge,
   CoreItemSpecs,
-  Circle,
-  GradientButton,
-  CartOptions
 } from './'
 
 export const ItemInfo = ({}) => {
@@ -63,8 +60,6 @@ export const ItemInfo = ({}) => {
       </View>
 
       <CoreItemSpecs specs={item.coreItemSpecs} />
-
-      <CartOptions currentQuantity={1} />
     </View>
   )
 }

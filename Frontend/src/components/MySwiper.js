@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Dimensions } from 'react-native'
+import { Text, View, Dimensions, Image } from 'react-native'
 import Swiper from 'react-native-swiper'
 
 export default class MySwiper extends Component {
@@ -9,21 +9,17 @@ export default class MySwiper extends Component {
 	render() {
 		const {  } = this.state
 
-    const { container, contentStyle, slide } = styles
+    const { container, contentStyle, slide, imageStyle } = styles
 
 		return (
-      <Swiper style={container} containerStyle={contentStyle} height={'100%'}>
-        <View style={slide}>
-          <Text>I love the Swiper!</Text>
-        </View>
+      <Swiper style={container} containerStyle={contentStyle}>
+				<View style={slide}>
+					<Image style={slide} source={{uri: 'http://d176tvmxv7v9ww.cloudfront.net/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-xs-space-select-2018_av2_1_1.jpg'}} />
+				</View>
 
-        <View style={slide}>
-          <Text>And I love many things!</Text>
-        </View>
-
-        <View style={slide}>
-          <Text>Including .. idk..</Text>
-        </View>
+				<View style={slide}>
+					<Image source={{uri: 'https://cdn.rc-static.com/images/ProductImages/ScaleProducts/0320CV10_I2.jpg'}} />
+				</View>
       </Swiper>
 		)
 	}
@@ -32,15 +28,16 @@ export default class MySwiper extends Component {
 const styles = {
   container: {
     flex: 1,
-
   },
 	contentStyle: {
 		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height/2.5
+		height: Dimensions.get('window').height/2.5,
 	},
   slide: {
     flex: 1,
-    justifyContent: 'center'
-  }
+    alignSelf: 'center',
+		width: '70%',
+		height: '70%',
+  },
 }
 export { MySwiper }

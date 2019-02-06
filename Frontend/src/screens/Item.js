@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 
-import { MySwiper, ItemInfo, ItemDetails } from '../components'
+import { MySwiper, ItemInfo, ItemDetails, CartOptions } from '../components'
 import * as API from '../API'
 
 export default class Item extends Component {
@@ -16,6 +16,8 @@ export default class Item extends Component {
 				<MySwiper />
 
 				<ItemInfo />
+
+				<CartOptions currentQuantity={1} />
 
 				<ItemDetails />
       </ScrollView>
