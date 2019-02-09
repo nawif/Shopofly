@@ -12,6 +12,7 @@ export default class Login extends Component {
 		loading: false,
 		showAlert: false,
 		alertMessage: '',
+		isLoading: false
 	}
 
 	isValidInput = () => {
@@ -30,7 +31,7 @@ export default class Login extends Component {
 			return
 		}
 
-		this.setState({ loading: true })
+		this.setState({ isLoading: true })
 
     API.login(phone, password)
     .then(async (token) => {

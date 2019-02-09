@@ -41,16 +41,12 @@ export const getUserInfo = (token) => {
   .then((res) => res.data)
 }
 
-const logout = () => {
-  // TODO implement this.
-}
+export const getItem = (url, token) => {
 
-export const getItem = (url) => {
-  //TODO wait for Nawaf to change API request
   return axios({
     method: 'GET',
     url: url,
-    headers: { 'Content-type': 'application/json' }
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token }
   })
   .then((res) => res.data)
 }
@@ -58,7 +54,7 @@ export const getItem = (url) => {
 export const getAddress = (token) => {
   return axios({
     method: 'POST',
-    url: `${url}/auth/me`,
+    url: url,
     headers: { 'Content-type': 'application/json' },
     data: {
       'token': token
