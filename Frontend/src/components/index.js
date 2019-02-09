@@ -11,3 +11,9 @@ export * from './LogoSection'
 export * from './TextInput'
 export * from './LoginFormInputs.js'
 export * from './FormContainer.js'
+export * from './ImageAndTitle'
+export * from './OptionCard'
+export * from './OptionCardList'
+
+
+

@@ -6,6 +6,7 @@ import { Font } from 'expo';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './src/reducers'
+import Profile from "./src/screens/Profile";
 
 export default class App extends React.Component {
   state = {
@@ -33,7 +34,7 @@ export default class App extends React.Component {
     this.clearAsyncStorage()
     return (
       this.state.fontLoaded ? <Provider store={createStore(reducers)}>
-                                <MyApp />
+                                <Profile />
                               </Provider> : null
     );
   }
