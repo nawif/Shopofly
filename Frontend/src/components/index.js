@@ -10,6 +10,7 @@ export * from './ItemDetails'
 export * from './CoreSpec'
 export * from './CoreItemSpecs'
 export * from './CartOptions'
+export * from './ItemReviews'
 
 export * from './common/GradientButton'
 export * from './common/TextInput'

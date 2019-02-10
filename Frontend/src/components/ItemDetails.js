@@ -62,6 +62,8 @@ export const ItemDetails = (props) => {
       <Devider height={1}/>
 
       <ItemSpecifications specifications={item.specifications}/>
+
+      <Devider />
     </View>
   )
 }
