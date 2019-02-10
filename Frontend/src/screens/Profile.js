@@ -1,14 +1,45 @@
 import React, { Component } from 'react'
 import { View, ImageBackground } from 'react-native'
 import { ImageAndTitle, OptionCardList } from "../components";
+import { removeItemValue } from "../Utility";
+import Images from "../../assets/images";
 
 export  class Profile extends Component {
+
+handelLogout = () =>{
+    removeItemValue('token')
+    this.props.navigation.navigate('Login');
+}
+
   render() {
+    const options =[
+      {
+          title:'Orders',
+          icon:Images.orders,
+          textStyle:{},
+      },
+      {
+          title:'Address Book',
+          icon:Images.addressBook,
+          textStyle:{}
+      },
+      {
+          title:'Account Settings',
+          icon:Images.account,
+          textStyle:{}
+      },
+      {
+          title:'Logout',
+          icon:Images.logout,
+          textStyle:{color:'#D34A4A'},
+          action:this.handelLogout
+      }
+  ]
     return (
       <ImageBackground source={require('../../assets/splash.png')} style={styles.container} >
         <ImageAndTitle style={styles.header} title="Osama Aloqaily" image={{uri:'https://www.ftcksu.com/v1/users/getUserImage/2'}} />
         <View style={styles.options}>
-            <OptionCardList/>
+            <OptionCardList options={options} />
         </View>
       </ImageBackground>
     )
