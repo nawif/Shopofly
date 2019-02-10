@@ -4,7 +4,7 @@ import { ScrollView, View } from 'react-native'
 import { MySwiper, ItemInfo, ItemDetails, CartOptions } from '../components'
 import * as API from '../API'
 
-export default class Item extends Component {
+export  class Item extends Component {
 	state = {
 	}
 

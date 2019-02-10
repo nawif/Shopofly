@@ -5,7 +5,7 @@ import { MainContainer, LogoSection, LoginFormInputs, ClickablesSection } from '
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
-export default class Login extends Component {
+export  class Login extends Component {
 	state = {
 		phone: '0504244460',
 		password: '12345678',

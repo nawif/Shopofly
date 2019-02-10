@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, FlatList } from 'react-native'
 import Images from "../../assets/images";
-import { OptionCard } from "./local";
+import { OptionCard } from "./";
 
 export class OptionCardList extends Component {
     

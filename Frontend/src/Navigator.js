@@ -2,16 +2,14 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
-import Login from './screens/Login'
-import Register from './screens/Register'
-import Item from './screens/Item'
+import { Item, Register, Profile, Login } from "./screens";
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 const scanNavigator = createStackNavigator({
   Item: {
-    screen: Item,
+    screen: Profile,
     navigationOptions: {
       header: null
     }

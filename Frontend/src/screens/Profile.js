@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, ImageBackground } from 'react-native'
+import { View, ImageBackground } from 'react-native'
 import { ImageAndTitle, OptionCardList } from "../components";
 
-export default class Profile extends Component {
+export  class Profile extends Component {
   render() {
     return (
       <ImageBackground source={require('../../assets/splash.png')} style={styles.container} >
