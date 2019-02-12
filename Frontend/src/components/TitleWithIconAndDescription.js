@@ -26,6 +26,7 @@ const styles ={
         flex:1,
         flexDirection:'row',
         alignItems:'center',
+        marginRight:15
     },
     icon:{
         marginRight:10
@@ -33,10 +34,10 @@ const styles ={
     title:{
         fontFamily:'Cairo-SemiBold',
         color:'#919191',
-        fontSize:12
+        fontSize:12,
     },
     subtitle:{
-        marginLeft:10,
+        paddingLeft:10,
         flex:2,
         color:'#535353',
         fontFamily:'Cairo-SemiBold',

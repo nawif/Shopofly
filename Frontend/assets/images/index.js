@@ -11,6 +11,11 @@ const images = {
     location: require('./Account/address.png'),
     phone: require('./Account/phone-call.png'),
     name: require('./Account/name.png'),
+    edit: require('./Account/edit.png'),
+    cancel: require('./Account/cancel-button.png'),
+
+
+
 
 
 
