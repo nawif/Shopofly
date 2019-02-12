@@ -72,7 +72,7 @@ const getCards = (cards) => {
           </View>
 
           <Text style={bodyStyle}>
-            { element.feedback.substring(0, 155) }...
+            { element.feedback.substring(0, 155)+'...' }
           </Text>
 
           <View style={rowStyle}>

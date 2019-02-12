@@ -6,7 +6,8 @@ import {
 	ItemInfo,
 	ItemDetails,
 	CartOptions,
-	ItemReviews
+	ItemReviews,
+	FloatingButtons,
 } from '../components'
 
 import * as API from '../API'
@@ -20,6 +21,8 @@ export default class Item extends Component {
 
 		return (
       <ScrollView style={container}>
+				<FloatingButtons />
+
 				<MySwiper />
 
 				<ItemInfo />
