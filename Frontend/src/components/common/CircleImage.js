@@ -29,6 +29,7 @@ const styles = {
     borderRadius: defaultSize/2,
     borderWidth: 1,
     borderColor: '#EBEBEB',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center'
   }

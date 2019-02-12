@@ -21,6 +21,7 @@ export const FloatingButtons = () => {
 
 const styles = {
   floatingContainer: {
+    zIndex: 1,
     position: 'absolute',
     top: 60,
     right: 20,
