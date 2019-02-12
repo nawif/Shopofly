@@ -1,13 +1,25 @@
 import React, { Component } from 'react'
-import { Text, View,TouchableOpacity } from 'react-native'
-import { AddressBox } from "../components";
+import { Text, View,TouchableOpacity, FlatList } from 'react-native'
+import { AddressesList } from "../components";
+import listOfAddresses from '../dumb_data/address.json'
+
 
 
 export class AddressBook extends Component {
+  hasOption = true; // will be passed to the AddressesList coponent telling it to propmt options
+
+  state={
+    address:listOfAddresses
+  }
+
+  _handelAddAddressOnPress = () =>{
+    console.log("ADD A NEW ADDRESS");
+    
+  }
 
   renderButton(){
     return (
-      <TouchableOpacity style={styles.buttonContainer} >
+      <TouchableOpacity onPress={this._handelAddAddressOnPress} style={styles.buttonContainer} >
         <Text style={styles.buttonTitle}  >ADD A NEW ADDRESS</Text>
       </TouchableOpacity>
     )
@@ -16,13 +28,9 @@ export class AddressBook extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <View style={styles.spacer} />
         {this.renderButton()}
-        <View style={styles.spacer} />
-        <AddressBox style={{marginBottom:30}} title="Home" />
-        <View style={styles.spacer} />
-        <AddressBox title="Home1" />
-
+        {/* <View style={styles.spacer} /> */}
+        <AddressesList addresses={listOfAddresses} />
       </View>
     )
   }
@@ -33,6 +41,7 @@ const styles ={
   container:{
     flex:1,
     alignItems:'center',
+    backgroundColor:'#FFFFFF'
   },
   buttonContainer:{
     width:'80%',
@@ -45,6 +54,6 @@ const styles ={
     padding:10
   },
   spacer:{
-    flex:0.2
+    flex:0.1
   }
 }

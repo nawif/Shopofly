@@ -24,6 +24,7 @@ export * from './OptionCardList'
 export * from './TitleWithIconAndDescription'
 export * from './ButtonWithIcon'
 export * from './AddressBox'
+export * from './AddressesList'
 
 
 

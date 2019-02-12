@@ -2,9 +2,21 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { TitleWithIconAndDescription, ButtonWithIcon } from "./";
 import Images from "../../assets/images";
+import { LinearGradient } from 'expo'
+import * as Global from '../Global'
 
 
 export class AddressBox extends Component {
+
+    renderGradient(){
+        return(
+            <LinearGradient
+            colors={[Global.FIRST_COLOR,Global.SECOND_COLOR]}
+            start={[1.0, 0]}
+            end={[0.0, 0]}
+            style={styles.circleStyle} />
+        )
+    }
     
   renderHeader(){
     return (
@@ -13,7 +25,6 @@ export class AddressBox extends Component {
         <View style={styles.titleLine} />
         <Text style={styles.title} >{this.props.title}</Text>
         <View style={styles.titleLine} />
-
         <View style={styles.titleWhiteSpace} />
       </View>
     )
@@ -22,9 +33,9 @@ export class AddressBox extends Component {
   renderItems(){
     return (
       <View>
-        <TitleWithIconAndDescription icon={Images.location} title="Address" subtitle="4043 Algamh Al Wadi." />
-        <TitleWithIconAndDescription icon={Images.phone} title="Phone Number" subtitle="+966568484248" />
-        <TitleWithIconAndDescription icon={Images.name} title="Name" subtitle="Osama Aloqaily" />
+        <TitleWithIconAndDescription icon={Images.location} title="Address" subtitle={this.props.address} />
+        <TitleWithIconAndDescription icon={Images.phone} title="Phone Number" subtitle={this.props.phone} />
+        <TitleWithIconAndDescription icon={Images.name} title="Name" subtitle={this.props.name} />
       </View>
     )
   }
@@ -32,20 +43,23 @@ export class AddressBox extends Component {
   renderButtons(){
     return(
       <View style={styles.buttonsContainer} >
-        <ButtonWithIcon icon={Images.edit} title={"Edit"} />
+        <ButtonWithIcon onPress={this.props.editOnPress} icon={Images.edit} title={"Edit"} />
         <View style={styles.verticalLineBreak} />
-        <ButtonWithIcon icon={Images.cancel} title={"Remove"} />
+        <ButtonWithIcon onPress={this.props.removeOnPress} icon={Images.cancel} title={"Remove"} />
       </View>
     )
   }
 
   render() {
     return (
-      <View style={styles.container} >
+        <View style={{alignItems:'center',justifyContent:'center',margin:5,alignSelf:'center',}} >
+        {this.props.isSelected?this.renderGradient():null}
+        <View style={styles.container} >
         {this.renderHeader()}
         {this.renderItems()}
-        {this.renderButtons()}
+        {this.props.hasOptions?this.renderButtons():null}
       </View>
+        </View>
     )
   }
 }
@@ -54,16 +68,18 @@ const styles ={
 
   container:{
     padding:20,
+    margin:5,
     alignSelf:'center',
     justifyContent:'space-evenly',
-    borderRadius: 20,
+    borderRadius: 30,
     borderWidth: 2,
     borderColor: '#CFCFCF',
-    width:'90%'
+    width:'88%',
+    backgroundColor:'white'
   },
   titleContainer:{
     flexDirection:'row',
-    marginTop:20,
+    // marginTop:20,
     flex:1,
     justifyContent:'space-evenly',
     alignItems:'center',
@@ -91,7 +107,7 @@ const styles ={
     flexDirection:'row',
     justifyContent:'space-evenly',
     alignItems:'flex-end',
-    marginTop:30,
+    // marginTop:10,
     // marginBottom:30
   },
   dataContainer:{
@@ -106,5 +122,13 @@ const styles ={
     flex:1,
     textAlign:'center'
     // backgroundColor:'black'
+  },
+  circleStyle:{
+    position:'absolute',
+    height:'98%',
+    width:'98%',
+    borderRadius: 33,
+    alignSelf:'center',
+
   }
 }
