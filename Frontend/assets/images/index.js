@@ -8,6 +8,13 @@ const images = {
     profile: require('./Navigator/man-user.png'),
     cart: require('./Navigator/shopping-cart.png'),
 
+    location: require('./Account/address.png'),
+    phone: require('./Account/phone-call.png'),
+    name: require('./Account/name.png'),
+
+
+
+
 }
 
 export default images

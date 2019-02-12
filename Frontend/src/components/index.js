@@ -21,3 +21,5 @@ export * from './common/Devider'
 export * from './ImageAndTitle'
 export * from './OptionCard'
 export * from './OptionCardList'
+export * from './TitleWithIconAndDescription'
+
