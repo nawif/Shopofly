@@ -7,6 +7,8 @@ import Login from './screens/Login'
 import Register from './screens/Register'
 import Item from './screens/Item'
 import Scan from './screens/Scan'
+import Checkout from './screens/Checkout'
+
 import { Icon } from 'react-native-elements'
 import { Entypo, Octicons, FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
@@ -31,7 +33,7 @@ const scanNavigator = createStackNavigator({
     }
   },
   Cart: {
-    screen: Item,
+    screen: Checkout,
     navigationOptions: {
       header: null
     }
@@ -66,7 +68,7 @@ const tabNavigator = createBottomTabNavigator({
   Wishlist: {
     screen: scanNavigator,
     navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (   
+      tabBarIcon: ({ tintColor, focused }) => (
         <FontAwesome
           name={focused ? 'heart' : 'heart'}
           size={24}

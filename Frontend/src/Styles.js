@@ -5,6 +5,11 @@ export const container = {
   backgroundColor: 'white'
 }
 
+export const defaultTextContainer = {
+  width: '90%',
+  alignSelf: 'center',
+}
+
 export const subtitleStyle = {
   fontFamily: 'Cairo-Bold',
   fontSize: 14,
