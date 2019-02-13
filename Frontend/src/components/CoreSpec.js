@@ -27,7 +27,7 @@ const styles = {
     borderWidth: 1,
     borderColor: '#EBEBEB',
     marginTop: '3%',
-    width: '45%'
+    width: '45%',
   },
   keyStyle: {
     color: '#2B2B2B',
