@@ -19,6 +19,9 @@ export default class App extends React.Component {
       'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
       'Roboto-Thin': require('./assets/fonts/Roboto-Thin.ttf'),
       'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
+      'Cairo-Bold': require('./assets/fonts/Cairo-Bold.ttf'),
+      'Cairo-SemiBold': require('./assets/fonts/Cairo-SemiBold.ttf'),
+      'Cairo-Regular': require('./assets/fonts/Cairo-Regular.ttf'),
     });
 
     this.setState({ fontLoaded: true });

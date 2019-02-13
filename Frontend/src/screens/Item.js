@@ -1,22 +1,47 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
+import { ScrollView, View } from 'react-native'
 
-import { Container, Swiper } from '../components'
+import {
+	MySwiper,
+	ItemInfo,
+	ItemDetails,
+	CartOptions,
+	ItemReviews,
+	FloatingButtons,
+} from '../components'
+
 import * as API from '../API'
 
-export default class Login extends Component {
+export default class Item extends Component {
 	state = {
 	}
 
 	render() {
-		const { images } = this.state
+		const { container } = styles;
 
 		return (
-      <Container>
-        <Swiper
-          images={images}
-        />
-      </Container>
+      <ScrollView style={container}>
+				<FloatingButtons />
+
+				<MySwiper />
+
+				<ItemInfo />
+
+				<CartOptions currentQuantity={1} />
+
+				<ItemDetails />
+
+				<ItemReviews />
+      </ScrollView>
 		)
+	}
+}
+
+const styles = {
+	container: {
+		width: '100%',
+	  height: '100%',
+	  flex: 1,
+	  backgroundColor: 'white'
 	}
 }
