@@ -1,7 +1,5 @@
 import React from 'react'
-import { createStackNavigator } from 'react-navigation'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
-
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Login from './screens/Login'
 import Register from './screens/Register'
 import Item from './screens/Item'
@@ -18,20 +16,42 @@ const scanNavigator = createStackNavigator({
   }
 })
 
-const tabNavigator = createBottomTabNavigator({
-  Scan: {
-    screen: scanNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? 'ios-home' : 'ios-home-outline'}
-          size={26}
-          style={{ color: tintColor }}
-        />
-      )
+/* Main Tab Navigator */
+let tabNavigator = createBottomTabNavigator(
+  /* Screens */ 
+  {
+    Scan: scanNavigator,
+  },
+
+  /* Configuration */
+  /* Warning: DO NOT PANIC */
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+          const { routeName } = navigation.state
+          let icon;
+
+          switch (routeName) {
+              case 'Scan': 
+                icon = 'ios-home'
+                break;
+          }
+
+          return <Ionicons name={icon} size={30} />
+      },
+    }),
+    
+    tabBarOptions: {
+      showLabel: false,
+      style: { 
+        height: 70,
+        borderTopWidth: 3,
+        borderTopColor: '#eee'
+        // paddingBottom: 15
+      }
     }
   }
-})
+)
 
 /*
 * This is the main Navigator,
@@ -60,4 +80,4 @@ const MyApp = createStackNavigator({
   }
 })
 
-export default MyApp
+export default Navigator = createAppContainer(MyApp)
