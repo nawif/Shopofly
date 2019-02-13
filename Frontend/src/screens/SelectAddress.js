@@ -5,8 +5,8 @@ import listOfAddresses from '../dumb_data/address.json'
 
 
 
-export class AddressBook extends Component {
-  hasOption = true; // will be passed to the AddressesList coponent telling it to propmt options
+export class SelectAddress extends Component {
+    canSelect = true; // tells the address list component that the list can be selected
 
   state={
     address:listOfAddresses
@@ -14,12 +14,13 @@ export class AddressBook extends Component {
 
   _handelAddAddressOnPress = () =>{
     console.log("ADD A NEW ADDRESS");
+    
   }
 
-  renderButton(){
+  renderNewAddressButton(){
     return (
       <TouchableOpacity onPress={this._handelAddAddressOnPress} style={styles.buttonContainer} >
-        <Text style={styles.buttonTitle}  >ADD A NEW ADDRESS</Text>
+        <Text style={styles.buttonTitle}  >Deliver To a New Address</Text>
       </TouchableOpacity>
     )
   }
@@ -28,8 +29,9 @@ export class AddressBook extends Component {
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
-        {this.renderButton()}
-        <AddressesList addresses={listOfAddresses} />
+        <AddressesList addresses={listOfAddresses} canSelect={this.canSelect} />
+        {this.renderNewAddressButton()}
+
       </View>
     )
   }
@@ -43,14 +45,14 @@ const styles ={
     backgroundColor:'#FFFFFF'
   },
   buttonContainer:{
-    width:'80%',
+    width:'90%',
     borderRadius: 30,
     borderWidth: 2,
     borderColor: '#CFCFCF',
   },
   buttonTitle:{
     textAlign:'center',
-    padding:10
+    padding:10,
   },
   spacer:{
     flex:0.1

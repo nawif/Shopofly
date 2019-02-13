@@ -12,13 +12,14 @@ export class AddressesList extends Component {
     }
 
     _renderItem = ({item}) => (
-        <AddressBox title={item.title} address={item.address} phone={item.phone} name={item.name} hasOptions={this.props.hasOptions} isSelected={this.props.isSelected}  />
+        <AddressBox canBeSelected={this.props.canSelect} title={item.title} address={item.address} phone={item.phone} name={item.name} hasOptions={this.props.hasOptions} isSelected={this.props.isSelected}  />
       );
 
     _keyExtractor = (item, index) => item.id;  
   render() {
     return (
         <FlatList
+        style={{flexGrow: 0}}
         data={this.state.addresses}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}

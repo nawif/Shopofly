@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, TouchableWithoutFeedback } from 'react-native'
 import { TitleWithIconAndDescription, ButtonWithIcon } from "./";
 import Images from "../../assets/images";
 import { LinearGradient } from 'expo'
@@ -7,6 +7,9 @@ import * as Global from '../Global'
 
 
 export class AddressBox extends Component {
+    state={
+      isSelected:false
+    }
 
     renderGradient(){
         return(
@@ -49,17 +52,25 @@ export class AddressBox extends Component {
       </View>
     )
   }
+  _handelPress = () =>{
+    console.log("_handelPress:"+ this.state.isSelected );
+    if(this.props.canBeSelected){
+      this.setState({isSelected:!this.state.isSelected})
 
+    }
+  }
   render() {
     return (
-        <View style={{alignItems:'center',justifyContent:'center',margin:5,alignSelf:'center',}} >
-        {this.props.isSelected?this.renderGradient():null}
-        <View style={styles.container} >
-        {this.renderHeader()}
-        {this.renderItems()}
-        {this.props.hasOptions?this.renderButtons():null}
-      </View>
-        </View>
+        <TouchableWithoutFeedback onPress={this._handelPress}>
+          <View style={{alignItems:'center',justifyContent:'center',margin:5,alignSelf:'center',}} >
+            {this.state.isSelected?this.renderGradient():null}
+            <View style={styles.container} >
+              {this.renderHeader()}
+              {this.renderItems()}
+              {this.props.hasOptions?this.renderButtons():null}
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
     )
   }
 }

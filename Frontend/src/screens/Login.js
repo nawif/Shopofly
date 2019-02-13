@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
-import { AddressBook } from "./";
+import { SelectAddress } from "./";
 import { MainContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts'
@@ -89,7 +89,7 @@ export class Login extends Component {
 		const isValid = this.isValidInput()
 
 		return (
-	      <AddressBook/>
+	      <SelectAddress/>
 
 		)
 	}
