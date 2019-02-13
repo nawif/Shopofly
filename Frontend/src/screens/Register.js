@@ -12,7 +12,7 @@ import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Utility from '../Utility.js'
 
-export default class Register extends Component {
+export class Register extends Component {
 	state = {
 		phone: '',
 		password: '',

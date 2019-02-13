@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList } from 'react-native'
-import Images from "../../assets/images";
+import images from "../../assets/images";
 import { OptionCard } from "./local";
 
 export class OptionCardList extends Component {
@@ -9,36 +9,38 @@ export class OptionCardList extends Component {
       const options =[
     {
         title:'Orders',
-        icon:Images.orders,
+        icon:images.orders,
         textStyle:{}
     },
     {
         title:'Address Book',
-        icon:Images.addressBook,
+        icon:images.addressBook,
         textStyle:{}
     },
     {
         title:'Account Settings',
-        icon:Images.account,
+        icon:images.account,
         textStyle:{}
     },
     {
         title:'Logout',
-        icon:Images.logout,
+        icon:images.logout,
         textStyle:{color:'#D34A4A'}
     }
 ]
     return (
     
         <View>
-            <FlatList
-                style={{ height:'100%'}}
+            {
+            // <FlatList
+            //     style={{ flex: 1 }}
                 
-                data={options}
-                renderItem={ ({item})  => 
-                        <OptionCard key={item.title} title={item.title} icon={item.icon} textStyle={item.textStyle}  />
-                }  
-            />
+            //     data={options}
+            //     renderItem={ ({item})  => 
+            //             <OptionCard key={item.title} title={item.title} icon={item.icon} textStyle={item.textStyle}  />
+            //     }  
+            // />
+            }
         </View>
     )
   }

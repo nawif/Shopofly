@@ -33,7 +33,6 @@ export default class App extends React.Component {
 
 
   render() {
-    this.clearAsyncStorage()
     return (
       this.state.fontLoaded ? <Provider store={createStore(reducers)}>
                                 <MyApp />
@@ -41,12 +40,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

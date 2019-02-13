@@ -1,19 +1,25 @@
 import React from 'react'
+import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import Login from './screens/Login'
-import Register from './screens/Register'
-import Item from './screens/Item'
-
-import Ionicons from 'react-native-vector-icons/Ionicons'
-
+import { Login, Register, Item, Scan, Profile } from './screens'
+import images from '../assets/images'
+import { TabBarIcon } from './components'
 
 const scanNavigator = createStackNavigator({
+  Scan: {
+    screen: Scan,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
   Item: {
     screen: Item,
-    navigationOptions: {
-      header: null
-    }
-  }
+  },
 })
 
 /* Main Tab Navigator */
@@ -21,6 +27,9 @@ let tabNavigator = createBottomTabNavigator(
   /* Screens */ 
   {
     Scan: scanNavigator,
+    Profile: Profile,
+    Starred: Profile,
+    Cart: Profile
   },
 
   /* Configuration */
@@ -29,15 +38,24 @@ let tabNavigator = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => {
           const { routeName } = navigation.state
-          let icon;
+          let image;
 
           switch (routeName) {
               case 'Scan': 
-                icon = 'ios-home'
+                image = focused ? images.qrActive : images.qr
+                break;
+              case 'Profile': 
+                image = focused ? images.profileActive : images.profile
+                break;
+              case 'Starred': 
+                image = focused ? images.starredActive : images.starred
+                break;
+              case 'Cart': 
+                image = focused ? images.cartActive : images.cart
                 break;
           }
 
-          return <Ionicons name={icon} size={30} />
+          return <TabBarIcon source={image} size={30} />
       },
     }),
     
