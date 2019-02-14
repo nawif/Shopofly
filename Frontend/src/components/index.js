@@ -36,8 +36,5 @@ export * from './AddressesList'
 
 
 export * from './common/CircleImage'
-<<<<<<< HEAD
 export * from './common/Headline'
-=======
 export * from './TabBarIcon'
->>>>>>> dev
