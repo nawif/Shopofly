@@ -33,7 +33,7 @@ export * from './ButtonWithIcon'
 export * from './AddressBox'
 export * from './AddressesList'
 
-
+export * from './Checkout/ItemSummary'
 
 export * from './common/CircleImage'
 export * from './common/Headline'

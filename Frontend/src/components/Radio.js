@@ -31,7 +31,7 @@ export const Radio = ({ label, isSelected }) => {
           ) : null
         }
       </View>
-      <Text>Pay With Credit Card</Text>
+      <Text>{ label }</Text>
     </View>
   )
 }
