@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native'
 
 import { defaultTextContainer } from '../../Styles'
 
-export const ItemSummary = ({ item }) => {
+export const ItemSummary = ({ item, withQuantity }) => {
   const {
     container,
     leftStyle,
@@ -36,7 +36,10 @@ export const ItemSummary = ({ item }) => {
 
         <Text style={priceStyle}>SAR { item.price } <Text style={muteStyle}>(inclusive of vat)</Text></Text>
 
-        <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.quantity}</Text></Text>
+        { withQuantity ? (
+            <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.quantity}</Text></Text>
+          ) : null
+        }
       </View>
 
       <View style={rightStyle}>
