@@ -9,7 +9,7 @@ import { Container, Headline, Radio, Devider } from '../components'
 import { VAT } from '../Global'
 import { defaultTextContainer } from '../Styles'
 
-export default class Checkout extends Component {
+export class Checkout extends Component {
     state = {
       selected: 1,
     }

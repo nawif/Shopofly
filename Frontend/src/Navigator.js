@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile } from './screens'
+import { Login, Register, Item, Scan, Profile, Checkout } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -29,7 +29,7 @@ let tabNavigator = createBottomTabNavigator(
     Scan: scanNavigator,
     Profile: Profile,
     Starred: Profile,
-    Cart: Profile
+    Cart: Checkout
   },
 
   /* Configuration */
