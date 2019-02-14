@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
-import { SelectAddress } from "./";
+
 import { MainContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
 import * as API from '../API'
 import AwesomeAlert from 'react-native-awesome-alerts'
@@ -90,7 +90,30 @@ export class Login extends Component {
 		const isValid = this.isValidInput()
 
 		return (
-	      <SelectAddress/>
+	      <MainContainer>
+
+					<LogoSection />
+
+					<LoginFormInputs
+						phone={phone}
+						password={password}
+						onChangePhone={(phone) => this.setState({ phone })}
+						onChangePassword={(password) => this.setState({ password })}
+					/>
+
+					<ClickablesSection
+						label={'Login'}
+						marginTop={'10%'}
+						onClick={this.onLogin}
+						isLoading={this.state.isLoading}
+						anchorText="Don't have an account?"
+						anchorHook="Sign Up"
+						onPress={() => this.props.navigation.navigate('Register')}
+						isValid={isValid}
+					/>
+
+					{ this.renderAlert() }
+	      </MainContainer>
 
 		)
 	}
