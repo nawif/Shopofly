@@ -1,35 +1,75 @@
 import React from 'react'
-import { createStackNavigator } from 'react-navigation'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
-
-import { AddressBook, Register, Profile, Login,Item } from "./screens";
-
-import Ionicons from 'react-native-vector-icons/Ionicons'
-
+import { Image } from 'react-native'
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { Login, Register, Item, Scan, Profile } from './screens'
+import images from '../assets/images'
+import { TabBarIcon } from './components'
 
 const scanNavigator = createStackNavigator({
-  Item: {
-    screen: AddressBook,
+  Scan: {
+    screen: Scan,
     navigationOptions: {
-      header: null
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
     }
-  }
+  },
+  Item: {
+    screen: Item,
+  },
 })
 
-const tabNavigator = createBottomTabNavigator({
-  Scan: {
-    screen: scanNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Ionicons
-          name={focused ? 'ios-home' : 'ios-home-outline'}
-          size={26}
-          style={{ color: tintColor }}
-        />
-      )
+/* Main Tab Navigator */
+let tabNavigator = createBottomTabNavigator(
+  /* Screens */ 
+  {
+    Scan: scanNavigator,
+    Profile: Profile,
+    Starred: Profile,
+    Cart: Profile
+  },
+
+  /* Configuration */
+  /* Warning: DO NOT PANIC */
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+          const { routeName } = navigation.state
+          let image;
+
+          switch (routeName) {
+              case 'Scan': 
+                image = focused ? images.qrActive : images.qr
+                break;
+              case 'Profile': 
+                image = focused ? images.profileActive : images.profile
+                break;
+              case 'Starred': 
+                image = focused ? images.starredActive : images.starred
+                break;
+              case 'Cart': 
+                image = focused ? images.cartActive : images.cart
+                break;
+          }
+
+          return <TabBarIcon source={image} size={30} />
+      },
+    }),
+    
+    tabBarOptions: {
+      showLabel: false,
+      style: { 
+        height: 70,
+        borderTopWidth: 3,
+        borderTopColor: '#eee'
+        // paddingBottom: 15
+      }
     }
   }
-})
+)
 
 /*
 * This is the main Navigator,
@@ -58,4 +98,4 @@ const MyApp = createStackNavigator({
   }
 })
 
-export default MyApp
+export default Navigator = createAppContainer(MyApp)

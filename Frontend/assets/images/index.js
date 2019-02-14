@@ -1,4 +1,6 @@
 const images = {
+
+    /* Profile */
     orders: require('./Account/shopping-bag.png'),
     payment: require('./Account/credit-card.png'),
     addressBook: require('./Account/agenda.png'),
@@ -19,6 +21,15 @@ const images = {
 
 
 
+    /* Tab Navigator */
+    qr: require('./TabNavigator/qr.png'),
+    qrActive: require('./TabNavigator/qr-active.png'),
+    profile: require('./TabNavigator/profile.png'),
+    profileActive: require('./TabNavigator/profile-active.png'),
+    starred: require('./TabNavigator/starred.png'),
+    starredActive: require('./TabNavigator/starred-active.png'),
+    cart: require('./TabNavigator/cart.png'),
+    cartActive: require('./TabNavigator/cart-active.png')
 
 }
 

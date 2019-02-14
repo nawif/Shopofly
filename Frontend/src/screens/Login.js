@@ -12,6 +12,7 @@ export class Login extends Component {
 		loading: false,
 		showAlert: false,
 		alertMessage: '',
+		isLoading: false
 	}
 
 	isValidInput = () => {
@@ -30,13 +31,13 @@ export class Login extends Component {
 			return
 		}
 
-		this.setState({ loading: true })
+		this.setState({ isLoading: true })
 
     API.login(phone, password)
     .then(async (token) => {
 			if(token){
 				await AsyncStorage.setItem('token', token)
-				this.props.navigation.navigate('Item', { token })
+				this.props.navigation.navigate('Scan', { token })
 			} else {
 				this.showAlert('Could not get token, please check your connection and try again.')
 			}

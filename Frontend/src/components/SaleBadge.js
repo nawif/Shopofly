@@ -8,7 +8,7 @@ import {
 import { LinearGradient } from 'expo'
 import * as Global from '../Global'
 
-const SaleBadge = ({ percentage, marginLeft }) => {
+export const SaleBadge = ({ percentage, marginLeft }) => {
   const { container, badgeStyle, offerStyle, imageStyle } = styles
 
   container.marginLeft = marginLeft || null
@@ -51,5 +51,3 @@ const styles = {
     width: 12
   }
 }
-
-export { SaleBadge }

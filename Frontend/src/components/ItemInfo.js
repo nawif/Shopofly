@@ -68,6 +68,7 @@ const styles = {
   container: {
     flex: 1,
     width: '90%',
+    height: 220,
     alignSelf: 'center',
     marginBottom: '5%'
   },
