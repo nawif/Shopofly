@@ -4,5 +4,5 @@ export * from './Profile'
 export * from './Register'
 export * from './AddressBook' 
 export * from './SelectAddress' 
-
+export * from './AddNewAddress' 
 export * from './Scan'
