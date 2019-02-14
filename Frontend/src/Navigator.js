@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, AddressBook } from './screens'
+import { Login, Register, Item, Scan, Profile, AddressBook, AddNewAddress } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 

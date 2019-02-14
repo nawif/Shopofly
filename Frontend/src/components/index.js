@@ -30,7 +30,7 @@ export * from './TitleWithIconAndDescription'
 export * from './ButtonWithIcon'
 export * from './AddressBox'
 export * from './AddressesList'
-
+export * from './SectionWithHeader'
 
 
 export * from './common/CircleImage'
