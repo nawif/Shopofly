@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { QrHandler} from '../components';
+import { QrHandler } from '../components';
 
-export default class App extends Component {
+export class Scan extends Component {
 
   render() {
     return (

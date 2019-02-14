@@ -1,95 +1,75 @@
 import React from 'react'
 import { Image } from 'react-native'
-import { createStackNavigator } from 'react-navigation'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
-
-import Login from './screens/Login'
-import Register from './screens/Register'
-import Item from './screens/Item'
-import Scan from './screens/Scan'
-import Checkout from './screens/Checkout'
-
-import { Icon } from 'react-native-elements'
-import { Entypo, Octicons, FontAwesome, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { Login, Register, Item, Scan, Profile } from './screens'
+import images from '../assets/images'
+import { TabBarIcon } from './components'
 
 const scanNavigator = createStackNavigator({
   Scan: {
     screen: Scan,
     navigationOptions: {
-      header: null
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
     }
   },
-  Profile: {
+  Item: {
     screen: Item,
-    navigationOptions: {
-      header: null
-    }
   },
-  Wishlist: {
-    screen: Item,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Cart: {
-    screen: Checkout,
-    navigationOptions: {
-      header: null
-    }
-  }
 })
 
-const tabNavigator = createBottomTabNavigator({
-  Scan: {
-    screen: scanNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <MaterialCommunityIcons
-          name={focused ? "qrcode-scan" : "qrcode-scan"}
-          size={24}
-          style={{ color: tintColor }}
-        />
-      )
-    }
+/* Main Tab Navigator */
+let tabNavigator = createBottomTabNavigator(
+  /* Screens */
+  {
+    Scan: scanNavigator,
+    Profile: Profile,
+    Starred: Profile,
+    Cart: Profile
   },
-  Profile: {
-    screen: scanNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Octicons
-          name={focused ? "person" : "person"}
-          size={24}
-          style={{ color: tintColor }}
-        />
-      )
-    }
-  },
-  Wishlist: {
-    screen: scanNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <FontAwesome
-          name={focused ? 'heart' : 'heart'}
-          size={24}
-          style={{ color: tintColor }}
-        />
-      )
-    }
-  },
-  Cart: {
-    screen: scanNavigator,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, focused }) => (
-        <Entypo
-          name={focused ? 'shopping-cart' : 'shopping-cart'}
-          size={24}
-          style={{ color: tintColor }}
-        />
-      )
+
+  /* Configuration */
+  /* Warning: DO NOT PANIC */
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+          const { routeName } = navigation.state
+          let image;
+
+          switch (routeName) {
+              case 'Scan':
+                image = focused ? images.qrActive : images.qr
+                break;
+              case 'Profile':
+                image = focused ? images.profileActive : images.profile
+                break;
+              case 'Starred':
+                image = focused ? images.starredActive : images.starred
+                break;
+              case 'Cart':
+                image = focused ? images.cartActive : images.cart
+                break;
+          }
+
+          return <TabBarIcon source={image} size={30} />
+      },
+    }),
+
+    tabBarOptions: {
+      showLabel: false,
+      style: {
+        height: 70,
+        borderTopWidth: 3,
+        borderTopColor: '#eee'
+        // paddingBottom: 15
+      }
     }
   }
-})
+)
 
 /*
 * This is the main Navigator,
@@ -118,4 +98,4 @@ const MyApp = createStackNavigator({
   }
 })
 
-export default MyApp
+export default Navigator = createAppContainer(MyApp)

@@ -12,7 +12,7 @@ import {
 
 import * as API from '../API'
 
-export default class Item extends Component {
+export  class Item extends Component {
 	state = {
 	}
 

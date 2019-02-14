@@ -67,8 +67,8 @@ export const ItemInfo = ({}) => {
 const styles = {
   container: {
     flex: 1,
-    // width: '90%',
-    height: '100%',
+    width: '90%',
+    height: 220,
     alignSelf: 'center',
     marginBottom: '5%'
   },
