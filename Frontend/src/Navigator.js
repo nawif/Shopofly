@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile } from './screens'
+import { Login, Register, Item, Scan, Profile, StarredItems } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -79,7 +79,7 @@ let tabNavigator = createBottomTabNavigator(
 */
 const MyApp = createStackNavigator({
   Login: {
-    screen: Login,
+    screen: StarredItems,
     navigationOptions: {
       header: null
     }

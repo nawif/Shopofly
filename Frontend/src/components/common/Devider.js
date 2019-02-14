@@ -4,7 +4,7 @@ import { View } from 'react-native'
 export const Devider = (props) => {
 
   const devider = {
-    height: 3 || props.height,
+    height: props.height || 3,
     backgroundColor: '#F0F0F0',
   }
 
