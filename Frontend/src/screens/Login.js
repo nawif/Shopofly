@@ -9,7 +9,6 @@ export class Login extends Component {
 	state = {
 		phone: '0504244460',
 		password: '12345678',
-		loading: false,
 		showAlert: false,
 		alertMessage: '',
 		isLoading: false
@@ -41,12 +40,12 @@ export class Login extends Component {
 			} else {
 				this.showAlert('Could not get token, please check your connection and try again.')
 			}
-			this.setState({ loading: false })
+			this.setState({ isLoading: false })
     })
     .catch((error) => {
 			console.log(error.response);
 			this.showAlert(error.response.data['error'])
-			this.setState({ loading: false })
+			this.setState({ isLoading: false })
 		})
   }
 

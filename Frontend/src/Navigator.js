@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, Checkout } from './screens'
+import { Login, Register, Item, Scan, Profile, Checkout, AddressBook } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -22,12 +22,32 @@ const scanNavigator = createStackNavigator({
   },
 })
 
+const profileNavigator = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      header: null
+    }
+  },
+  AddressBook: {
+    screen: AddressBook,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+})
+
 /* Main Tab Navigator */
 let tabNavigator = createBottomTabNavigator(
   /* Screens */
   {
     Scan: scanNavigator,
-    Profile: Profile,
+    Profile: profileNavigator,
     Starred: Profile,
     Cart: Checkout
   },

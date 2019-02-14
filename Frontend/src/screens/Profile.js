@@ -11,22 +11,26 @@ handelLogout = () =>{
     this.props.navigation.navigate('Login');
 }
 
+handelAddressBook = () =>{
+    this.props.navigation.navigate('AddressBook');
+}
+
   render() {
     const options =[
       {
           title:'Orders',
           icon:Images.orders,
-          textStyle:{},
+
       },
       {
           title:'Address Book',
           icon:Images.addressBook,
-          textStyle:{}
+        action:this.handelAddressBook
       },
       {
           title:'Account Settings',
           icon:Images.account,
-          textStyle:{}
+
       },
       {
           title:'Logout',
