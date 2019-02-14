@@ -92,7 +92,7 @@ export class Checkout extends Component {
         (item, index) => {
           return (
             <View key={index}>
-              <ItemSummary item={item} />
+              <ItemSummary item={item} withQuantity={true} />
               <Devider />
             </View>
           )
@@ -102,27 +102,21 @@ export class Checkout extends Component {
   }
 
   renderBill() {
+    return (
+      <View>
 
+      </View>
+    )
   }
 
   loadItems() {
     const item = {
       seller:'Apple',
       title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
-      rating: 4.8,
-      reviews: 4,
-      specification:{ dimensions:{width:'10',height:'10'} },
       price: '2,890.00',
       storeDetails: {
         store: 'Extra Store',
-        warranty: '6 months',
       },
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      specifications: [
-        { key: 'Key', value: 'Value'},
-        { key: 'Key', value: 'Value'},
-        { key: 'Key', value: 'Value'},
-      ],
       quantity: 3,
       image: 'https://www.jagojet.com/media/catalog/product/cache/4/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/g/r/gray-1_2.png'
     }

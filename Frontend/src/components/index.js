@@ -27,6 +27,7 @@ export * from './common/Devider'
 export * from './common/DividerWithHeading'
 export * from './common/CircleImage'
 export * from './common/ButtonWithRadius'
+export * from './common/ItemSummary'
 
 export * from './ImageAndTitle'
 export * from './OptionCard'
@@ -35,8 +36,6 @@ export * from './TitleWithIconAndDescription'
 export * from './ButtonWithIcon'
 export * from './AddressBox'
 export * from './AddressesList'
-
-export * from './Checkout/ItemSummary'
 
 export * from './common/CircleImage'
 export * from './common/Headline'
