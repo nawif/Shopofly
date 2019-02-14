@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  Text,
   ScrollView,
   AsyncStorage,
 } from 'react-native';
@@ -14,10 +15,13 @@ import {
   Devider,
   AddressBox,
   ItemSummary,
+  CheckoutFooter,
 } from '../components'
 
 import { VAT } from '../Global'
 import { defaultTextContainer } from '../Styles'
+
+const defaultPaddingSummary = 4
 
 export class Checkout extends Component {
   state = {
@@ -61,9 +65,21 @@ export class Checkout extends Component {
         <ScrollView>
           <Headline text={'Payment Method'} />
 
-          <Radio label={'Pay With Credit Card'} isSelected={isCreditCard}/>
+          <Radio
+            label={'Pay With Credit Card'}
+            isSelected={isCreditCard}
+            onPressHandler={ () => {
+              this.setState({selectedPayment: 'credit'})
+            }}
+          />
           <Devider height={1} />
-          <Radio label={'Payofly - Pay On Delivery'} isSelected={isPayofly}/>
+          <Radio
+            label={'Payofly - Pay On Delivery'}
+            isSelected={isPayofly}
+            onPressHandler={ () => {
+              this.setState({selectedPayment: 'payofly'})
+            }}
+          />
 
           <Headline text={'Deliver To'} />
           <AddressBox
@@ -81,7 +97,9 @@ export class Checkout extends Component {
           { cart ? this.renderItems() : null }
 
           { this.renderBill() }
+
         </ScrollView>
+        { this.renderPlaceOrder() }
       </Container>
     )
   }
@@ -102,10 +120,34 @@ export class Checkout extends Component {
   }
 
   renderBill() {
-    return (
-      <View>
+    const { billKey, billValue, totalStyle, billContainer } = styles
+    const { subtotal, vatApprox, totalPrice } = this.state
 
+    return (
+      <View style={[defaultTextContainer, billContainer]}>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={billKey}>Subtotal</Text>
+          <Text style={billValue}>SAR {subtotal}</Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={billKey}>Shipping Fee</Text>
+          <Text style={billValue}>FREE</Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={billKey}>VAT</Text>
+          <Text style={billValue}>{vatApprox}</Text>
+        </View>
+        <View style={totalStyle}>
+          <Text style={billKey}>TOTAL</Text>
+          <Text style={billValue}>SAR {totalPrice}</Text>
+        </View>
       </View>
+    )
+  }
+
+  renderPlaceOrder() {
+    return (
+      <CheckoutFooter onPressHandler={() => console.log("Presses (Place Order)")} />
     )
   }
 
@@ -113,7 +155,7 @@ export class Checkout extends Component {
     const item = {
       seller:'Apple',
       title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
-      price: '2,890.00',
+      price: '2890.00',
       storeDetails: {
         store: 'Extra Store',
       },
@@ -148,7 +190,7 @@ export class Checkout extends Component {
 
     for (let item of this.state.cart) {
       if (item.price) {
-         subtotal = subtotal + parseInt(item.price.substring(1)) * parseInt(item.quantity)
+         subtotal = subtotal + parseInt(item.price) * parseInt(item.quantity)
       }
     }
 
@@ -156,7 +198,7 @@ export class Checkout extends Component {
   }
 
   getVatApprox(subtotal) {
-    let vatApprox = Global.vat * subtotal
+    let vatApprox = Global.VAT * subtotal
     vatApprox = Math.round(vatApprox * 100) / 100
     return vatApprox
   }
@@ -169,4 +211,26 @@ const styles = {
     alignItems: 'center',
     flexDirection: 'row',
   },
+  billKey: {
+    flex: 10,
+    paddingBottom: defaultPaddingSummary,
+    fontFamily: 'Cairo-SemiBold',
+    fontSize: 14,
+    color: '#2B2B2B'
+  },
+  billValue: {
+    flex: 4,
+    paddingBottom: defaultPaddingSummary,
+    fontFamily: 'Cairo-Bold',
+    fontSize: 14,
+    color: '#2B2B2B'
+  },
+  totalStyle: {
+    flexDirection: 'row',
+    marginTop: 30,
+  },
+  billContainer: {
+    marginTop: 15,
+    marginBottom: 150,
+  }
 }
