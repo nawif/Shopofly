@@ -15,6 +15,7 @@ import {
   Devider,
   AddressBox,
   ItemSummary,
+  CheckoutFooter,
 } from '../components'
 
 import { VAT } from '../Global'
@@ -96,7 +97,9 @@ export class Checkout extends Component {
           { cart ? this.renderItems() : null }
 
           { this.renderBill() }
+
         </ScrollView>
+        { this.renderPlaceOrder() }
       </Container>
     )
   }
@@ -139,6 +142,12 @@ export class Checkout extends Component {
           <Text style={billValue}>SAR {totalPrice}</Text>
         </View>
       </View>
+    )
+  }
+
+  renderPlaceOrder() {
+    return (
+      <CheckoutFooter onPressHandler={() => console.log("Presses (Place Order)")} />
     )
   }
 

@@ -37,3 +37,5 @@ export * from './AddressesList'
 export * from './common/CircleImage'
 export * from './common/Headline'
 export * from './TabBarIcon'
+
+export * from './Checkout/CheckoutFooter'
