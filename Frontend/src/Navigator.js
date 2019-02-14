@@ -48,7 +48,7 @@ let tabNavigator = createBottomTabNavigator(
   {
     Scan: scanNavigator,
     Profile: profileNavigator,
-    Starred: Profile,
+    Starred: StarredItems,
     Cart: Checkout
   },
 
@@ -99,7 +99,7 @@ let tabNavigator = createBottomTabNavigator(
 */
 const MyApp = createStackNavigator({
   Login: {
-    screen: StarredItems,
+    screen: Login,
     navigationOptions: {
       header: null
     }
