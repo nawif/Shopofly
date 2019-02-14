@@ -99,7 +99,7 @@ let tabNavigator = createBottomTabNavigator(
 */
 const MyApp = createStackNavigator({
   Login: {
-    screen: Checkout,
+    screen: Login,
     navigationOptions: {
       header: null
     }

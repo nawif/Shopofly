@@ -11,10 +11,13 @@ export const CheckoutFooter = ({ onPressHandler }) => {
   return (
     <View style={container}>
       <GradientButton
+        width={'90%'}
+        borderRadius={defaultButtonSize}
         fontFamily={'Cairo-SemiBold'}
         label={'Place Order'}
         isValid={true}
         onClick={onPressHandler}
+        align={null}
       />
     </View>
   )
@@ -22,9 +25,11 @@ export const CheckoutFooter = ({ onPressHandler }) => {
 
 const styles = {
   container: {
-    height: '10%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: 90,
+    paddingTop: 10,
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'flex-start',
     borderTopWidth: 1,
     borderTopColor: '#919191',
   }
