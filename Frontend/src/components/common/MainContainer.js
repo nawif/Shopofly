@@ -45,6 +45,4 @@ const mapStateToProps = (state, ownProps) => {
   return { action: ownProps.setKeyboardState }
 }
 
-const MainContainer = connect(mapStateToProps, actions)(MainContainerComponent)
-
-export { MainContainer }
+export const MainContainer = connect(mapStateToProps, actions)(MainContainerComponent)

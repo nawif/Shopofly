@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, StarredItems } from './screens'
+import { Login, Register, Item, Scan, Profile, Checkout, AddressBook, StarredItems } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -22,14 +22,34 @@ const scanNavigator = createStackNavigator({
   },
 })
 
+const profileNavigator = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      header: null
+    }
+  },
+  AddressBook: {
+    screen: AddressBook,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+})
+
 /* Main Tab Navigator */
 let tabNavigator = createBottomTabNavigator(
-  /* Screens */ 
+  /* Screens */
   {
     Scan: scanNavigator,
-    Profile: Profile,
+    Profile: profileNavigator,
     Starred: Profile,
-    Cart: Profile
+    Cart: Checkout
   },
 
   /* Configuration */
@@ -41,16 +61,16 @@ let tabNavigator = createBottomTabNavigator(
           let image;
 
           switch (routeName) {
-              case 'Scan': 
+              case 'Scan':
                 image = focused ? images.qrActive : images.qr
                 break;
-              case 'Profile': 
+              case 'Profile':
                 image = focused ? images.profileActive : images.profile
                 break;
-              case 'Starred': 
+              case 'Starred':
                 image = focused ? images.starredActive : images.starred
                 break;
-              case 'Cart': 
+              case 'Cart':
                 image = focused ? images.cartActive : images.cart
                 break;
           }
@@ -58,10 +78,10 @@ let tabNavigator = createBottomTabNavigator(
           return <TabBarIcon source={image} size={30} />
       },
     }),
-    
+
     tabBarOptions: {
       showLabel: false,
-      style: { 
+      style: {
         height: 70,
         borderTopWidth: 3,
         borderTopColor: '#eee'
