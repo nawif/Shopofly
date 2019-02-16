@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native' 
+import { View, FlatList } from 'react-native'
 import { DividerWithHeading, ItemSummary, Devider } from '../components'
 
 export class StarredItems extends Component {
@@ -23,7 +23,7 @@ export class StarredItems extends Component {
 
         this.setState({ starredItems: [item, item, item] })
     }
-    
+
 
     render() {
         const { starredItems } = this.state
@@ -35,11 +35,11 @@ export class StarredItems extends Component {
                     keyExtractor={ (item, index) => index.toString()}
                     renderItem={({item, index}) => (
                         <View key={index}>
-                            <ItemSummary item={item} withAddToCart />
+                            <ItemSummary item={item} withAddToCart withRemoveFromCart />
                             { index != starredItems.length-1 ? <Devider /> : null }
                         </View>
                     )
-                        
+
                     }
                 />
             </View>

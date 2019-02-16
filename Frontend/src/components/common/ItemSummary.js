@@ -21,23 +21,25 @@ export const ItemSummary = (props) => {
 }
 
 const renderSuitableButtons = (props) => {
-  const { buttonsContainer, quantityStyle } = styles
-  const { withQuantity, withAddToCart } = props
+  const { buttonsContainer, quantityStyle, numberStyle } = styles
+  const { withQuantity, withAddToCart, withRemoveFromCart, item } = props
   return (
     <View style={[defaultTextContainer, buttonsContainer]}>
-        { 
+        {
           withQuantity ? (
             <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.quantity}</Text></Text>
           ) : null
         }
-        { 
+        {
           withAddToCart ? (
             <ButtonWithRadius icon={images.shoppingCartIcon} label='ADD TO CART' color='#A4A4A4' />
           ) : null
         }
-
-        <ButtonWithRadius icon={images.removeIcon} label='REMOVE' color='#D76B6B' />
-
+        {
+          withRemoveFromCart ? (
+            <ButtonWithRadius icon={images.removeIcon} label='REMOVE' color='#D76B6B' />
+          ) : null
+        }
     </View>
   )
 }
@@ -53,7 +55,7 @@ const renderImage = (item) => {
 }
 
 const renderItemDetails = (item) => {
-  const { 
+  const {
     leftStyle,
     storeName,
     titleStyle,
