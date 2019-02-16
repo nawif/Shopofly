@@ -5,7 +5,7 @@ export class Scan extends Component {
 
   render() {
     return (
-        <QrHandler/>
+        <QrHandler navigation={this.props.navigation}/>
     );
   }
 }
