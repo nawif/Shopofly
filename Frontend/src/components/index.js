@@ -37,7 +37,7 @@ export * from './TitleWithIconAndDescription'
 export * from './ButtonWithIcon'
 export * from './AddressBox'
 export * from './AddressesList'
-
+export * from './SectionWithHeader'
 export * from './common/CircleImage'
 export * from './common/Headline'
 export * from './TabBarIcon'

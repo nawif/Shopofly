@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, PlaceOrder, AddressBook, StarredItems, SelectAddress, Cart } from './screens'
+import { Login, Register, Item, Scan, Profile, PlaceOrder, AddressBook, StarredItems, SelectAddress, Cart, AddNewAddress } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -40,7 +40,20 @@ const profileNavigator = createStackNavigator({
       }
     }
   },
+  AddAddress: {
+    screen: AddNewAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
 })
+
+
 
 // TODO: make main screen as cart step 1
 const cartNavigator = createStackNavigator({

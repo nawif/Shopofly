@@ -13,7 +13,7 @@ export class AddressBook extends Component {
   }
 
   _handelAddAddressOnPress = () =>{
-    console.log("ADD A NEW ADDRESS");
+    this.props.navigation.navigate("AddAddress");
   }
 
   renderButton(){
