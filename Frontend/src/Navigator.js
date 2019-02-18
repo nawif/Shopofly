@@ -40,7 +40,19 @@ const profileNavigator = createStackNavigator({
       }
     }
   },
+  AddAddress: {
+    screen: AddNewAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
 })
+
 
 /* Main Tab Navigator */
 let tabNavigator = createBottomTabNavigator(

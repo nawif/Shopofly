@@ -22,7 +22,8 @@ const styles ={
         fontFamily:'Cairo-Bold',
         fontSize:15,
         color:'#2B2B2B',
-        backgroundColor:'#F7F7F7'
+        backgroundColor:'#F7F7F7',
+        padding:10
     },
     childrenContainer:{
 

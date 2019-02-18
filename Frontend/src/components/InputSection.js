@@ -10,7 +10,7 @@ const InputSectionComponent = (props) => {
 		justifyContent: 'space-around',
     alignContent: props.alignContent || 'space-around',
     alignSelf: 'center',
-    marginTop: props.keyboardState ? 30 : null,
+    marginBottom: props.keyboardState ? 30 : null,
   }
 
 	return (

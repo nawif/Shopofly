@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import { MainContainer, SectionWithHeader,TextInput } from "../components";
+import { MainContainer, SectionWithHeader,TextInput, GradientButton } from "../components";
 import * as Utility from '../Utility.js'
 import * as Global from '../Global.js'
 
@@ -26,9 +26,10 @@ export class AddNewAddress extends Component {
         </SectionWithHeader>
         <SectionWithHeader header="LOCATION INFORMATION" >
             {this.renderTextField("First Name")}
-            {this.renderTextField("Last")}
-            {this.renderTextField("City")}
+            {this.renderTextField("Last Name")}
+            {this.renderTextField("Phone Number")}
         </SectionWithHeader>
+        <GradientButton isValid={true} label={"ADD ADDRESS"} />
       </MainContainer>
     )
   }
