@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View,TouchableOpacity, FlatList } from 'react-native'
-import { AddressesList } from "../components";
-import listOfAddresses from '../dumb_data/address.json'
+import { AddressesList } from "../../components";
+import listOfAddresses from '../../dumb_data/address.json'
 
 
 
@@ -12,9 +12,11 @@ export class SelectAddress extends Component {
     address:listOfAddresses
   }
 
-  _handelAddAddressOnPress = () =>{
+  _handelAddAddressOnPress = () => {
     console.log("ADD A NEW ADDRESS");
-    
+
+    this.props.navigation.navigate('PlaceOrder')
+
   }
 
   renderNewAddressButton(){

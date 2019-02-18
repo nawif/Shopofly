@@ -29,7 +29,11 @@ const images = {
     starred: require('./TabNavigator/starred.png'),
     starredActive: require('./TabNavigator/starred-active.png'),
     cart: require('./TabNavigator/cart.png'),
-    cartActive: require('./TabNavigator/cart-active.png')
+    cartActive: require('./TabNavigator/cart-active.png'),
+
+    /* Starred Items */
+    shoppingCartIcon: require('./StarredItems/shoppingCartIcon.png'),
+    removeIcon: require('./StarredItems/removeIcon.png')
 
 }
 

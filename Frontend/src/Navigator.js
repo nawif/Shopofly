@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, AddressBook, AddNewAddress } from './screens'
+import { Login, Register, Item, Scan, Profile, PlaceOrder, AddressBook, StarredItems, SelectAddress, Cart, AddNewAddress } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -54,14 +54,47 @@ const profileNavigator = createStackNavigator({
 })
 
 
+
+// TODO: make main screen as cart step 1
+const cartNavigator = createStackNavigator({
+  Cart: {
+    screen: Cart,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SelectAddress: {
+    screen: SelectAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  PlaceOrder: {
+    screen: PlaceOrder,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+})
+
 /* Main Tab Navigator */
 let tabNavigator = createBottomTabNavigator(
-  /* Screens */ 
+  /* Screens */
   {
     Scan: scanNavigator,
     Profile: profileNavigator,
-    Starred: Profile,
-    Cart: Profile
+    Starred: StarredItems,
+    Cart: cartNavigator,
   },
 
   /* Configuration */
@@ -73,16 +106,16 @@ let tabNavigator = createBottomTabNavigator(
           let image;
 
           switch (routeName) {
-              case 'Scan': 
+              case 'Scan':
                 image = focused ? images.qrActive : images.qr
                 break;
-              case 'Profile': 
+              case 'Profile':
                 image = focused ? images.profileActive : images.profile
                 break;
-              case 'Starred': 
+              case 'Starred':
                 image = focused ? images.starredActive : images.starred
                 break;
-              case 'Cart': 
+              case 'Cart':
                 image = focused ? images.cartActive : images.cart
                 break;
           }
@@ -90,10 +123,10 @@ let tabNavigator = createBottomTabNavigator(
           return <TabBarIcon source={image} size={30} />
       },
     }),
-    
+
     tabBarOptions: {
       showLabel: false,
-      style: { 
+      style: {
         height: 70,
         borderTopWidth: 3,
         borderTopColor: '#eee'

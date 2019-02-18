@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { 
+import {
   Dimensions,
   Text,
   View,
@@ -19,15 +19,6 @@ export default class QrHandler extends Component {
     alertMessage: '',
   };
 
-  loadItems() {
-    AsyncStorage.getItem('token')
-    console.log(AsyncStorage.getItem('token'))
-    .then((token) => {
-      API.getItem(token, url)
-      .then((item) => this.setState({ showAlert: true, alertMessage: itemName }))
-    })
-		.catch((error) => console.log(error))
-	}
   componentDidMount() {
     this._requestCameraPermission();
   }
@@ -87,7 +78,7 @@ export default class QrHandler extends Component {
   _handleBarCodeRead = result => {
     // result.data !== this.state.lastScannedUrl
       this.setState({ lastScannedUrl: result.data })
-      
+
       const scannedText = result.data
       console.log(result.data);
       const regex = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
@@ -96,8 +87,8 @@ export default class QrHandler extends Component {
         .then((token) => {
           API.getItem(scannedText, token)
           .then((item) => {
-            this.setState({ 
-                showAlert: true, 
+            this.setState({
+                showAlert: true,
                 alertMessage: `Name: ${item.itemName} \n Price: ${item.price} \n from ${item.supplier.supplierName}`
              })
           })
@@ -123,20 +114,26 @@ export default class QrHandler extends Component {
 
   loadItem = () => {
     // TODO save item data from the first API request ()
-    API.getItem(this.state.lastScannedUrl)
-    .then(async (response) => {
-      const itemName = response.itemName
-      const price = response.price
-      const supplier = response.supplier.supplierName
-      const description = response.description
-      const quantity = response.quantity
-      // TODO pass all images to item.
-      const imageUrl = response.image_url[0]
 
-      this.props.navigation.navigate('Item', { itemName, price, supplier, description, quantity, imageUrl })
-      this.hideAlert()
+    AsyncStorage.getItem('token')
+    .then((token) => {
+      console.log("MAJEED WAS HERE 111")
+      API.getItem(this.state.lastScannedUrl, token)
+      .then(async (response) => {
+        const itemName = response.itemName
+        const price = response.price
+        const supplier = response.supplier.supplierName
+        const description = response.description
+        const quantity = response.quantity
+        // TODO pass all images to item.
+        const imageUrl = response.image_url[0]
+
+        const { navigate } = this.props.navigation
+        navigate('Item', { itemName, price, supplier, description, quantity, imageUrl })
+        this.hideAlert()
+      })
+      .catch((error) => console.log(error))
     })
-    .catch((error) => {})
   }
 }
 
