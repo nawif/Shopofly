@@ -28,6 +28,7 @@ export * from './common/DividerWithHeading'
 export * from './common/CircleImage'
 export * from './common/ButtonWithRadius'
 export * from './common/ItemSummary'
+export * from './common/Bill'
 
 export * from './ImageAndTitle'
 export * from './OptionCard'
