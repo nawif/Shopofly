@@ -42,4 +42,6 @@ export * from './common/CircleImage'
 export * from './common/Headline'
 export * from './TabBarIcon'
 
-export * from './Checkout/CheckoutFooter'
+export * from './PlaceOrder/PlaceOrderFooter'
+
+export * from './Cart/CartHeader'

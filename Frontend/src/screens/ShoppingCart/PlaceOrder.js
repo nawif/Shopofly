@@ -4,22 +4,25 @@ import {
   Text,
   ScrollView,
   AsyncStorage,
+  FlatList,
 } from 'react-native';
 
 import * as Global from '../../Global'
 
 import {
   Container,
-  Headline,
+  DividerWithHeading,
   Radio,
   Devider,
   AddressBox,
   ItemSummary,
   Bill,
-  CheckoutFooter,
+  PlaceOrderFooter,
 } from '../../components'
 
 import { defaultTextContainer } from '../../Styles'
+
+const headlineHeight = 65
 
 export class PlaceOrder extends Component {
   state = {
@@ -61,7 +64,7 @@ export class PlaceOrder extends Component {
     return (
       <Container>
         <ScrollView>
-          <Headline text={'Payment Method'} />
+          <DividerWithHeading label={'Payment Method'} height={headlineHeight} />
 
           <Radio
             label={'Pay With Credit Card'}
@@ -79,7 +82,7 @@ export class PlaceOrder extends Component {
             }}
           />
 
-          <Headline text={'Deliver To'} />
+          <DividerWithHeading label={'Deliver To'} height={headlineHeight} />
           <AddressBox
             canBeSelected={false}
             title={selectedAddress.title}
@@ -90,9 +93,8 @@ export class PlaceOrder extends Component {
             isSelected={false}
           />
 
-          <Headline text={'Order Summary'} />
-
           { cart ? this.renderItems() : null }
+          <Devider />
 
           { this.renderBill() }
 
@@ -103,17 +105,22 @@ export class PlaceOrder extends Component {
   }
 
   renderItems() {
+    const { cart } = this.state
+
     return (
-      this.state.cart.map(
-        (item, index) => {
-          return (
-            <View key={index}>
-              <ItemSummary item={item} withQuantity={true} />
-              <Devider />
-            </View>
-          )
-        }
-      )
+      <View style={{ flex: 1 }}>
+          <DividerWithHeading label='Order Summary' sublabel={cart.length + '  Items'} height={headlineHeight} />
+          <FlatList
+            data={cart}
+            keyExtractor={ (item, index) => index.toString()}
+            renderItem={({item, index}) => (
+              <View key={index}>
+                <ItemSummary item={item} withQuantity />
+                { index != cart.length-1 ? <Devider /> : null }
+              </View>
+            )}
+          />
+      </View>
     )
   }
 
@@ -132,7 +139,7 @@ export class PlaceOrder extends Component {
 
   renderPlaceOrder() {
     return (
-      <CheckoutFooter onPressHandler={() => console.log("Presses (Place Order)")} />
+      <PlaceOrderFooter onPressHandler={() => console.log("Presses (Place Order)")} />
     )
   }
 

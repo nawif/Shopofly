@@ -5,7 +5,7 @@ import { GradientButton } from '../'
 
 const defaultButtonSize = 50
 
-export const CheckoutFooter = ({ onPressHandler }) => {
+export const PlaceOrderFooter = ({ onPressHandler }) => {
   const { container } = styles
 
   return (

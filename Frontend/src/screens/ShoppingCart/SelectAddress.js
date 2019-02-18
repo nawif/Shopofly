@@ -12,8 +12,10 @@ export class SelectAddress extends Component {
     address:listOfAddresses
   }
 
-  _handelAddAddressOnPress = () =>{
+  _handelAddAddressOnPress = () => {
     console.log("ADD A NEW ADDRESS");
+
+    this.props.navigation.navigate('PlaceOrder')
 
   }
 

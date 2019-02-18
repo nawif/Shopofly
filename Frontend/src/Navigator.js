@@ -45,8 +45,9 @@ const profileNavigator = createStackNavigator({
 // TODO: make main screen as cart step 1
 const cartNavigator = createStackNavigator({
   Cart: {
-    screen: PlaceOrder,
+    screen: Cart,
     navigationOptions: {
+      header: null
     }
   },
   SelectAddress: {

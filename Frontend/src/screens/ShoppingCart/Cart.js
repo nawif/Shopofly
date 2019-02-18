@@ -1,20 +1,68 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView } from 'react-native'
-import { Container, GradientButton, Bill } from '../../components'
+import { Text, View, ScrollView, AsyncStorage, FlatList } from 'react-native'
+import { Container, GradientButton, Bill, DividerWithHeading, ItemSummary, Devider, CartHeader } from '../../components'
 
 import * as Global from '../../Global'
 
+const headlineHeight = 65
+
 export class Cart extends Component {
+  state = {
+    cart: [],
+    subtotal: 0,
+    vatApprox: 0,
+    totalPrice: 0,
+  }
+
+  componentWillMount() {
+    const item = {
+      seller:'Apple',
+      title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
+      price: '2890.00',
+      storeDetails: {
+        store: 'Extra Store',
+      },
+      quantity: 3,
+      image: 'https://www.jagojet.com/media/catalog/product/cache/4/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/g/r/gray-1_2.png'
+    }
+
+    AsyncStorage.getItem('cart')
+  	.then((cart) => {
+      // TODO: uncomment this
+      // this.setState({ cart: JSON.parse(cart) })
+      const items = [
+        item,
+        item,
+        item
+      ]
+
+      const { subtotal, vatApprox, totalPrice } = Global.getBillInfo(items)
+
+      this.setState({ cart: items, subtotal, vatApprox, totalPrice })
+
+    })
+  	.catch((error) => console.log(error))
+  }
+
   render() {
+    const { subtotal, vatApprox, totalPrice } = this.state
+
     return (
       <Container>
-        { this.renderHeader() }
+        <CartHeader
+          onPressHandler={() => this.props.navigation.navigate('SelectAddress')}
+          totalPrice={totalPrice}
+        />
 
         <ScrollView>
-          <Text>TESTING</Text>
-          <Text>TESTING</Text>
-          <Text>TESTING</Text>
-          <Text>TESTING</Text>
+          { this.renderItems() }
+          <Devider />
+
+          <Bill
+            subtotal={subtotal}
+            vatApprox={vatApprox}
+            totalPrice={totalPrice}
+          />
         </ScrollView>
       </Container>
     )
@@ -31,6 +79,27 @@ export class Cart extends Component {
       </View>
     )
   }
+
+  renderItems() {
+    const { cart } = this.state
+
+    return (
+      <View style={{ flex: 1 }}>
+          <DividerWithHeading label='My Cart' sublabel={cart.length + '  Items'} height={headlineHeight} />
+          <FlatList
+            data={cart}
+            keyExtractor={ (item, index) => index.toString()}
+            renderItem={({item, index}) => (
+              <View key={index}>
+                <ItemSummary item={item} withQuantity withRemoveFromCart />
+                { index != cart.length-1 ? <Devider /> : null }
+              </View>
+            )}
+          />
+      </View>
+    )
+  }
+
 }
 
 
