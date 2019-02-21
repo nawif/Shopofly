@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-import { Devider } from './'
+import { Devider } from '../'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { ItemDescription, ItemSpecifications } from './local'
 

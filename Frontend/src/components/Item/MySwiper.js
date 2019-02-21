@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Dimensions, Image } from 'react-native'
 import Swiper from 'react-native-swiper'
 import { LinearGradient } from 'expo'
-import * as Global from '../Global'
+import * as Global from '../../Global'
 
 const defaultDotSize = 10
 

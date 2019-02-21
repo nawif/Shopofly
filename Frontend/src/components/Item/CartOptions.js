@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Circle, GradientButton } from './'
+import { Circle, GradientButton } from '../'
 
 export const CartOptions = (props) => {
   const { container, cartOptionsStyle } = styles

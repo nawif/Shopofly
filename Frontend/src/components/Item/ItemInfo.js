@@ -8,7 +8,7 @@ import {
 import {
   SaleBadge,
   CoreItemSpecs,
-} from './'
+} from '../'
 
 export const ItemInfo = ({}) => {
   const item = {
@@ -46,7 +46,7 @@ export const ItemInfo = ({}) => {
 
       <View style={reviewStyle}>
         <Image
-          source={require('../../assets/star.png')}
+          source={require('../../../assets/star.png')}
         />
         <Text style={ratingStyle}>{item.rating}</Text>
         <Text style={reviewCountStyle}>{item.reviews} reviews</Text>

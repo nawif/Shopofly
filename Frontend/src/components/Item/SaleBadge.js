@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 import { LinearGradient } from 'expo'
-import * as Global from '../Global'
+import * as Global from '../../Global'
 
 export const SaleBadge = ({ percentage, marginLeft }) => {
   const { container, badgeStyle, offerStyle, imageStyle } = styles
@@ -21,7 +21,7 @@ export const SaleBadge = ({ percentage, marginLeft }) => {
       style={container}
     >
       <Image
-        source={require('../../assets/percentage.png')}
+        source={require('../../../assets/percentage.png')}
         style={imageStyle}
       />
       <Text style={offerStyle}>{percentage}% OFF</Text>
