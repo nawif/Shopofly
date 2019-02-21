@@ -6,18 +6,18 @@ import * as Global from '../Global'
 
 const defaultDotSize = 10
 
-export default class MySwiper extends Component {
-	state = {
-	}
+const defaultSwiperWidth = Dimensions.get('window').width
+const defaultSwiperHeight = Dimensions.get('window').height/2.5
 
+export class MySwiper extends Component {
 	render() {
-		const {  } = this.state
+		const { images } = this.props
 
-    const { container, contentStyle, slide, imageStyle, dotStyle, activeDotStyle } = styles
+    const { wrapper, container, contentStyle, imageStyle, dotStyle, activeDotStyle } = styles
 
 		return (
       <Swiper
-				style={container}
+				style={wrapper}
 				containerStyle={contentStyle}
 				dot={<View style={dotStyle} />}
 				activeDot={
@@ -32,32 +32,49 @@ export default class MySwiper extends Component {
             bottom: 0
 				}}
 			>
-				<View style={slide}>
-					<Image style={slide} source={{uri: 'http://d176tvmxv7v9ww.cloudfront.net/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-xs-space-select-2018_av2_1_1.jpg'}} />
-				</View>
-
-				<View style={slide}>
-					<Image source={{uri: 'https://cdn.rc-static.com/images/ProductImages/ScaleProducts/0320CV10_I2.jpg'}} />
-				</View>
+				{ this.renderImages(images) }
       </Swiper>
 		)
+	}
+
+	renderImages(images) {
+		const { slide, image } = styles
+		return (
+      images.map(
+        (imageUrl, index) => {
+          return (
+            <View key={index} style={slide}>
+							<Image style={image} source={{uri: imageUrl}} />
+            </View>
+          )
+        }
+      )
+    )
 	}
 }
 
 const styles = {
+	wrapper: {
+	},
   container: {
     flex: 1,
   },
 	contentStyle: {
-		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height/2.5,
+		flex: 1,
+		width: defaultSwiperWidth,
+		height: defaultSwiperHeight,
 	},
   slide: {
-    flex: 1,
-    alignSelf: 'center',
-		width: '70%',
-		height: '70%',
+		flex: 1,
+    justifyContent: 'center',
+		alignItems: 'center',
+    backgroundColor: 'transparent',
   },
+	image: {
+		width: '60%',
+		height: defaultSwiperHeight - 30,
+		resizeMode: 'contain',
+	},
 	dotStyle: {
 		backgroundColor:'rgba(0,0,0,.2)',
 		width: defaultDotSize,
@@ -78,4 +95,3 @@ const styles = {
 		marginBottom: 3,
 	}
 }
-export { MySwiper }

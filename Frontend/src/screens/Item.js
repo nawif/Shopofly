@@ -18,12 +18,13 @@ export  class Item extends Component {
 
 	render() {
 		const { container } = styles;
+		const { itemName, price, supplier, description, quantity, images } = this.props.navigation.state.params
 
 		return (
       <ScrollView style={container}>
 				<FloatingButtons />
 
-				<MySwiper />
+				<MySwiper images={images}/>
 
 				<ItemInfo />
 

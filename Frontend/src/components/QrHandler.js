@@ -126,10 +126,10 @@ export default class QrHandler extends Component {
         const description = response.description
         const quantity = response.quantity
         // TODO pass all images to item.
-        const imageUrl = response.image_url[0]
+        const images = response.image_url
 
         const { navigate } = this.props.navigation
-        navigate('Item', { itemName, price, supplier, description, quantity, imageUrl })
+        navigate('Item', { itemName, price, supplier, description, quantity, images })
         this.hideAlert()
       })
       .catch((error) => console.log(error))
