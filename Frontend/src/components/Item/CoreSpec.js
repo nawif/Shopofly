@@ -4,7 +4,7 @@ import {
   Text,
 } from 'react-native'
 
-const CoreSpec = ({ specKey, specValue, alignSelf }) => {
+export const CoreSpec = ({ specKey, specValue, alignSelf }) => {
   const { container, keyStyle, valueStyle } = styles
 
   return (
@@ -38,5 +38,3 @@ const styles = {
     fontFamily: 'Cairo-Bold'
   }
 }
-
-export { CoreSpec };

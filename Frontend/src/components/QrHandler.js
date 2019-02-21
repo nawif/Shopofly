@@ -120,16 +120,24 @@ export default class QrHandler extends Component {
       console.log("MAJEED WAS HERE 111")
       API.getItem(this.state.lastScannedUrl, token)
       .then(async (response) => {
-        const itemName = response.itemName
-        const price = response.price
-        const supplier = response.supplier.supplierName
-        const description = response.description
-        const quantity = response.quantity
-        // TODO pass all images to item.
-        const imageUrl = response.image_url[0]
+        // const itemName = response.itemName
+        // const price = response.price
+        // const supplier = response.supplier.supplierName
+        // const description = response.description
+        // const quantity = response.quantity
+        // const images = response.image_url
+
+        const item = {
+          supplierName: response.supplier.supplierName,
+          itemName: response.itemName,
+          price: response.price,
+          description: response.description,
+          quantity: response.quantity,
+          images: response.image_url,
+        }
 
         const { navigate } = this.props.navigation
-        navigate('Item', { itemName, price, supplier, description, quantity, imageUrl })
+        navigate('Item', { item })
         this.hideAlert()
       })
       .catch((error) => console.log(error))

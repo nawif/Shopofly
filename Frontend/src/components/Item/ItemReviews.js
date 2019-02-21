@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ScrollView, Text, Image } from 'react-native'
-import { subtitleStyle } from '../Styles'
+import { subtitleStyle } from '../../Styles'
 
 const defaultCardHeight = 130
 
@@ -66,7 +66,7 @@ const getCards = (cards) => {
             <Text style={reviewerStyle}>{element.reviewer}</Text>
 
             <View style={ratingStyle}>
-              <Image source={require('../../assets/star.png')}/>
+              <Image source={require('../../../assets/star.png')}/>
               <Text style={ratingNumStyle}>{element.rating}</Text>
             </View>
           </View>

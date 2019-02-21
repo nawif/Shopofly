@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { CircleImage } from './'
+import { CircleImage } from '../'
 
 export const FloatingButtons = () => {
   const { floatingContainer } = styles
@@ -9,11 +9,11 @@ export const FloatingButtons = () => {
   return (
     <View style={floatingContainer}>
       <CircleImage
-        image={require('../../assets/colored_star.png')}
+        image={require('../../../assets/colored_star.png')}
       />
 
       <CircleImage
-        image={require('../../assets/colored_share.png')}
+        image={require('../../../assets/colored_share.png')}
       />
     </View>
   )
