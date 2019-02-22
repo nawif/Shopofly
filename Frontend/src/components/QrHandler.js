@@ -89,7 +89,7 @@ export default class QrHandler extends Component {
           .then((item) => {
             this.setState({
                 showAlert: true,
-                alertMessage: `Name: ${item.itemName} \n Price: ${item.price} \n from ${item.supplier.supplierName}`
+                alertMessage: `Name: ${item.itemName} \nPrice: ${item.price} \nfrom ${item.supplier.supplierName}`
              })
           })
           .catch((error) => console.log(error))
@@ -120,19 +120,50 @@ export default class QrHandler extends Component {
       console.log("MAJEED WAS HERE 111")
       API.getItem(this.state.lastScannedUrl, token)
       .then(async (response) => {
-        // const itemName = response.itemName
-        // const price = response.price
-        // const supplier = response.supplier.supplierName
-        // const description = response.description
-        // const quantity = response.quantity
-        // const images = response.image_url
-
         const item = {
-          supplierName: response.supplier.supplierName,
-          itemName: response.itemName,
-          price: response.price,
-          description: response.description,
-          quantity: response.quantity,
+          key: response.key,
+          summary: {
+            manufacturer: response.supplier.supplierName,
+            itemName: response.itemName,
+            price: response.price,
+            quantity: response.quantity,
+            rating: 4.8,
+            reviews_count: 69,
+            primary_specifications: [
+              { specKey: 'Color', specValue: 'Black' },
+              { specKey: 'Size', specValue: '64 GB'}
+            ],
+          },
+          details: {
+            description: response.description,
+            supplierName: 'Great store',
+            warranty: '6 months',
+            specifications: [
+              { key: 'Key', value: 'Value'},
+              { key: 'Key', value: 'Value'},
+              { key: 'Key', value: 'Value'},
+            ],
+          },
+          reviews: [
+            {
+              reviewer: 'Osama Aloqaily',
+              rating: 4.8,
+              feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              date: '27 jan 2019'
+            },
+            {
+              reviewer: 'Nawaf Alquaid',
+              rating: 4.7,
+              feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              date: '27 jan 2019'
+            },
+            {
+              reviewer: 'Osama Aloqaily',
+              rating: 4.8,
+              feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+              date: '27 jan 2019'
+            }
+          ],
           images: response.image_url,
         }
 

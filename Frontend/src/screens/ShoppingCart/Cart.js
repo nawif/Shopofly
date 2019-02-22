@@ -28,13 +28,7 @@ export class Cart extends Component {
 
     AsyncStorage.getItem('cart')
   	.then((cart) => {
-      // TODO: uncomment this
-      // this.setState({ cart: JSON.parse(cart) })
-      const items = [
-        item,
-        item,
-        item
-      ]
+      this.setState({ cart: JSON.parse(cart) })
 
       const { subtotal, vatApprox, totalPrice } = Global.getBillInfo(items)
 

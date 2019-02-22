@@ -10,23 +10,15 @@ import {
   CoreItemSpecs,
 } from '../'
 
-export const ItemInfo = ({ item }) => {
-  // TODO: Remove this when backend updates
-  item.rating = 4.8
-  item.reviews_count = 69
-  item.primary_specifications = [
-    { specKey: 'Color', specValue: 'Black' },
-    { specKey: 'Size', specValue: '64 GB'}
-  ]
-
+export const ItemInfo = ({ summary }) => {
   const {
-    supplierName,
+    manufacturer,
     itemName,
     price,
     rating,
     reviews_count,
     primary_specifications,
-  } = item
+  } = summary
 
   const {
     container,
@@ -44,7 +36,7 @@ export const ItemInfo = ({ item }) => {
 
   return (
     <View style={container}>
-      <Text style={sellerStyle}>{supplierName}</Text>
+      <Text style={sellerStyle}>{manufacturer}</Text>
 
       <Text style={itemNameStyle}>{itemName}</Text>
 

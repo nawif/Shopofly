@@ -7,7 +7,7 @@ import { ItemDescription, ItemSpecifications } from './local'
 
 const iconSize = 20
 
-export const ItemDetails = ({ item }) => {
+export const ItemDetails = ({ details }) => {
   const {
     simpleContainer,
     iconStyle,
@@ -16,21 +16,12 @@ export const ItemDetails = ({ item }) => {
     storeNameColor
   } = styles
 
-  // TODO: add those to item json
-  item.manufacturer = 'Great store'
-  item.warranty = '6 months'
-  item.specifications = [
-    { key: 'Key', value: 'Value'},
-    { key: 'Key', value: 'Value'},
-    { key: 'Key', value: 'Value'},
-  ]
-
   const {
-    manufacturer,
+    supplierName,
     warranty,
     description,
     specifications,
-  } = item
+  } = details
 
   return (
     <View>
@@ -43,7 +34,7 @@ export const ItemDetails = ({ item }) => {
             style={iconStyle}
           />
           <Text style={storeKeyStyle}>Sold by</Text>
-          <Text style={[storeValueStyle, storeNameColor]}>{manufacturer}</Text>
+          <Text style={[storeValueStyle, storeNameColor]}>{supplierName}</Text>
         </View>
 
         <Devider height={1} />

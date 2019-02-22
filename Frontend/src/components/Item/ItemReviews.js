@@ -4,29 +4,8 @@ import { subtitleStyle } from '../../Styles'
 
 const defaultCardHeight = 130
 
-export const ItemReviews = (props) => {
+export const ItemReviews = ({ reviews }) => {
   const { container, alignStyle, cardsContainer, cardStyle } = styles
-
-  const cards = [
-    {
-      reviewer: 'Osama Aloqaily',
-      rating: 4.8,
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      date: '27 jan 2019'
-    },
-    {
-      reviewer: 'Nawaf Alquaid',
-      rating: 4.7,
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      date: '27 jan 2019'
-    },
-    {
-      reviewer: 'Osama Aloqaily',
-      rating: 4.8,
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      date: '27 jan 2019'
-    }
-  ]
 
 	return (
     <View>
@@ -38,14 +17,14 @@ export const ItemReviews = (props) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-          { getCards(cards) }
+          { getCards(reviews) }
         </ScrollView>
       </View>
     </View>
 	)
 }
 
-const getCards = (cards) => {
+const getCards = (reviews) => {
   const {
     cardStyle,
     reviewerStyle,
@@ -58,7 +37,7 @@ const getCards = (cards) => {
     readStyle,
   } = styles
 
-  return cards.map((element, index) => {
+  return reviews.map((element, index) => {
     return (
       <View style={cardStyle} key={index}>
         <View style={cardContainerStyle}>

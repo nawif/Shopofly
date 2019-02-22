@@ -1,8 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, AsyncStorage } from 'react-native'
 import { Circle, GradientButton } from '../'
 
-export const CartOptions = (props) => {
+export const CartOptions = ({ currentQuantity, onAddToCart }) => {
   const { container, cartOptionsStyle } = styles
   const size = 45
 
@@ -10,7 +10,7 @@ export const CartOptions = (props) => {
     <View style={container}>
       <View style={cartOptionsStyle}>
 
-        <Circle text={props.currentQuantity} size={size} />
+        <Circle text={currentQuantity} />
 
         <GradientButton
           borderRadius={size}
@@ -19,6 +19,7 @@ export const CartOptions = (props) => {
           fontFamily={'Cairo-SemiBold'}
           label={'ADD TO CART'}
           isValid={true}
+          onClick={onAddToCart}
         />
 
       </View>

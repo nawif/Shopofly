@@ -9,9 +9,18 @@ import { LinearGradient } from 'expo'
 import * as Global from '../../Global'
 
 export const SaleBadge = ({ percentage, marginLeft }) => {
-  const { container, badgeStyle, offerStyle, imageStyle } = styles
+  const { badgeStyle, offerStyle, imageStyle } = styles
 
-  container.marginLeft = marginLeft || null
+  const container = {
+    borderRadius:20,
+    marginLeft: marginLeft || null,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 1,
+    paddingBottom: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  }
 
   return (
     <LinearGradient
@@ -30,15 +39,6 @@ export const SaleBadge = ({ percentage, marginLeft }) => {
 }
 
 const styles = {
-  container: {
-    borderRadius:20,
-    paddingLeft: 7,
-    paddingRight: 7,
-    paddingTop: 1,
-    paddingBottom: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   offerStyle: {
     color: 'white',
     fontSize: 10,

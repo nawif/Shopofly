@@ -27,7 +27,7 @@ const renderSuitableButtons = (props) => {
     <View style={[defaultTextContainer, buttonsContainer]}>
         {
           withQuantity ? (
-            <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.quantity}</Text></Text>
+            <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.currentQuantity}</Text></Text>
           ) : null
         }
         {
@@ -67,8 +67,8 @@ const renderItemDetails = (item) => {
   } = styles
   return (
     <View style={leftStyle}>
-      <Text style={storeName}>{ item.seller }</Text>
-      <Text style={titleStyle}>{ item.title }</Text>
+      <Text style={storeName}>{ item.summary.manufacturer }</Text>
+      <Text style={titleStyle}>{ item.summary.itemName }</Text>
 
       <View style={groupStyle}>
         <Image
@@ -76,10 +76,10 @@ const renderItemDetails = (item) => {
           source={require('../../../assets/store.png')}
         />
         <Text style={storeKeyStyle}>Sold by</Text>
-        <Text style={storeValueStyle}>{item.storeDetails.store}</Text>
+        <Text style={storeValueStyle}>TODO: add soldBy here</Text>
       </View>
 
-      <Text style={priceStyle}>SAR { item.price } <Text style={muteStyle}>(Onclusive of VAT)</Text></Text>
+      <Text style={priceStyle}>SAR { item.summary.price } <Text style={muteStyle}>(Inclusive of VAT)</Text></Text>
     </View>
 
   )
