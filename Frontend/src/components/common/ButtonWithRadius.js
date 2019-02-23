@@ -29,7 +29,7 @@ export const ButtonWithRadius = (props) => {
     }
 
     return (
-        <TouchableOpacity style={containerStyle}>
+        <TouchableOpacity style={containerStyle} onPress={props.onPress}>
             <Image source={props.icon} style={iconStyle} />
             <Text style={labelStyle}>{ props.label }</Text>
         </TouchableOpacity>

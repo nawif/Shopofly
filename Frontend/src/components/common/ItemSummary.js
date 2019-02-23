@@ -32,12 +32,22 @@ const renderSuitableButtons = (props) => {
         }
         {
           withAddToCart ? (
-            <ButtonWithRadius icon={images.shoppingCartIcon} label='ADD TO CART' color='#A4A4A4' />
+            <ButtonWithRadius
+              icon={images.shoppingCartIcon}
+              label='ADD TO CART'
+              color='#A4A4A4'
+              onPress={props.onAddPress}
+            />
           ) : null
         }
         {
           withRemoveFromCart ? (
-            <ButtonWithRadius icon={images.removeIcon} label='REMOVE' color='#D76B6B' />
+            <ButtonWithRadius
+              icon={images.removeIcon}
+              label='REMOVE'
+              color='#D76B6B'
+              onPress={props.onRemovePress}
+            />
           ) : null
         }
     </View>

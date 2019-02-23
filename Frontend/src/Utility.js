@@ -28,3 +28,47 @@ export async function removeItemValue(key){
     return false;
   }
 }
+
+export const getBillInfo = (items) => {
+  const subtotal = _getSubtotal(items)
+  const vatApprox = _getVatApprox(subtotal)
+  const totalPrice = subtotal + vatApprox
+
+  return { subtotal, vatApprox, totalPrice }
+}
+
+export const removeItemFromCart = async (itemToBeRemoved, callback) => {
+  let cart = await AsyncStorage.getItem('cart')
+  cart = JSON.parse(cart) // To make string as array
+
+  cart.forEach(function(item, index) {
+    if(item.key === itemToBeRemoved.key) {
+      cart.splice(index, 1) // To remove the item from cart
+      return
+    }
+  })
+
+  // Reset oldCart to the newCart
+  await AsyncStorage.setItem('cart', JSON.stringify(cart))
+
+  // Callback to render cart when item is removed
+  callback(cart)
+}
+
+function _getSubtotal(items) {
+  let subtotal = 0
+
+  for (let item of items) {
+    if (item.price) {
+       subtotal = subtotal + parseInt(item.price) * parseInt(item.quantity)
+    }
+  }
+
+  return subtotal
+}
+
+function _getVatApprox(subtotal) {
+  let vatApprox = VAT * subtotal
+  vatApprox = Math.round(vatApprox * 100) / 100
+  return vatApprox
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native'
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo'
 import * as Global from '../../Global'
 
 export const GradientButton = (props) => {

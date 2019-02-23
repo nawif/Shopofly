@@ -3,6 +3,7 @@ import { Text, View, ScrollView, AsyncStorage, FlatList } from 'react-native'
 import { Container, GradientButton, Bill, DividerWithHeading, ItemSummary, Devider, CartHeader } from '../../components'
 
 import * as Global from '../../Global'
+import * as Utility from '../../Utility'
 
 const headlineHeight = 65
 
@@ -30,7 +31,7 @@ export class Cart extends Component {
   	.then((cart) => {
       this.setState({ cart: JSON.parse(cart) })
 
-      const { subtotal, vatApprox, totalPrice } = Global.getBillInfo(items)
+      const { subtotal, vatApprox, totalPrice } = Utility.getBillInfo(items)
 
       this.setState({ cart: items, subtotal, vatApprox, totalPrice })
 
