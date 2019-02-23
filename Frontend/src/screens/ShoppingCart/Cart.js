@@ -16,11 +16,16 @@ export class Cart extends Component {
   }
 
   componentWillMount() {
+    this.didFocusListener = this.props.navigation.addListener(
+		  'didFocus',
+		  () => { this.loadItems() },
+		)
+  }
+
+  loadItems() {
     AsyncStorage.getItem('cart')
   	.then((cart) => {
-      console.log("cart: componentWillMount")
       const items = JSON.parse(cart)
-      console.log("itemsLength: ", items.length)
       const { subtotal, vatApprox, totalPrice } = Utility.getBillInfo(items)
       console.log(subtotal, vatApprox, totalPrice)
 
