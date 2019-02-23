@@ -30,6 +30,7 @@ export async function removeItemValue(key){
   }
 }
 
+// Retrieves bill info as object of {subtotal, vatAprrox, totalPrice}
 export const getBillInfo = (items) => {
   const subtotal = _getSubtotal(items)
   const vatApprox = _getVatApprox(subtotal)
@@ -38,22 +39,37 @@ export const getBillInfo = (items) => {
   return { subtotal, vatApprox, totalPrice }
 }
 
-export const removeItemFromCart = async (itemToBeRemoved, callback) => {
-  let cart = await AsyncStorage.getItem('cart')
-  cart = JSON.parse(cart) // To make string as array
+// Adds item to storage: (cart, orderList, starredItems)
+// callback returns new items list
+export async function addItem(itemToBeAdded, storage, callback){
+  let items = await AsyncStorage.getItem(storage)
 
-  cart.forEach(function(item, index) {
-    if(item.key === itemToBeRemoved.key) {
-      cart.splice(index, 1) // To remove the item from cart
-      return
-    }
-  })
+  items = JSON.parse(items)
 
-  // Reset oldCart to the newCart
-  await AsyncStorage.setItem('cart', JSON.stringify(cart))
+  if(!items) {
+    items = []
+  }
+
+  items.push(itemToBeAdded)
+
+  await AsyncStorage.setItem(storage, JSON.stringify(items))
+
+  callback(items)
+}
+
+// Removes item from storage: (cart, orderList, starredItems)
+// callback returns new items list
+export async function removeItem(indexToBeRemoved, storage, callback) {
+  let items = await AsyncStorage.getItem(storage)
+  items = JSON.parse(items) // To make string as array
+
+  items.splice(indexToBeRemoved, 1) // To remove the item from cart
+
+  // Reset oldList to the newList
+  await AsyncStorage.setItem(storage, JSON.stringify(items))
 
   // Callback to render cart when item is removed
-  callback(cart)
+  callback(items)
 }
 
 function _getSubtotal(items) {
