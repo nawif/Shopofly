@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native'
 
 import { MainContainer, LogoSection, LoginFormInputs, ClickablesSection } from '../components'
 import * as API from '../API'
+import * as Seeder from '../Seeder'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
 export class Login extends Component {
@@ -12,6 +13,10 @@ export class Login extends Component {
 		showAlert: false,
 		alertMessage: '',
 		isLoading: false
+	}
+
+	componentWillMount() {
+		Seeder.seedAsyncStorage()
 	}
 
 	isValidInput = () => {

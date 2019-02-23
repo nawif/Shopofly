@@ -77,9 +77,9 @@ function _getSubtotal(items) {
 
   for (let item of items) {
     const itemSummary = item.summary
-    const price = parseInt(itemSummary.price.substring(1))
+    const price = parseFloat(itemSummary.price.substring(1))
     if (itemSummary.price) {
-       subtotal = subtotal + price * parseInt(itemSummary.quantity)
+       subtotal = subtotal + price * parseInt(item.currentQuantity)
     }
   }
 

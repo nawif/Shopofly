@@ -19,7 +19,7 @@ export const Bill = ({ subtotal, vatApprox, totalPrice }) => {
       </View>
       <View style={{flexDirection: 'row'}}>
         <Text style={billKey}>VAT</Text>
-        <Text style={billValue}>{vatApprox}</Text>
+        <Text style={billValue}>SAR {vatApprox}</Text>
       </View>
       <View style={totalStyle}>
         <Text style={billKey}>TOTAL</Text>

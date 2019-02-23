@@ -117,7 +117,6 @@ export default class QrHandler extends Component {
 
     AsyncStorage.getItem('token')
     .then((token) => {
-      console.log("MAJEED WAS HERE 111")
       API.getItem(this.state.lastScannedUrl, token)
       .then(async (response) => {
         const item = {
