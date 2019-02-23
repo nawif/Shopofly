@@ -58,7 +58,6 @@ export class Item extends Component {
 
 	async addItemToCart(item) {
 	  let items = await AsyncStorage.getItem('cart')
-	  console.log(typeof items)
 
 	  items = JSON.parse(items)
 

@@ -58,18 +58,6 @@ export class Cart extends Component {
     )
   }
 
-  renderHeader() {
-    return (
-      <View>
-        <View>
-          <Text>TESTING!!!!</Text>
-        </View>
-
-        <GradientButton />
-      </View>
-    )
-  }
-
   renderItems() {
     const { cart } = this.state
     const itemCount = cart ? cart.length : 0
@@ -82,7 +70,17 @@ export class Cart extends Component {
             keyExtractor={ (item, index) => index.toString()}
             renderItem={({item, index}) => (
               <View key={index}>
-                <ItemSummary item={item} withQuantity withRemoveFromCart />
+                <ItemSummary
+                  item={item}
+                  withQuantity
+                  withRemoveFromCart
+                  onRemovePress={() => {
+                    Utility.removeItem(index, 'cart', (newCart) => {
+                      const { subtotal, vatApprox, totalPrice } = Utility.getBillInfo(newCart)
+                      this.setState({cart: newCart, subtotal, vatApprox, totalPrice})
+                    })
+                  }}
+                />
                 { index != itemCount-1 ? <Devider /> : null }
               </View>
             )}
