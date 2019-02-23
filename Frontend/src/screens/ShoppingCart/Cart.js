@@ -38,10 +38,13 @@ export class Cart extends Component {
     const { cart, subtotal, vatApprox, totalPrice } = this.state
     const { cartEmptyStyle } = styles
 
+    const itemCount = cart ? cart.length : 0
+
     return (
       <Container>
         <CartHeader
           onPressHandler={() => this.props.navigation.navigate('SelectAddress')}
+          isActive={itemCount > 0}
           totalPrice={totalPrice}
         />
 
@@ -49,7 +52,7 @@ export class Cart extends Component {
           { this.renderItems() }
           <Devider />
 
-          { cart && cart.length > 0 ? (
+          { itemCount > 0 ? (
             <Bill
               subtotal={subtotal}
               vatApprox={vatApprox}

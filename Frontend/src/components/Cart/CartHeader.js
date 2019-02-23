@@ -5,7 +5,7 @@ import { GradientButton, Devider } from '../'
 
 const defaultButtonSize = 50
 
-export const CartHeader = ({ onPressHandler, totalPrice }) => {
+export const CartHeader = ({ onPressHandler, isActive, totalPrice }) => {
   const { container, infoStyle, deviderStyle, totalContentStyle, totalPriceStyle, buttonStyle } = styles
 
   return (
@@ -30,7 +30,7 @@ export const CartHeader = ({ onPressHandler, totalPrice }) => {
           borderRadius={defaultButtonSize}
           fontFamily={'Cairo-SemiBold'}
           label={'Checkout'}
-          isValid={true}
+          isValid={isActive}
           onClick={onPressHandler}
           align={null}
         />
