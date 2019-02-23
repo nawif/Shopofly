@@ -22,6 +22,7 @@ export class Item extends Component {
 	render() {
 		const { container } = styles;
 		const { item } = this.props.navigation.state.params
+		const { currentQuantity } = this.state
 
 		return (
       <ScrollView style={container}>
@@ -32,7 +33,7 @@ export class Item extends Component {
 				<ItemInfo summary={item.summary}/>
 
 				<CartOptions
-					currentQuantity={this.state.currentQuantity}
+					currentQuantity={currentQuantity}
 					onAddToCart={() => {
 						this.addItemToCart({
 							key: item.key,

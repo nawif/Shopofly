@@ -16,25 +16,15 @@ export class Cart extends Component {
   }
 
   componentWillMount() {
-    const item = {
-      seller:'Apple',
-      title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
-      price: '2890.00',
-      storeDetails: {
-        store: 'Extra Store',
-      },
-      quantity: 3,
-      image: 'https://www.jagojet.com/media/catalog/product/cache/4/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/g/r/gray-1_2.png'
-    }
-
     AsyncStorage.getItem('cart')
   	.then((cart) => {
-      this.setState({ cart: JSON.parse(cart) })
-
+      console.log("cart: componentWillMount")
+      const items = JSON.parse(cart)
+      console.log("itemsLength: ", items.length)
       const { subtotal, vatApprox, totalPrice } = Utility.getBillInfo(items)
+      console.log(subtotal, vatApprox, totalPrice)
 
       this.setState({ cart: items, subtotal, vatApprox, totalPrice })
-
     })
   	.catch((error) => console.log(error))
   }
@@ -77,17 +67,18 @@ export class Cart extends Component {
 
   renderItems() {
     const { cart } = this.state
+    const itemCount = cart ? cart.length : 0
 
     return (
       <View style={{ flex: 1 }}>
-          <DividerWithHeading label='My Cart' sublabel={cart.length + '  Items'} height={headlineHeight} />
+          <DividerWithHeading label='My Cart' sublabel={itemCount + '  Items'} height={headlineHeight} />
           <FlatList
             data={cart}
             keyExtractor={ (item, index) => index.toString()}
             renderItem={({item, index}) => (
               <View key={index}>
                 <ItemSummary item={item} withQuantity withRemoveFromCart />
-                { index != cart.length-1 ? <Devider /> : null }
+                { index != itemCount-1 ? <Devider /> : null }
               </View>
             )}
           />

@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native'
+import * as Global from './Global'
 
 // Returns false if phone is incorrect
 export const validatePhone = (phone) => {
@@ -59,8 +60,10 @@ function _getSubtotal(items) {
   let subtotal = 0
 
   for (let item of items) {
-    if (item.price) {
-       subtotal = subtotal + parseInt(item.price) * parseInt(item.quantity)
+    const itemSummary = item.summary
+    const price = parseInt(itemSummary.price.substring(1))
+    if (itemSummary.price) {
+       subtotal = subtotal + price * parseInt(itemSummary.quantity)
     }
   }
 
@@ -68,7 +71,7 @@ function _getSubtotal(items) {
 }
 
 function _getVatApprox(subtotal) {
-  let vatApprox = VAT * subtotal
+  let vatApprox = Global.VAT * subtotal
   vatApprox = Math.round(vatApprox * 100) / 100
   return vatApprox
 }
