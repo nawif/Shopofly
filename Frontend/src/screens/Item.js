@@ -9,9 +9,11 @@ import {
 	CartOptions,
 	ItemReviews,
 	FloatingButtons,
+	Container,
 } from '../components'
 
 import * as API from '../API'
+import * as Utility from '../Utility'
 
 export class Item extends Component {
 	state = {
@@ -25,56 +27,43 @@ export class Item extends Component {
 		const { currentQuantity } = this.state
 
 		return (
-      <ScrollView style={container}>
-				<FloatingButtons />
+			<Container>
+				<ScrollView style={container}>
+					<FloatingButtons />
 
-				<MySwiper images={item.images}/>
+					<MySwiper images={item.images}/>
 
-				<ItemInfo summary={item.summary}/>
+					<ItemInfo summary={item.summary}/>
 
-				<CartOptions
-					currentQuantity={currentQuantity}
-					onAddToCart={() => {
-						this.addItemToCart({
-							key: item.key,
-							summary: item.summary,
-							currentQuantity,
-							image: item.images[0],
-						})
-					}}
-				/>
+					<CartOptions
+						currentQuantity={currentQuantity}
+						onAddToCart={() => {
+							Utility.addItem({
+									key: item.key,
+									summary: item.summary,
+									currentQuantity,
+									image: item.images[0],
+								},
+								'cart',
+								(newCart) => {
+									this.setState({showAlert: true})
+								}
+							)
+						}}
+					/>
 
-				<ItemDetails details={item.details}/>
+					<ItemDetails details={item.details}/>
 
-				<ItemReviews reviews={item.reviews}/>
+					<ItemReviews reviews={item.reviews}/>
 
-				{
-					// TODO: Put it in a View tag!
-				}
+					{
+						// TODO: Put it in a View tag!
+					}
+				</ScrollView>
+
 				{ this.renderAlert() }
-      </ScrollView>
+			</Container>
 		)
-	}
-
-	async addItemToCart(item) {
-	  let items = await AsyncStorage.getItem('cart')
-
-	  items = JSON.parse(items)
-
-	  if(!items) {
-	    items = []
-	  }
-
-	  items.push(item)
-
-	  items.forEach((i, index) => {
-	    console.log((index+1)+"- ", i.key);
-	  })
-
-
-	  await AsyncStorage.setItem('cart', JSON.stringify(items))
-
-		this.setState({showAlert: true})
 	}
 
 	renderAlert() {
