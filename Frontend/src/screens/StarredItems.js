@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList, AsyncStorage } from 'react-native'
+import { View, FlatList, AsyncStorage, Text } from 'react-native'
 import { DividerWithHeading, ItemSummary, Devider } from '../components'
 import AwesomeAlert from 'react-native-awesome-alerts'
 
@@ -25,42 +25,53 @@ export class StarredItems extends Component {
 
 
     render() {
-        const { starredItems } = this.state
-        const itemCount = starredItems ? starredItems.length : 0
+      const { itemsEmptyStyle } = styles
+      const { starredItems } = this.state
+      const itemCount = starredItems ? starredItems.length : 0
 
-        return (
-            <View style={{ flex: 1 }}>
-                <DividerWithHeading label='Starred Items' sublabel={itemCount + '  Items'} height={100} />
-                <FlatList
-                    data={starredItems}
-                    keyExtractor={ (item, index) => index.toString()}
-                    renderItem={({item, index}) => (
-                        <View key={index}>
-                            <ItemSummary item={item}
-                              withAddToCart
-                              withRemoveFromCart
+      return (
+          <View style={{ flex: 1 }}>
+              <DividerWithHeading label='Starred Items' sublabel={itemCount + '  Items'} height={100} />
+              { itemCount > 0 ? (
+                this.renderItemsList(starredItems, itemCount)
+              ) : (
+                <Text style={itemsEmptyStyle}>You have no starred items yet.</Text>
+              )}
+              { this.renderAlert() }
+          </View>
+      )
+    }
 
-                              onAddPress={() => {
-                                Utility.addItem(item, 'cart', (newCart) => {
-                                  this.setState({showAlert: true})
-                                })
-                              }}
+    renderItemsList(starredItems, itemCount) {
+      return (
+        <FlatList
+            data={starredItems}
+            keyExtractor={ (item, index) => index.toString()}
+            renderItem={({item, index}) => (
+                <View key={index}>
+                    <ItemSummary item={item}
+                      withAddToCart
+                      withRemoveFromCart
 
-                              onRemovePress={() => {
-                                Utility.removeItem(index, 'starredItems', (newStarredItems) => {
-                                  this.setState({starredItems: newStarredItems})
-                                })
-                              }}
-                            />
-                            { index != itemCount-1 ? <Devider /> : null }
-                        </View>
-                    )
+                      onAddPress={() => {
+                        Utility.addItem(item, 'cart', (newCart) => {
+                          this.setState({showAlert: true})
+                        })
+                      }}
 
-                    }
-                />
-                { this.renderAlert() }
-            </View>
-        )
+                      onRemovePress={() => {
+                        Utility.removeItem(index, 'starredItems', (newStarredItems) => {
+                          this.setState({starredItems: newStarredItems})
+                        })
+                      }}
+                    />
+                    { index != itemCount-1 ? <Devider /> : null }
+                </View>
+            )
+
+            }
+        />
+      )
     }
 
     renderAlert() {
@@ -75,4 +86,13 @@ export class StarredItems extends Component {
   			onConfirmPressed={() => this.setState({showAlert: false})}
   		/>
     }
+}
+
+const styles = {
+  itemsEmptyStyle: {
+    alignSelf: 'center',
+    fontFamily: 'Cairo-Bold',
+    fontSize: 18,
+    marginTop: 50,
+  }
 }

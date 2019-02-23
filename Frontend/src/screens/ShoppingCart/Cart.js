@@ -35,7 +35,8 @@ export class Cart extends Component {
   }
 
   render() {
-    const { subtotal, vatApprox, totalPrice } = this.state
+    const { cart, subtotal, vatApprox, totalPrice } = this.state
+    const { cartEmptyStyle } = styles
 
     return (
       <Container>
@@ -48,11 +49,15 @@ export class Cart extends Component {
           { this.renderItems() }
           <Devider />
 
-          <Bill
-            subtotal={subtotal}
-            vatApprox={vatApprox}
-            totalPrice={totalPrice}
-          />
+          { cart && cart.length > 0 ? (
+            <Bill
+              subtotal={subtotal}
+              vatApprox={vatApprox}
+              totalPrice={totalPrice}
+            />
+          ) : (
+            <Text style={cartEmptyStyle}>Your cart is empty.</Text>
+          )}
         </ScrollView>
       </Container>
     )
@@ -98,4 +103,10 @@ const styles ={
     alignItems:'center',
     backgroundColor:'#FFFFFF'
   },
+  cartEmptyStyle: {
+    alignSelf: 'center',
+    fontFamily: 'Cairo-Bold',
+    fontSize: 18,
+    marginTop: 50,
+  }
 }
