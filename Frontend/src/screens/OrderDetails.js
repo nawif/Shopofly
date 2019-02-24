@@ -23,47 +23,42 @@ const defaultPaddingSummary = 4
 export class OrderDetails extends Component {
 
   render() {
-    const { storeKeyStyle,
-            orderId,
-            simpleContainer,
-            orderIssuedDate,
-        } = styles
+    const {
+      storeKeyStyle,
+      orderId,
+      simpleContainer,
+      orderIssuedDate,
+    } = styles
 
-    const order = {
-        orderDetails: {
-          orderId: '#000001',
-          orderIssuedDate: 'Placed On Jan 10, 2019'
-        }
-    }
-    
+    const { order } = this.props
 
     return (
       <Container>
           <View style={simpleContainer}>
                 <Image source={require('../../assets/images/Account/shopping-bag.png')}/>
                 <Text style={storeKeyStyle}>Order
-                <Text style={ orderId }>{order.orderDetails.orderId}</Text>
+                <Text style={ orderId }>{order.orderId}</Text>
                 </Text>
-                <Text style={ orderIssuedDate }>{order.orderDetails.orderIssuedDate}</Text>
+                <Text style={ orderIssuedDate }>{order.orderIssuedDate}</Text>
           </View>
           <Devider height={1} />
           <View style={simpleContainer}>
                 <Image source={require('../../assets/images/Account/box.png')}/>
                 <Text style={storeKeyStyle}>Shipment Status </Text>
           </View>
-          
-          { this.renderOrderProgress() }
+
+          { this.renderOrderProgress(order.deliveryStatus) }
           <View>
-              <ItemSummary item={this.props.item} withQuantity={false} />
+              <ItemSummary item={order.items[0]} />
               <Devider />
           </View>
         {/* { withbill ? ( this.renderBill() ) : null } */}
-        
+
       </Container>
     )
   }
 
-  renderOrderProgress () {
+  renderOrderProgress (deliveryStatus) {
     const progressStepsStyle = {
         activeStepIconBorderColor: '#14BAAB',
         activeLabelColor: '#686868',
@@ -163,8 +158,8 @@ export class OrderDetails extends Component {
           <Text style={billValue}>SAR {totalPrice}</Text>
         </View>
       </View>
-      
-      
+
+
     )
   }
 
@@ -253,8 +248,8 @@ const styles = {
   orderIssuedDate: {
     fontFamily: 'Cairo-SemiBold',
     fontSize: 14,
-    flex:8,
+    flex:6,
     color: '#A1A1A1',
-    
+
   }
 }

@@ -18,7 +18,29 @@ const item = {
   image: "http://shopofly.xyz/storage/listingsImages/ODU4MzQ1NjE.jpg",
 }
 
+const orders = [
+  {
+    orderId: '#000003',
+    orderIssuedDate: 'Placed On Jan 10, 2019',
+    deliveryStatus: 'processing',
+    items: [item, item, item],
+  },
+  {
+    orderId: '#000002',
+    orderIssuedDate: 'Placed On Jan 10, 2019',
+    deliveryStatus: 'shipped',
+    items: [item],
+  },
+  {
+    orderId: '#000001',
+    orderIssuedDate: 'Placed On Jan 10, 2019',
+    deliveryStatus: 'delivered',
+    items: [item, item],
+  },
+]
+
 export async function seedAsyncStorage() {
-  await AsyncStorage.setItem('cart', JSON.stringify([item, item]))
-  await AsyncStorage.setItem('starredItems', JSON.stringify([item]))
+  AsyncStorage.setItem('cart', JSON.stringify([item, item]))
+  AsyncStorage.setItem('starredItems', JSON.stringify([item]))
+  AsyncStorage.setItem('orders', JSON.stringify(orders))
 }

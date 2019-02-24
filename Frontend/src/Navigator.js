@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { 
+import {
   Login,
   Register,
   Item,
@@ -180,18 +180,18 @@ let tabNavigator = createBottomTabNavigator(
 * If not, the user will land on Login screen.
 */
 const MyApp = createStackNavigator({
-  // Login: {
-  //   screen: Login,
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // },
-  // Register: {
-  //   screen: Register,
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Register: {
+    screen: Register,
+    navigationOptions: {
+      header: null
+    }
+  },
   App: {
     screen: tabNavigator,
     navigationOptions: {

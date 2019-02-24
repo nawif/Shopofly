@@ -39,7 +39,7 @@ export const getBillInfo = (items) => {
   return { subtotal, vatApprox, totalPrice }
 }
 
-// Adds item to storage: (cart, orderList, starredItems)
+// Adds item to storage: (cart, orders, starredItems)
 // callback returns new items list
 export async function addItem(itemToBeAdded, storage, callback){
   let items = await AsyncStorage.getItem(storage)
@@ -57,7 +57,7 @@ export async function addItem(itemToBeAdded, storage, callback){
   callback(items)
 }
 
-// Removes item from storage: (cart, orderList, starredItems)
+// Removes item from storage: (cart, orders, starredItems)
 // callback returns new items list
 export async function removeItem(indexToBeRemoved, storage, callback) {
   let items = await AsyncStorage.getItem(storage)
