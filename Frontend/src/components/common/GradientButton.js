@@ -24,7 +24,7 @@ export const GradientButton = (props) => {
 		alignSelf: 'center',
 		fontFamily: props.fontFamily || 'Roboto-Medium',
 		color: props.labelColor || 'white',
-		fontSize: 20,
+		fontSize: props.fontSize ||20,
 		paddingTop: props.padding || null,
 		paddingBottom: props.padding || null,
 	}

@@ -114,7 +114,6 @@ export default class QrHandler extends Component {
 
   loadItem = () => {
     // TODO save item data from the first API request ()
-
     AsyncStorage.getItem('token')
     .then((token) => {
       API.getItem(this.state.lastScannedUrl, token)

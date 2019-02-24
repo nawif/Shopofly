@@ -78,6 +78,7 @@ export class Cart extends Component {
             keyExtractor={ (item, index) => index.toString()}
             renderItem={({item, index}) => (
               <View key={index}>
+<<<<<<< HEAD
                 <ItemSummary
                   item={item}
                   withQuantity
@@ -89,6 +90,9 @@ export class Cart extends Component {
                     })
                   }}
                 />
+=======
+                <ItemSummary item={item} withQuantity withRemoveFromCart />
+>>>>>>> eaf69638e958e3395c8cdf488e79b307ab5d61be
                 { index != itemCount-1 ? <Devider /> : null }
               </View>
             )}

@@ -8,7 +8,8 @@ import * as Global from '../Global'
 
 export class AddressBox extends Component {
     state={
-      isSelected:false
+      isSelected:false,
+      value:0
     }
 
     renderGradient(){
@@ -53,10 +54,8 @@ export class AddressBox extends Component {
     )
   }
   _handelPress = () =>{
-    console.log("_handelPress:"+ this.state.isSelected );
-    if(this.props.canBeSelected){
-      this.setState({isSelected:!this.state.isSelected})
-
+    if(this.props.canBeSelected ){
+      this.setState({isSelected: !this.state.isSelected})
     }
   }
   render() {

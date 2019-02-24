@@ -1,9 +1,24 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, PlaceOrder, AddressBook, StarredItems, SelectAddress, Cart, AddNewAddress } from './screens'
+import { 
+  Login,
+  Register,
+  Item,
+  Scan,
+  Profile,
+  PlaceOrder,
+  AddressBook,
+  StarredItems,
+  SelectAddress,
+  Cart,
+  AddNewAddress,
+  OrderDetails,
+  OrderList,
+  OrderConfirmation} from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
+
 
 const scanNavigator = createStackNavigator({
   Scan: {
@@ -42,6 +57,28 @@ const profileNavigator = createStackNavigator({
   },
   AddAddress: {
     screen: AddNewAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  OrderDetails: {
+    screen: OrderDetails,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  OrderList: {
+    screen: OrderList,
     navigationOptions: {
       headerTitle: (
           <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
@@ -93,7 +130,7 @@ let tabNavigator = createBottomTabNavigator(
   {
     Scan: scanNavigator,
     Profile: profileNavigator,
-    Starred: StarredItems,
+    Starred: OrderConfirmation,
     Cart: cartNavigator,
   },
 
@@ -143,18 +180,18 @@ let tabNavigator = createBottomTabNavigator(
 * If not, the user will land on Login screen.
 */
 const MyApp = createStackNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Register: {
-    screen: Register,
-    navigationOptions: {
-      header: null
-    }
-  },
+  // Login: {
+  //   screen: Login,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
+  // Register: {
+  //   screen: Register,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
   App: {
     screen: tabNavigator,
     navigationOptions: {
