@@ -17,19 +17,75 @@ import * as Utility from '../Utility'
 
 export class Item extends Component {
 	state = {
+		isStarred: false,
 		currentQuantity: 1,
 		showAlert: false,
 	}
 
+	componentWillMount() {
+		// Call it as async, to check the star status
+		this.didFocusListener = this.props.navigation.addListener(
+		  'didFocus',
+		  () => { this.itemStarredCheck() },
+		)
+	}
+
+  async itemStarredCheck() {
+		// TODO: make state (finishedChecking) to make it safer
+    AsyncStorage.getItem('starredItems')
+  	.then((starredItems) => {
+			const { key } = this.props.navigation.state.params.item
+
+			let actuallyStarred = false
+
+			starredItems = JSON.parse(starredItems)
+
+			// Iterates through starred items to check whether current item is starred or not
+			starredItems.forEach(function(item) {
+				if(item.key === key) {
+					// If item is not starred then star it, do nothing otherwise
+					if(!this.state.isStarred) {
+						this.setState({isStarred: true})
+					}
+					// Sets the flag as true if item is starred
+					actuallyStarred = true
+					return
+				}
+			})
+
+			// If item is not actually starred and currently it is starred
+			// then set it as not starred
+			if(!actuallyStarred && this.state.isStarred) {
+				this.setState({isStarred: false})
+			}
+    })
+  	.catch((error) => console.log(error))
+  }
+
 	render() {
 		const { container } = styles;
 		const { item } = this.props.navigation.state.params
-		const { currentQuantity } = this.state
+		const { currentQuantity, isStarred } = this.state
 
 		return (
 			<Container>
 				<ScrollView style={container}>
-					<FloatingButtons />
+					<FloatingButtons
+						isStarred={isStarred}
+
+						onStarPress={() => {
+							console.log('Clicked Star')
+							if(isStarred) {
+								this.removeStarredItem(item)
+							} else {
+								this.addStarredItem(item)
+							}
+						}}
+
+						onSharePress={() => {
+							console.log('Clicked Share')
+						}}
+					/>
 
 					<MySwiper images={item.images}/>
 
@@ -77,6 +133,41 @@ export class Item extends Component {
 			confirmText="Okay"
 			onConfirmPressed={() => this.setState({showAlert: false})}
 		/>
+	}
+
+	async removeStarredItem(item) {
+		let starredItems = await AsyncStorage.getItem('starredItems')
+
+		starredItems = JSON.parse(starredItems)
+
+		if(starredItems && starredItems.length > 0) {
+			starredItems.forEach(function(tempItem, index) {
+				if(tempItem.key === item.key) {
+					starredItems.splice(index, 1)
+				}
+
+				return
+			})
+
+			AsyncStorage.setItem('starredItems', JSON.stringify(starredItems))
+			.then((starredItems) => {
+				this.setState({ isStarred: false })
+			})
+			.catch((error) => console.log(error))
+		}
+	}
+
+	addStarredItem(item) {
+		const { currentQuantity } = this.state
+
+		Utility.addItem({
+			key: item.key,
+			currentQuantity,
+			summary: item.summary,
+			image: item.images[0],
+		}, 'starredItems', () => {
+			this.setState({isStarred: true})
+		})
 	}
 }
 
