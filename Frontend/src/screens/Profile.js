@@ -15,17 +15,22 @@ handelAddressBook = () =>{
     this.props.navigation.navigate('AddressBook');
 }
 
+handelOrderList = () =>{
+    this.props.navigation.navigate('OrderList');
+}
+
   render() {
     const options =[
       {
           title:'Orders',
           icon:Images.orders,
+          action:this.handelOrderList
 
       },
       {
           title:'Address Book',
           icon:Images.addressBook,
-        action:this.handelAddressBook
+          action:this.handelAddressBook
       },
       {
           title:'Account Settings',

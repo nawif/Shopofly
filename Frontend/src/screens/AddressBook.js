@@ -28,7 +28,7 @@ export class AddressBook extends Component {
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
-        {this.renderButton()}
+           {this.renderButton()}
         <AddressesList addresses={listOfAddresses} />
       </View>
     )
