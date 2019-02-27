@@ -27,6 +27,7 @@ export const GradientButton = (props) => {
 		fontSize: props.fontSize ||20,
 		paddingTop: props.padding || null,
 		paddingBottom: props.padding || null,
+		padding: props.padding || null
 	}
 
 	const firstColor = props.firstColor || Global.FIRST_COLOR

@@ -6,10 +6,9 @@ import listOfAddresses from '../../dumb_data/address.json'
 
 
 export class SelectAddress extends Component {
-    canSelect = true; // tells the address list component that the list can be selected
-
   state={
-    address:listOfAddresses
+    address: listOfAddresses,
+    selectedAddress: null
   }
 
   _handelAddAddressOnPress = () => {
@@ -27,11 +26,16 @@ export class SelectAddress extends Component {
     )
   }
 
+  onAddressSelect(addressId) {
+    console.log(addressId)
+    this.setState({ selectedAddress: addressId })
+  }
+
   render() {
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
-        <AddressesList addresses={listOfAddresses} canSelect={this.canSelect} />
+        <AddressesList addresses={listOfAddresses} selectedAddress={this.state.selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)} />
         {this.renderNewAddressButton()}
 
       </View>

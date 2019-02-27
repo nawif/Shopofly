@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, ImageBackground, Text, Image } from 'react-native'
-import { GradientButton } from "../components"
+import { GradientButton, MainContainer } from "../components"
 import { LinearGradient } from 'expo'
 import * as Global from '../Global'
 
@@ -23,30 +23,40 @@ export class OrderConfirmation extends Component {
       alignItems: 'center'
     }
 		return (
-      <ImageBackground source={require('../../assets/splash.png')} style={styles.background} >
-      <View style={styles.container}>
-          <LinearGradient
-          colors={[Global.FIRST_COLOR, Global.SECOND_COLOR]}
-          start={[1.0, 0]}
-          end={[0.0, 0]}
-          style={container1}
-        >
-          <Image
-            source={require('../../assets/checked2.png')}
-            style={styles.checked}
-          />
-        </LinearGradient>
-        <Text style={styles.FirstLine}>Thank You!</Text>
-        <Text style={styles.SecondLine}>Your order has been placed</Text>
-        <Text style={styles.ThierdLine} > You will receive a confirmtion email shortly</Text>
-        {/* <GradientButton isValid={true} label={"CONTINUE SHOPPING"} width={'70%'} borderRadius={50} fontSize={16}/> */}
-        <View style={styles.orderId}>
-          <Text> Your order number is 
-            <Text style={styles.orderNumber}> #{orderid} </Text>
-          </Text>
+      <MainContainer>
+        <ImageBackground source={require('../../assets/splash.png')} style={styles.background} >
+        <View style={styles.container}>
+            <LinearGradient
+            colors={[Global.FIRST_COLOR, Global.SECOND_COLOR]}
+            start={[1.0, 0]}
+            end={[0.0, 0]}
+            style={container1}
+          >
+            <Image
+              source={require('../../assets/checked2.png')}
+              style={styles.checked}
+            />
+          </LinearGradient>
+          <Text style={styles.FirstLine}>Thank You!</Text>
+          <Text style={styles.SecondLine}>Your order has been placed</Text>
+          <Text style={styles.ThierdLine} > You will receive a confirmtion email shortly</Text>
+          <View style={styles.orderId}>
+            <Text> Your order number is 
+              <Text style={styles.orderNumber}> #{orderid} </Text>
+            </Text>
           </View>
-      </View>
-      </ImageBackground>
+          {/* <GradientButton 
+            isValid={true} 
+            label={"CONTINUE SHOPPING"} 
+            width={'100%'} 
+            borderRadius={50} 
+            height={'20%'}
+            fontSize={14}
+            padding={10}
+          /> */}
+        </View>
+        </ImageBackground>
+      </MainContainer>
 		)
 	}
 }
@@ -73,7 +83,7 @@ const styles ={
       container:{
         justifyContent:'center',
         alignItems: 'center',
-        height: '60%',
+        height: '50%',
         width: '100%',
         borderRadius:40,
         backgroundColor:'white'
@@ -96,7 +106,8 @@ const styles ={
         borderWidth: 2,
         borderColor: '#CFCFCF',
         width:'50%',
-        backgroundColor:'white'
+        backgroundColor:'white',
+        marginTop: 20
       },
       orderNumber: {
         fontFamily: 'Cairo-Bold',

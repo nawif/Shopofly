@@ -48,7 +48,6 @@ export class Login extends Component {
 			this.setState({ isLoading: false })
     })
     .catch((error) => {
-			console.log(error.response);
 			this.showAlert(error.response.data['error'])
 			this.setState({ isLoading: false })
 		})
