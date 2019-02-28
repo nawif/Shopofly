@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage, FlatList  } from 'react-native'
+import { View, AsyncStorage, FlatList, TouchableOpacity } from 'react-native'
 import { Devider } from '../components'
 import { OrderDetails } from './';
 
@@ -42,11 +42,10 @@ export class OrderList extends Component {
             data={orderList}
             keyExtractor={ (order, index) => index.toString()}
             renderItem={({order, index}) => (
-                <View key={index}>
-                  {console.log(orderList[index])}
-                  <OrderDetails order={orderList[index]} />
-                  { index != ordersCount-1 ?  <Devider height={20} /> : null }
-                </View>
+                    <View key={index}>
+                    <OrderDetails order={orderList[index]} />
+                    { index != ordersCount-1 ?  <Devider height={20} /> : null }
+                    </View>
               )
             }
           />

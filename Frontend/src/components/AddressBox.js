@@ -7,18 +7,15 @@ import * as Global from '../Global'
 
 
 export class AddressBox extends Component {
-    state={
-      isSelected:false,
-      value:0
-    }
 
     renderGradient(){
         return(
             <LinearGradient
-            colors={[Global.FIRST_COLOR,Global.SECOND_COLOR]}
-            start={[1.0, 0]}
-            end={[0.0, 0]}
-            style={styles.circleStyle} />
+              colors={[Global.FIRST_COLOR,Global.SECOND_COLOR]}
+              start={[1.0, 0]}
+              end={[0.0, 0]}
+              style={styles.circleStyle}
+            />
         )
     }
     
@@ -53,16 +50,13 @@ export class AddressBox extends Component {
       </View>
     )
   }
-  _handelPress = () =>{
-    if(this.props.canBeSelected ){
-      this.setState({isSelected: !this.state.isSelected})
-    }
-  }
+
   render() {
+    
     return (
-        <TouchableWithoutFeedback onPress={this._handelPress}>
+        <TouchableWithoutFeedback onPress={() => this.props.onAddressSelect(this.props.item.id)}>
           <View style={{alignItems:'center',justifyContent:'center',margin:5,alignSelf:'center',}} >
-            {this.state.isSelected?this.renderGradient():null}
+            {this.props.selectedAddress == this.props.item.id ? this.renderGradient() : null }
             <View style={styles.container} >
               {this.renderHeader()}
               {this.renderItems()}

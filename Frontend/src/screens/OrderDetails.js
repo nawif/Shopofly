@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Image,
-  AsyncStorage
+  TouchableOpacity
 } from 'react-native';
 
 import * as Global from '../Global'
@@ -16,7 +16,6 @@ import {
 
 import { defaultTextContainer } from '../Styles'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
-import { OrderList } from './OrderList';
 
 const defaultPaddingSummary = 4
 
@@ -28,33 +27,43 @@ export class OrderDetails extends Component {
       orderId,
       simpleContainer,
       orderIssuedDate,
+      detailsSectionText,
+      detailsSectionImage
     } = styles
+    const orderDetails ={
+      orderId: ' #12345',
+      orderIssuedDate: 'Place On Jan 10,2019',
 
+    }
     const { order } = this.props
 
     return (
-      <Container>
-          <View style={simpleContainer}>
-                <Image source={require('../../assets/images/Account/shopping-bag.png')}/>
-                <Text style={storeKeyStyle}>Order
-                <Text style={ orderId }>{order.orderId}</Text>
-                </Text>
-                <Text style={ orderIssuedDate }>{order.orderIssuedDate}</Text>
-          </View>
-          <Devider height={1} />
-          <View style={simpleContainer}>
-                <Image source={require('../../assets/images/Account/box.png')}/>
-                <Text style={storeKeyStyle}>Shipment Status </Text>
-          </View>
-
-          { this.renderOrderProgress(order.deliveryStatus) }
-          <View>
-              <ItemSummary item={order.items[0]} />
-              <Devider />
-          </View>
-        {/* { withbill ? ( this.renderBill() ) : null } */}
-
-      </Container>
+      
+        <Container>
+            <View style={simpleContainer}>
+                  <Image source={require('../../assets/images/Account/shopping-bag.png')}/>
+                  <Text style={storeKeyStyle}>Order
+                    <Text style={ orderId }>{orderDetails.orderId}</Text>
+                  </Text>
+                  <Text style={ orderIssuedDate }>{orderDetails.orderIssuedDate}</Text>
+            </View>
+            <Devider height={1} />
+            <View style={simpleContainer}>
+                  <Image source={require('../../assets/images/Account/box.png')}/>
+                  <Text style={storeKeyStyle}>Shipment Status </Text>
+            </View>
+            { this.renderOrderProgress(orderDetails.deliveryStatus) }
+            <View>
+                <ItemSummary item={order.items[0]} />
+            </View>
+            <Devider height={1} />
+            <TouchableOpacity >
+              <View style={simpleContainer} >
+                  <Text style={ detailsSectionText }> View Order Details </Text>
+                  <Image style={ detailsSectionImage } source={require('../../assets/images/Account/Shape.png')}/>
+              </View>
+            </TouchableOpacity>
+        </Container>
     )
   }
 
@@ -100,7 +109,6 @@ export class OrderDetails extends Component {
                     previousBtnTextStyle={buttonTextStyle}
                 >
                     <View style={{ alignItems: 'center' }}>
-                    <Text>This is the content within step 2!</Text>
                     </View>
                 </ProgressStep>
                 <ProgressStep
@@ -113,7 +121,6 @@ export class OrderDetails extends Component {
                     previousBtnTextStyle={buttonTextStyle}
                 >
                     <View style={{ alignItems: 'center' }}>
-                    <Text>This is the content within step 3!</Text>
                     </View>
                 </ProgressStep>
                 <ProgressStep
@@ -126,7 +133,6 @@ export class OrderDetails extends Component {
                     previousBtnTextStyle={buttonTextStyle}
                 >
                     <View style={{ alignItems: 'center' }}>
-                    <Text>This is the content within step 4!</Text>
                     </View>
                 </ProgressStep>
             </ProgressSteps>
@@ -236,7 +242,6 @@ const styles = {
     fontSize: 16,
     alignSelf: 'center',
     color: '#2B2B2B',
-    flex:7
   },
   storeKeyStyle: {
     fontFamily: 'Cairo-Bold',
@@ -248,8 +253,14 @@ const styles = {
   orderIssuedDate: {
     fontFamily: 'Cairo-SemiBold',
     fontSize: 14,
-    flex:6,
     color: '#A1A1A1',
-
+  },
+  detailsSectionText:{
+    color: '#3061E9',
+    fontFamily: 'Cairo-Bold',
+    fontSize: 11
+  },
+  detailsSectionImage:{
+    marginLeft: '65%'
   }
 }
