@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 import * as Utility from '../../Utility'
+import * as API from '../../API'
+
 import {
   Container,
   DividerWithHeading,
@@ -127,8 +129,35 @@ export class PlaceOrder extends Component {
   }
 
   renderPlaceOrder() {
+    const { cart } = this.state
+    const { selectedAddress } = this.props.navigation.state.params
+
     return (
-      <PlaceOrderFooter onPressHandler={() => console.log("Presses (Place Order)")} />
+      <PlaceOrderFooter onPressHandler={() =>{
+        const myOrder = {
+          items: [],
+          address_id: selectedAddress.id
+        }
+
+        cart.forEach(function(item) {
+          myOrder.items.push({
+            id: item.key,
+            quantity: item.currentQuantity,
+          })
+        })
+
+
+        AsyncStorage.getItem('token')
+        .then((token) => {
+          API.checkout(token, myOrder)
+          .then((response) => {
+            console.log(response)
+            AsyncStorage.setItem('cart', JSON.stringify([]))
+            .catch((err) => console.log(err))
+          })
+          .catch((err) => console.log(err))
+        })
+      }} />
     )
   }
 

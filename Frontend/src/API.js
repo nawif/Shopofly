@@ -64,3 +64,30 @@ export const getAddress = (token) => {
 export const addAddress = (token) => {
   return null
 }
+
+export const checkout = (token, order) => {
+  const itemsWithQuantity = []
+  // TODO: fix checkout issue
+  // TODO: tell backend developers about payment method!
+  order.items.forEach(function(item) {
+    itemsWithQuantity.push({
+      "key": item.id,
+      "quantity": item.quantity
+    })
+  })
+
+  const body = {
+    "orders": itemsWithQuantity,
+    "address_id": order.address_id
+  }
+
+  console.log("Body: ", body)
+
+  return axios({
+    method: 'POST',
+    url: `${url}/store/checkout`,
+    headers: {'Content-type':'json', 'Authorization': 'Bearer ' + token},
+    body: body
+  })
+  .then((res) => res.data)
+}
