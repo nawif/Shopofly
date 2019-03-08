@@ -7,8 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 
-import * as Global from '../../Global'
-
+import * as Utility from '../../Utility'
 import {
   Container,
   DividerWithHeading,
@@ -31,30 +30,17 @@ export class PlaceOrder extends Component {
     vatApprox: 0,
     totalPrice: 0,
     selectedPayment: 'payofly',
-    selectedAddress: null,
   }
 
   componentWillMount() {
     this.loadItems()
-
-    // TODO: make sure that the prop is this.props.navigation.state.params.selectedAddress
-    const { selectedAddress } = {
-      selectedAddress: {
-        title: 'Home',
-        address: '4043 Galg, Alwadi',
-        phone: '+966535352775',
-        name: 'Abdulmajeed Alomari',
-      }
-    }
-
-    this.setState({ selectedAddress })
   }
 
   render() {
     const { radioGroup } = styles
+    const { selectedAddress } = this.props.navigation.state.params
 
     const {
-      selectedAddress,
       cart,
     } = this.state
 
@@ -85,6 +71,7 @@ export class PlaceOrder extends Component {
           <DividerWithHeading label={'Deliver To'} height={headlineHeight} />
           <AddressBox
             canBeSelected={false}
+            item={selectedAddress}
             title={selectedAddress.title}
             address={selectedAddress.address}
             phone={selectedAddress.phone}
@@ -107,16 +94,18 @@ export class PlaceOrder extends Component {
   renderItems() {
     const { cart } = this.state
 
+    const itemCount = cart ? cart.length : 0
+
     return (
       <View style={{ flex: 1 }}>
-          <DividerWithHeading label='Order Summary' sublabel={cart.length + '  Items'} height={headlineHeight} />
+          <DividerWithHeading label='Order Summary' sublabel={itemCount + '  Items'} height={headlineHeight} />
           <FlatList
             data={cart}
             keyExtractor={ (item, index) => index.toString()}
             renderItem={({item, index}) => (
               <View key={index}>
                 <ItemSummary item={item} withQuantity />
-                { index != cart.length-1 ? <Devider /> : null }
+                { index != itemCount-1 ? <Devider /> : null }
               </View>
             )}
           />
@@ -144,55 +133,15 @@ export class PlaceOrder extends Component {
   }
 
   loadItems() {
-    const item = {
-      seller:'Apple',
-      title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
-      price: '2890.00',
-      storeDetails: {
-        store: 'Extra Store',
-      },
-      quantity: 3,
-      image: 'https://www.jagojet.com/media/catalog/product/cache/4/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/g/r/gray-1_2.png'
-    }
-
     AsyncStorage.getItem('cart')
   	.then((cart) => {
-      // TODO: uncomment this
-      // this.setState({ cart: JSON.parse(cart) })
-      this.setState({ cart: [
-        item,
-        item,
-        item
-      ]})
-      this.loadPriceInfo()
+      cart = JSON.parse(cart)
+      const { subtotal, vatApprox, totalPrice } = Utility.getBillInfo(cart)
+
+      console.log("LENGTH OF CART IN PLACEORDER: " + cart.length);
+      this.setState({ cart, subtotal, vatApprox, totalPrice })
     })
   	.catch((error) => console.log(error))
-  }
-
-  loadPriceInfo() {
-    const subtotal = this.getSubtotal()
-    const vatApprox = this.getVatApprox(subtotal)
-    const totalPrice = subtotal + vatApprox
-
-    this.setState({ subtotal, vatApprox, totalPrice })
-  }
-
-  getSubtotal() {
-    let subtotal = 0
-
-    for (let item of this.state.cart) {
-      if (item.price) {
-         subtotal = subtotal + parseInt(item.price) * parseInt(item.quantity)
-      }
-    }
-
-    return subtotal
-  }
-
-  getVatApprox(subtotal) {
-    let vatApprox = Global.VAT * subtotal
-    vatApprox = Math.round(vatApprox * 100) / 100
-    return vatApprox
   }
 }
 

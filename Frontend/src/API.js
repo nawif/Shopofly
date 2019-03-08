@@ -53,12 +53,14 @@ export const getItem = (url, token) => {
 
 export const getAddress = (token) => {
   return axios({
-    method: 'POST',
-    url: url,
-    headers: { 'Content-type': 'application/json' },
-    data: {
-      'token': token
-    }
+    method: 'GET',
+    url: `${url}/users/address`,
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
   })
   .then((res) => res.data)
+}
+
+// TODO: Make "addAddress" endpoint
+export const addAddress = (token) => {
+  return null
 }

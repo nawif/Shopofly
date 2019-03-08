@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View,TouchableOpacity, FlatList } from 'react-native'
+import { Text, View,TouchableOpacity, FlatList, AsyncStorage } from 'react-native'
 import { AddressesList } from "../components";
-import listOfAddresses from '../dumb_data/address.json'
+import * as API from '../API'
 
 
 
@@ -9,11 +9,29 @@ export class AddressBook extends Component {
   hasOption = true; // will be passed to the AddressesList coponent telling it to propmt options
 
   state={
-    address:listOfAddresses
+    listOfAddresses: []
   }
 
   _handelAddAddressOnPress = () =>{
     this.props.navigation.navigate("AddAddress");
+  }
+
+  componentWillMount() {
+		// Call it as async, to check the star status
+		this.didFocusListener = this.props.navigation.addListener(
+		  'didFocus',
+		  () => { this.retrieveAddresses() },
+		)
+	}
+
+  retrieveAddresses() {
+    AsyncStorage.getItem('token')
+    .then((token) => {
+      API.getAddress(token)
+      .then((addresses) => {
+        this.setState({listOfAddresses: addresses})
+      })
+    })
   }
 
   renderButton(){
@@ -25,11 +43,13 @@ export class AddressBook extends Component {
   }
 
   render() {
+    const { listOfAddresses } = this.state
+
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
            {this.renderButton()}
-        <AddressesList addresses={listOfAddresses} />
+        <AddressesList addresses={ listOfAddresses } />
       </View>
     )
   }
