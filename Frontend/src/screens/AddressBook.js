@@ -30,11 +30,6 @@ export class AddressBook extends Component {
       API.getAddress(token)
       .then((addresses) => {
         this.setState({listOfAddresses: addresses})
-
-        console.log("Addresses are: \n");
-        for(let key in addresses[0]) {
-          console.log(key);
-        }
       })
     })
   }

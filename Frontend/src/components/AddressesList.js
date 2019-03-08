@@ -10,12 +10,12 @@ export class AddressesList extends Component {
     _keyExtractor = (item, index) => `${item.id}`;
   render() {
     return (
-        <FlatList
+      <FlatList
         style={{flexGrow: 0}}
         data={this.props.addresses}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
-        />
+      />
     )
   }
 }
