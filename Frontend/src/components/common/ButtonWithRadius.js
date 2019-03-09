@@ -4,15 +4,16 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 export const ButtonWithRadius = (props) => {
     const containerStyle = {
         borderRadius: 100,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: props.paddingTop || 10,
+        paddingBottom: props.paddingBottom || 10,
         paddingRight: 15,
         paddingLeft: 15,
-        borderWidth: 1,
-        borderColor: props.color || '#A4A4A4',
+        borderWidth: props.borderWidth ||1,
+        borderColor: props.borderColor || '#A4A4A4',
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        marginLeft: props.marginLeft
     }
 
     const labelStyle = {
@@ -25,7 +26,7 @@ export const ButtonWithRadius = (props) => {
     const iconStyle = {
         width: 12,
         height: 12,
-        marginRight: 10
+        marginRight: 10,
     }
 
     return (

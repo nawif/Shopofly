@@ -36,6 +36,7 @@ export * from './TabBarIcon'
 export * from './PlaceOrder/PlaceOrderFooter'
 
 export * from './Cart/CartHeader'
+export * from './Cart/CartFooter'
 
 export * from './Item/ItemInfo'
 export * from './Item/CoreSpec'

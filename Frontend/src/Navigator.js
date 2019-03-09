@@ -15,7 +15,9 @@ import {
   AddNewAddress,
   OrderDetails,
   OrderList,
-  OrderConfirmation} from './screens'
+  OrderConfirmation,
+  AccountSettings
+  } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -88,6 +90,17 @@ const profileNavigator = createStackNavigator({
       }
     }
   },
+  AccountSettings: {
+    screen: AccountSettings,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
 })
 
 
@@ -113,6 +126,17 @@ const cartNavigator = createStackNavigator({
   },
   PlaceOrder: {
     screen: PlaceOrder,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  AddNewAddress: {
+    screen: AddNewAddress,
     navigationOptions: {
       headerTitle: (
           <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
@@ -180,18 +204,18 @@ let tabNavigator = createBottomTabNavigator(
 * If not, the user will land on Login screen.
 */
 const MyApp = createStackNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Register: {
-    screen: Register,
-    navigationOptions: {
-      header: null
-    }
-  },
+  // Login: {
+  //   screen: Login,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
+  // Register: {
+  //   screen: Register,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
   App: {
     screen: tabNavigator,
     navigationOptions: {

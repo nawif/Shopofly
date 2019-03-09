@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
 import { Text, View,TouchableOpacity, FlatList } from 'react-native'
-import { AddressesList } from "../../components";
+import { AddressesList, CartFooter } from "../../components";
 import listOfAddresses from '../../dumb_data/address.json'
 
 
 
 export class SelectAddress extends Component {
+
   state={
     address: listOfAddresses,
     selectedAddress: null
   }
 
   _handelAddAddressOnPress = () => {
-    console.log("ADD A NEW ADDRESS");
-
-    this.props.navigation.navigate('PlaceOrder')
-
+    this.props.navigation.navigate('AddNewAddress')
   }
 
   renderNewAddressButton(){
@@ -37,7 +35,10 @@ export class SelectAddress extends Component {
         <View style={styles.spacer} />
         <AddressesList addresses={listOfAddresses} selectedAddress={this.state.selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)} />
         {this.renderNewAddressButton()}
-
+        <CartFooter
+          onPressHandler={() => this.props.navigation.navigate('PlaceOrder')}
+          isActive={this.state.selectedAddress!=null} 
+        />
       </View>
     )
   }

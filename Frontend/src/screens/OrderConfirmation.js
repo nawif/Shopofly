@@ -45,7 +45,7 @@ export class OrderConfirmation extends Component {
               <Text style={styles.orderNumber}> #{orderid} </Text>
             </Text>
           </View>
-          {/* <GradientButton 
+          <GradientButton 
             isValid={true} 
             label={"CONTINUE SHOPPING"} 
             width={'100%'} 
@@ -53,7 +53,10 @@ export class OrderConfirmation extends Component {
             height={'20%'}
             fontSize={14}
             padding={10}
-          /> */}
+            onClick={()=>{
+              this.props.navigation.navigate('Scan')
+            } }
+          />
         </View>
         </ImageBackground>
       </MainContainer>

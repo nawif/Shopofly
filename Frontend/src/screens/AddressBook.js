@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View,TouchableOpacity, FlatList } from 'react-native'
-import { AddressesList } from "../components";
+import { Text, View,TouchableOpacity, Image } from 'react-native'
+import { AddressesList, ButtonWithRadius } from "../components";
 import listOfAddresses from '../dumb_data/address.json'
-
+import images from '../../assets/images'
 
 
 export class AddressBook extends Component {
@@ -16,20 +16,25 @@ export class AddressBook extends Component {
     this.props.navigation.navigate("AddAddress");
   }
 
-  renderButton(){
+  renderNewAddressButton(){
     return (
       <TouchableOpacity onPress={this._handelAddAddressOnPress} style={styles.buttonContainer} >
-        <Text style={styles.buttonTitle}  >ADD A NEW ADDRESS</Text>
+        <Text style={styles.buttonTitle}  >Add a New Address</Text>
       </TouchableOpacity>
     )
+  }
+
+  onAddressSelect(addressId) {
+    console.log(addressId)
+    this.setState({ selectedAddress: addressId })
   }
 
   render() {
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
-           {this.renderButton()}
-        <AddressesList addresses={listOfAddresses} />
+        {this.renderNewAddressButton()}
+        <AddressesList addresses={listOfAddresses} selectedAddress={this.state.selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)} />
       </View>
     )
   }
@@ -43,14 +48,14 @@ const styles ={
     backgroundColor:'#FFFFFF'
   },
   buttonContainer:{
-    width:'80%',
+    width:'90%',
     borderRadius: 30,
     borderWidth: 2,
     borderColor: '#CFCFCF',
   },
   buttonTitle:{
     textAlign:'center',
-    padding:10
+    padding:10,
   },
   spacer:{
     flex:0.1

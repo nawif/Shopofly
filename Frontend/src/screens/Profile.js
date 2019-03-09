@@ -19,6 +19,10 @@ handelOrderList = () =>{
     this.props.navigation.navigate('OrderList');
 }
 
+handelAccountSettings = () =>{
+    this.props.navigation.navigate('AccountSettings');
+}
+
   render() {
     const options =[
       {
@@ -35,6 +39,7 @@ handelOrderList = () =>{
       {
           title:'Account Settings',
           icon:Images.account,
+          action:this.handelAccountSettings
 
       },
       {
