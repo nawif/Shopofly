@@ -16,7 +16,9 @@ import {
   OrderDetails,
   OrderList,
   OrderConfirmation,
-  AccountSettings
+  AccountSettings,
+  SecuritySettings,
+  PersonalSettings,
   } from './screens'
 import images from '../assets/images'
 import { TabBarIcon } from './components'
@@ -57,7 +59,7 @@ const profileNavigator = createStackNavigator({
       }
     }
   },
-  AddAddress: {
+  AddNewAddress: {
     screen: AddNewAddress,
     navigationOptions: {
       headerTitle: (
@@ -92,6 +94,28 @@ const profileNavigator = createStackNavigator({
   },
   AccountSettings: {
     screen: AccountSettings,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  PersonalSettings: {
+    screen: PersonalSettings,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  SecuritySettings: {
+    screen: SecuritySettings,
     navigationOptions: {
       headerTitle: (
           <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>

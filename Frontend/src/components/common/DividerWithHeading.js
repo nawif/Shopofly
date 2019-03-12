@@ -39,7 +39,7 @@ export const DividerWithHeading = (props) => {
             <ButtonWithRadius
               label='Edit'
               color='#3061E9'
-              onPress={props.onRemovePress}
+              onPress={props.onPress}
               borderColor={'#F0F0F0'}
               paddingTop={0}
               paddingBottom={0.5}
