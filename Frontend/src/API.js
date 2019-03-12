@@ -29,6 +29,7 @@ export const register = (phone, password) => {
 
 }
 
+// Get user information [POST]
 export const getUserInfo = (token) => {
   return axios({
     method: 'POST',
@@ -41,8 +42,8 @@ export const getUserInfo = (token) => {
   .then((res) => res.data)
 }
 
+// Get Item endpoint [GET]
 export const getItem = (url, token) => {
-
   return axios({
     method: 'GET',
     url: url,
@@ -51,6 +52,7 @@ export const getItem = (url, token) => {
   .then((res) => res.data)
 }
 
+// Get Address endpoint [GET]
 export const getAddress = (token) => {
   return axios({
     method: 'GET',
@@ -61,10 +63,12 @@ export const getAddress = (token) => {
 }
 
 // TODO: Make "addAddress" endpoint
+// Add Address Endpoint [POST]
 export const addAddress = (token) => {
   return null
 }
 
+// Checkout endpoint [POST]
 export const checkout = (token, order) => {
   const itemsWithQuantity = []
   // TODO: fix checkout issue
@@ -86,8 +90,8 @@ export const checkout = (token, order) => {
   return axios({
     method: 'POST',
     url: `${url}/store/checkout`,
-    headers: {'Content-type':'json', 'Authorization': 'Bearer ' + token},
-    body: body
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
+    data: body
   })
   .then((res) => res.data)
 }
