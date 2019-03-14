@@ -178,7 +178,7 @@ let tabNavigator = createBottomTabNavigator(
   {
     Scan: scanNavigator,
     Profile: profileNavigator,
-    Starred: StarredItems,
+    Starred: OrderConfirmation,
     Cart: cartNavigator,
   },
 

@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo'
 import * as Global from '../../Global'
 
 export const GradientButton = (props) => {
-	const { mainContainer } = styles
+	// const { mainContainer } = styles
 
 	const containerStyles = {
 		width: props.width || '80%',
@@ -25,9 +25,14 @@ export const GradientButton = (props) => {
 		fontFamily: props.fontFamily || 'Roboto-Medium',
 		color: props.labelColor || 'white',
 		fontSize: props.fontSize ||20,
-		paddingTop: props.padding || null,
-		paddingBottom: props.padding || null,
+		paddingTop: props.paddingTop || null,
+		paddingBottom: props.paddingBottom || null,
 		padding: props.padding || null
+	}
+	const mainContainer = {
+		flex:1,
+    justifyContent: 'center',
+		alignItems: 'center',
 	}
 
 	const firstColor = props.firstColor || Global.FIRST_COLOR
@@ -57,10 +62,10 @@ export const GradientButton = (props) => {
 	)
 }
 
-const styles = {
-	mainContainer: {
-		flex:1,
-    justifyContent: 'center',
-    alignItems: 'center'
-	}
-}
+// const styles = {
+// 	mainContainer: {
+// 		flex:1,
+//     justifyContent: 'center',
+//     alignItems: 'center'
+// 	}
+// }

@@ -23,7 +23,7 @@ export class OrderConfirmation extends Component {
       alignItems: 'center'
     }
 		return (
-      <MainContainer>
+
         <ImageBackground source={require('../../assets/splash.png')} style={styles.background} >
         <View style={styles.container}>
             <LinearGradient
@@ -41,25 +41,25 @@ export class OrderConfirmation extends Component {
           <Text style={styles.SecondLine}>Your order has been placed</Text>
           <Text style={styles.ThierdLine} > You will receive a confirmtion email shortly</Text>
           <View style={styles.orderId}>
-            <Text> Your order number is 
+            <Text style={styles.orderlabel}> Your order number is 
               <Text style={styles.orderNumber}> #{orderid} </Text>
             </Text>
           </View>
-          <GradientButton 
-            isValid={true} 
-            label={"CONTINUE SHOPPING"} 
-            width={'100%'} 
-            borderRadius={50} 
-            height={'20%'}
-            fontSize={14}
-            padding={10}
-            onClick={()=>{
-              this.props.navigation.navigate('Scan')
-            } }
-          />
+            <GradientButton style={styles.gradientButton}
+              isValid={true} 
+              label={"CONTINUE SHOPPING"} 
+              width={'100%'} 
+              borderRadius={50} 
+              height={'50%'}
+              fontSize={20}
+              padding={14}
+              onClick={()=>{
+                this.props.navigation.navigate('Scan')  
+              } }
+            />
         </View>
         </ImageBackground>
-      </MainContainer>
+
 		)
 	}
 }
@@ -89,7 +89,9 @@ const styles ={
         height: '50%',
         width: '100%',
         borderRadius:40,
-        backgroundColor:'white'
+        backgroundColor:'white',
+
+        paddingTop:80
       },
       background:{
         alignItems:'center',
@@ -105,16 +107,18 @@ const styles ={
         justifyContent: 'center',
         borderRadius:50,
         height:'10%',
-        borderRadius: 30,
         borderWidth: 2,
         borderColor: '#CFCFCF',
-        width:'50%',
+        width:'40%',
         backgroundColor:'white',
         marginTop: 20
       },
       orderNumber: {
         fontFamily: 'Cairo-Bold',
-        
-      }
+      },
+      orderlabel:{
+        fontFamily: 'Cairo-SemiBold',
+        fontSize:12,
 
+      }
 }
