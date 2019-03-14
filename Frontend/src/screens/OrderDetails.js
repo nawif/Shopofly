@@ -57,7 +57,7 @@ export class OrderDetails extends Component {
                 <ItemSummary item={order.items[0]} />
             </View>
             <Devider height={1} />
-            <TouchableOpacity >
+            <TouchableOpacity onPress={this.props.onPress}>
               <View style={simpleContainer} >
                   <Text style={ detailsSectionText }> View Order Details </Text>
                   <Image style={ detailsSectionImage } source={require('../../assets/images/Account/Shape.png')}/>

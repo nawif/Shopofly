@@ -37,7 +37,12 @@ export class OrderList extends Component {
             keyExtractor={ (order, index) => index.toString()}
             renderItem={({order, index}) => (
                     <View key={index}>
-                    <OrderDetails order={orderList[index]} />
+                    <OrderDetails 
+                    order={orderList[index]}
+                    onPress={()=>{
+                      this.props.navigation.navigate('OrderDetails')  
+                    } }
+                     />
                     { index != ordersCount-1 ?  <Devider height={20} /> : null }
                     </View>
               )

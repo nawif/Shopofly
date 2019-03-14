@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-
 import { defaultTextContainer } from '../../Styles'
 import { ButtonWithRadius } from './ButtonWithRadius'
 import images from '../../../assets/images'

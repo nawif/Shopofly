@@ -234,18 +234,18 @@ let tabNavigator = createBottomTabNavigator(
 * If not, the user will land on Login screen.
 */
 const MyApp = createStackNavigator({
-  // Login: {
-  //   screen: Login,
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // },
-  // Register: {
-  //   screen: Register,
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Register: {
+    screen: Register,
+    navigationOptions: {
+      header: null
+    }
+  },
   App: {
     screen: tabNavigator,
     navigationOptions: {

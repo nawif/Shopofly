@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View,TouchableOpacity, AsyncStorage } from 'react-native'
 import listOfAddresses from '../../dumb_data/address.json'
+import { AddressesList, CartFooter, GradientButton } from "../../components";
 import * as API from '../../API'
 
 
@@ -61,12 +62,10 @@ export class SelectAddress extends Component {
     const { selectedAddress } = this.state
 
     return (
-      <GradientButton
-        onClick={this._handelAddAddressOnPress}
-        isValid={selectedAddress !== null}
-        label={'CONTINUE'}
-        width={250}
-      />
+      <CartFooter
+          onPressHandler={() => this.props.navigation.navigate('PlaceOrder')}
+          isActive={this.state.selectedAddress !== null} 
+        />
     )
   }
   onAddressSelect(addressId) {
@@ -81,10 +80,6 @@ export class SelectAddress extends Component {
         <View style={styles.spacer} />
         <AddressesList addresses={listOfAddresses} selectedAddress={selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)} />
         {this.renderNewAddressButton()}
-        <CartFooter
-          onPressHandler={() => this.props.navigation.navigate('PlaceOrder')}
-          isActive={this.state.selectedAddress!=null} 
-        />
         {this.renderContinueButton()}
       </View>
     )
