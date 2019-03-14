@@ -30,12 +30,6 @@ export class OrderList extends Component {
     const { orderList } = this.state
     const ordersCount = orderList ? orderList.length : 0
 
-    if(ordersCount > 0) {
-      console.log(typeof orderList)
-      console.log(orderList.length)
-      console.log(orderList)
-    }
-
     return (
         <View style={{ flex: 1 }}>
           <FlatList

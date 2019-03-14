@@ -170,6 +170,12 @@ const cartNavigator = createStackNavigator({
       }
     }
   },
+  OrderConfirmation: {
+    screen: OrderConfirmation,
+    navigationOptions: {
+      headerVisible: false,
+    }
+  }
 })
 
 /* Main Tab Navigator */
