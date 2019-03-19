@@ -155,6 +155,7 @@ export class PlaceOrder extends Component {
             AsyncStorage.setItem('cart', JSON.stringify([]))
             // TODO: retrieve order number from API
             this.props.navigation.navigate('OrderConfirmation', { orderNumber: '#12452' })
+            .catch((err) => console.log(err))
           })
           .catch((err) => console.log(err))
         })

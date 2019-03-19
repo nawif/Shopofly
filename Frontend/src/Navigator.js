@@ -173,7 +173,7 @@ const cartNavigator = createStackNavigator({
   OrderConfirmation: {
     screen: OrderConfirmation,
     navigationOptions: {
-      headerVisible: false,
+      header: null
     }
   }
 })
@@ -184,7 +184,7 @@ let tabNavigator = createBottomTabNavigator(
   {
     Scan: scanNavigator,
     Profile: profileNavigator,
-    Starred: OrderConfirmation,
+    Starred: StarredItems,
     Cart: cartNavigator,
   },
 
