@@ -24,6 +24,9 @@ export class SelectAddress extends Component {
 
   _handelAddAddressOnPress = () => {
     this.props.navigation.navigate('AddNewAddress')
+  }
+
+  _handlePlaceOrder = () => {
     const { selectedAddress, listOfAddresses } = this.state
     let tmp = null
 
@@ -43,11 +46,6 @@ export class SelectAddress extends Component {
     }
 
     this.props.navigation.navigate('PlaceOrder', { selectedAddress: activeAddress })
-    // this.setState({isLoading: true})
-    // .then(() => {
-    //   this.props.navigation.navigate('PlaceOrder', { selectedAddress })
-    //   this.setState({isLoading:false})
-    // })
   }
 
   renderNewAddressButton(){
@@ -63,8 +61,8 @@ export class SelectAddress extends Component {
 
     return (
       <CartFooter
-          onPressHandler={() => this.props.navigation.navigate('PlaceOrder')}
-          isActive={this.state.selectedAddress !== null} 
+          onPressHandler={this._handlePlaceOrder}
+          isActive={this.state.selectedAddress !== null}
         />
     )
   }
