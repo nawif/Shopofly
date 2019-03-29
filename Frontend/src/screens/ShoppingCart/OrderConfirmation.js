@@ -5,14 +5,8 @@ import { LinearGradient } from 'expo'
 import * as Global from '../../Global'
 
 export class OrderConfirmation extends Component {
-    _handelAddAddressOnPress = () =>{
-        this.props.navigation.navigate("AddAddress");
-    }
-
-    
-
 	render() {
-    const orderid = 12
+    const { orderNumber } = this.props.navigation.state.params;
     const container1 = {
       borderRadius:100,
       flexDirection: 'row',
@@ -41,20 +35,20 @@ export class OrderConfirmation extends Component {
           <Text style={styles.SecondLine}>Your order has been placed</Text>
           <Text style={styles.ThierdLine} > You will receive a confirmtion email shortly</Text>
           <View style={styles.orderId}>
-            <Text style={styles.orderlabel}> Your order number is 
-              <Text style={styles.orderNumber}> #{orderid} </Text>
+            <Text style={styles.orderlabel}> Your order number is
+              <Text style={styles.orderNumber}> {orderNumber} </Text>
             </Text>
           </View>
             <GradientButton style={styles.gradientButton}
-              isValid={true} 
-              label={"CONTINUE SHOPPING"} 
-              width={'100%'} 
-              borderRadius={50} 
+              isValid={true}
+              label={"CONTINUE SHOPPING"}
+              width={'100%'}
+              borderRadius={50}
               height={'50%'}
               fontSize={20}
               padding={14}
               onClick={()=>{
-                this.props.navigation.navigate('Scan')  
+                this.props.navigation.navigate('Scan')
               } }
             />
         </View>
@@ -64,7 +58,7 @@ export class OrderConfirmation extends Component {
 	}
 }
 const styles ={
-    
+
       FirstLine:{
         fontSize: 24,
         color:'#2B2B2B',

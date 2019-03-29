@@ -29,7 +29,7 @@ export class MySwiper extends Component {
 					/>
 				}
 				paginationStyle={{
-            bottom: 0
+            bottom: -10
 				}}
 			>
 				{ this.renderImages(images) }

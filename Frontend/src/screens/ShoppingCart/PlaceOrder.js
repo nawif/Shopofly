@@ -152,10 +152,8 @@ export class PlaceOrder extends Component {
         .then((token) => {
           API.checkout(token, myOrder)
           .then((response) => {
-            console.log(response)
             AsyncStorage.setItem('cart', JSON.stringify([]))
-            // TODO: retrieve order number from API
-            this.props.navigation.navigate('OrderConfirmation', { orderNumber: '#12452' })
+            this.props.navigation.navigate('OrderConfirmation', { orderNumber: `#${response.orderNumber}` })
             .catch((err) => console.log(err))
           })
           .catch((err) => console.log(err))

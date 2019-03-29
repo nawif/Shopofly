@@ -127,6 +127,7 @@ export default class QrHandler extends Component {
           key: response.key,
           summary: {
             manufacturer: response.supplier.supplierName,
+            seller: response.supplier.supplierName,
             itemName: response.itemName,
             price: response.price,
             quantity: response.quantity,
@@ -139,7 +140,7 @@ export default class QrHandler extends Component {
           },
           details: {
             description: response.description,
-            supplierName: 'Great store',
+            supplierName: response.supplier.supplierName,
             warranty: '6 months',
             specifications: [
               { key: 'Key', value: 'Value'},

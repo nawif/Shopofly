@@ -85,7 +85,7 @@ const renderItemDetails = (item) => {
           source={require('../../../assets/store.png')}
         />
         <Text style={storeKeyStyle}>Sold by</Text>
-        <Text style={storeValueStyle}>TODO: add soldBy here</Text>
+        <Text style={storeValueStyle}>{item.summary.seller}</Text>
       </View>
 
       <Text style={priceStyle}>SAR { item.summary.price } <Text style={muteStyle}>(Inclusive of VAT)</Text></Text>

@@ -5,6 +5,7 @@ const item = {
   currentQuantity: 1,
   summary: {
     manufacturer: "Nawaf store",
+    seller: "Nawaf store",
     itemName: "Nintendo Switch",
     price: "$299.00",
     quantity: 100,
