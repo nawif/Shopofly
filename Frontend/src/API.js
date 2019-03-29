@@ -71,7 +71,6 @@ export const addAddress = (token) => {
 // Checkout endpoint [POST]
 export const checkout = (token, order) => {
   const itemsWithQuantity = []
-  // TODO: fix checkout issue
   // TODO: tell backend developers about payment method!
   order.items.forEach(function(item) {
     itemsWithQuantity.push({

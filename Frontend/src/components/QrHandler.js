@@ -76,17 +76,20 @@ export default class QrHandler extends Component {
 
   // Handle QR code reader output
   _handleBarCodeRead = result => {
-    // result.data !== this.state.lastScannedUrl
-      this.setState({ lastScannedUrl: result.data })
+      if(result.data === this.state.lastScannedUrl) {
+        return
+      }
 
       const scannedText = result.data
-      console.log(result.data);
+      console.log("ScannedText: " + result.data)
       const regex = new RegExp('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
       if(regex.test(scannedText) && scannedText.toLowerCase().includes("shopofly")) {
         AsyncStorage.getItem('token')
         .then((token) => {
           API.getItem(scannedText, token)
-          .then((item) => {
+          .then((response) => {
+            const item = response.data
+
             this.setState({
                 showAlert: true,
                 alertMessage: `Name: ${item.itemName} \nPrice: ${item.price} \nfrom ${item.supplier.supplierName}`
@@ -96,6 +99,8 @@ export default class QrHandler extends Component {
         })
         .catch((error) => console.log(error))
     }
+
+    this.setState({ lastScannedUrl: result.data })
   }
 
   showAlert = (message) => {
@@ -113,11 +118,11 @@ export default class QrHandler extends Component {
   }
 
   loadItem = () => {
-    // TODO save item data from the first API request ()
     AsyncStorage.getItem('token')
     .then((token) => {
       API.getItem(this.state.lastScannedUrl, token)
       .then(async (response) => {
+        response = response.data
         const item = {
           key: response.key,
           summary: {
