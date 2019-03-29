@@ -30,29 +30,24 @@ export class OrderDetails extends Component {
       detailsSectionText,
       detailsSectionImage
     } = styles
-    const orderDetails ={
-      orderId: ' #12345',
-      orderIssuedDate: 'Place On Jan 10,2019',
 
-    }
     const { order } = this.props
 
     return (
-      
         <Container>
             <View style={simpleContainer}>
                   <Image source={require('../../assets/images/Account/shopping-bag.png')}/>
                   <Text style={storeKeyStyle}>Order
-                    <Text style={ orderId }>{orderDetails.orderId}</Text>
+                    <Text style={ orderId }>{order.orderId}</Text>
                   </Text>
-                  <Text style={ orderIssuedDate }>{orderDetails.orderIssuedDate}</Text>
+                  <Text style={ orderIssuedDate }>{order.orderIssuedDate}</Text>
             </View>
             <Devider height={1} />
             <View style={simpleContainer}>
                   <Image source={require('../../assets/images/Account/box.png')}/>
                   <Text style={storeKeyStyle}>Shipment Status </Text>
             </View>
-            { this.renderOrderProgress(orderDetails.deliveryStatus) }
+            { this.renderOrderProgress(order.deliveryStatus) }
             <View>
                 <ItemSummary item={order.items[0]} />
             </View>
