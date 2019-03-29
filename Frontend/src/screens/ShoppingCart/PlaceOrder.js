@@ -140,13 +140,14 @@ export class PlaceOrder extends Component {
         }
 
         cart.forEach(function(item) {
+          console.log("Ordered key: " + item.key);
           myOrder.items.push({
             id: item.key,
             quantity: item.currentQuantity,
           })
         })
 
-
+        console.log("SelectedAddress: " + selectedAddress.id)
         AsyncStorage.getItem('token')
         .then((token) => {
           API.checkout(token, myOrder)

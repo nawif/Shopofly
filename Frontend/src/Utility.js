@@ -34,7 +34,7 @@ export async function removeItemValue(key){
 export const getBillInfo = (items) => {
   const subtotal = _getSubtotal(items)
   const vatApprox = _getVatApprox(subtotal)
-  const totalPrice = subtotal + vatApprox
+  const totalPrice = Math.round((subtotal + vatApprox) * 100) / 100
 
   return { subtotal, vatApprox, totalPrice }
 }
