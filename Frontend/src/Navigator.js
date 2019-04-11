@@ -173,10 +173,18 @@ const cartNavigator = createStackNavigator({
   OrderConfirmation: {
     screen: OrderConfirmation,
     navigationOptions: {
-      header: null
+      header: null,
+
     }
   }
 })
+
+// hide tabbar for orderConfirmation
+cartNavigator.navigationOptions = ({navigation}) => {
+  return {
+    tabBarVisible: navigation.state.routes[navigation.state.index].routeName == 'OrderConfirmation' ? false : true
+  }
+}
 
 /* Main Tab Navigator */
 let tabNavigator = createBottomTabNavigator(

@@ -3,8 +3,17 @@ import { View, ImageBackground, Text, Image } from 'react-native'
 import { GradientButton, MainContainer } from "../../components"
 import { LinearGradient } from 'expo'
 import * as Global from '../../Global'
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export class OrderConfirmation extends Component {
+
+  continueShopping() {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Cart' })],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
 	render() {
     const { orderNumber } = this.props.navigation.state.params;
     const container1 = {
@@ -14,7 +23,7 @@ export class OrderConfirmation extends Component {
       padding:10,
       width:70,
       height:70,
-      alignItems: 'center'
+      alignItems: 'center' 
     }
 		return (
 
@@ -42,13 +51,12 @@ export class OrderConfirmation extends Component {
             <GradientButton style={styles.gradientButton}
               isValid={true}
               label={"CONTINUE SHOPPING"}
-              width={'100%'}
+              width={'80%'}
               borderRadius={50}
-              height={'50%'}
               fontSize={20}
-              padding={14}
+              padding={14} 
               onClick={()=>{
-                this.props.navigation.navigate('Scan')
+                this.continueShopping()
               } }
             />
         </View>
@@ -80,7 +88,7 @@ const styles ={
       container:{
         justifyContent:'center',
         alignItems: 'center',
-        height: '50%',
+        height: '60%',
         width: '100%',
         borderRadius:40,
         backgroundColor:'white',
@@ -103,7 +111,7 @@ const styles ={
         height:'10%',
         borderWidth: 2,
         borderColor: '#CFCFCF',
-        width:'40%',
+        width:'50%',
         backgroundColor:'white',
         marginTop: 20
       },
