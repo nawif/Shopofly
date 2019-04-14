@@ -1,8 +1,42 @@
 import React, { Component } from 'react'
-import { View, ImageBackground, Text } from 'react-native'
-import { ImageAndTitle, DividerWithHeading } from "../components";
+import { View, ImageBackground, Text, AsyncStorage } from 'react-native'
+import AwesomeAlert from 'react-native-awesome-alerts'
+import { ImageAndTitle, DividerWithHeading } from "../components"
+import * as API from '../API'
 
 export  class AccountSettings extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    email: '',
+  }
+
+  componentWillMount() {
+    this.didFocusListener = this.props.navigation.addListener(
+		  'didFocus',
+		  () => { this.loadInfo() },
+		)
+
+  }
+
+  loadInfo() {
+    AsyncStorage.getItem('token')
+    .then((token) => {
+      API.getUserInfo(token)
+      .then((response) => {
+        const fullname = response.name ? response.name.split(" ") : ""
+
+        const firstName = fullname[0]
+        const lastName = fullname[1]
+
+        const email = response.email ? response.email : ""
+
+        this.setState({firstName, lastName, email})
+      })
+      .catch((err) => console.log(err))
+    })
+    .catch((err) => console.log(err))
+  }
 
   render() {
     const headlineHeight = 45
@@ -10,52 +44,55 @@ export  class AccountSettings extends Component {
         color:'#464949',
         fontFamily:'Roboto-Medium'
       }
-    
+
       const	labelTextStyle = {
           opacity: 0.5
       }
+
+      const { firstName, lastName, email } = this.state
+
     return (
     <ImageBackground source={require('../../assets/splash.png')} style={styles.container} >
-        <ImageAndTitle style={styles.header} title="Osama Aloqaily" image={{uri:'https://www.ftcksu.com/v1/users/getUserImage/2'}} />
+        <ImageAndTitle style={styles.header} title={`${firstName} ${lastName}`} image={{uri:'https://www.ftcksu.com/v1/users/getUserImage/2'}} />
         <View style={styles.options}>
-            <DividerWithHeading 
-                label={'Personal Information'} 
-                height={headlineHeight} 
+            <DividerWithHeading
+                label={'Personal Information'}
+                height={headlineHeight}
                 color={'#858B8C'}
                 fontSize={16}
                 withEdit
                 onPress={()=>{
                     this.props.navigation.navigate('PersonalSettings')
-                }} 
+                }}
             />
             <View style={styles.info} >
                 <View style={styles.titleAndIcon} >
                     <Text style={styles.title} >First Name</Text>
                 </View>
-                <Text style={styles.subtitle} > Osama </Text>
+                <Text style={styles.subtitle} >{firstName}</Text>
             </View>
             <View style={styles.info} >
                 <View style={styles.titleAndIcon} >
                     <Text style={styles.title} >Last Name</Text>
                 </View>
-                <Text style={styles.subtitle} > Aloqaily </Text>
+                <Text style={styles.subtitle} >{lastName}</Text>
             </View>
             <View style={styles.info} >
                 <View style={styles.titleAndIcon} >
                     <Text style={styles.title} >Email</Text>
                 </View>
-                <Text style={styles.subtitle} > osamaloqaily@gamil.com </Text>
+                <Text style={styles.subtitle} >{email}</Text>
             </View>
 
-            <DividerWithHeading 
-                label={'Security Information'} 
-                height={headlineHeight} 
+            <DividerWithHeading
+                label={'Security Information'}
+                height={headlineHeight}
                 color={'#858B8C'}
                 fontSize={16}
                 withEdit
                 onPress={()=>{
                     this.props.navigation.navigate('SecuritySettings')
-                }} 
+                }}
             />
             <View style={styles.info} >
                 <View style={styles.titleAndIcon} >

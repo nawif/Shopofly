@@ -48,7 +48,7 @@ export const ItemInfo = ({ summary }) => {
         <Text style={reviewCountStyle}>{reviews_count} reviews</Text>
       </View>
 
-      <Text style={priceStyle}>SAR {price} <Text style={infoStyle}>(inclusive of vat)</Text></Text>
+      <Text style={priceStyle}>SAR {price.substring(1, price.length)} <Text style={infoStyle}>(inclusive of vat)</Text></Text>
 
       <View style={saleStyle}>
         <Text style={oldPriceStyle}>SAR {price}</Text>

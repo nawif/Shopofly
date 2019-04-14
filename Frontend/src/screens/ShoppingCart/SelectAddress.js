@@ -10,6 +10,8 @@ export class SelectAddress extends Component {
   state={
     listOfAddresses: [],
     selectedAddress: null,
+    phone: '',
+    name: '',
   }
 
   componentWillMount() {
@@ -17,9 +19,15 @@ export class SelectAddress extends Component {
     .then((token) => {
       API.getAddress(token)
       .then((addresses) => {
-        this.setState({listOfAddresses: addresses})
+        API.getUserInfo(token)
+        .then((response) => {
+          this.setState({listOfAddresses: addresses, phone: response.mobile_number, name: response.name})
+        })
+        .catch((err) => console.log(err))
       })
+      .catch((err) => console.log(err))
     })
+    .catch((err) => console.log(err))
   }
 
   _handelAddAddressOnPress = () => {
@@ -39,10 +47,10 @@ export class SelectAddress extends Component {
 
     const activeAddress = {
       id: tmp.id,
-      title: 'TODO: add title',
+      title: tmp.label,
       address: `${tmp.house_number} ${tmp.street}, ${tmp.district}`,
-      phone: 'TODO: add phone',
-      name: 'TODO: add name'
+      phone: this.state.name,
+      name: this.state.phone,
     }
 
     this.props.navigation.navigate('PlaceOrder', { selectedAddress: activeAddress })
@@ -71,12 +79,12 @@ export class SelectAddress extends Component {
   }
 
   render() {
-    const { listOfAddresses, selectedAddress } = this.state
+    const { listOfAddresses, selectedAddress, phone, name } = this.state
 
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
-        <AddressesList addresses={listOfAddresses} selectedAddress={selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)} />
+        <AddressesList addresses={listOfAddresses} selectedAddress={selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)} phone={phone} name={name} />
         {this.renderNewAddressButton()}
         {this.renderContinueButton()}
       </View>

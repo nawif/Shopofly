@@ -1,57 +1,112 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, AsyncStorage } from 'react-native'
+import AwesomeAlert from 'react-native-awesome-alerts'
 import { MainContainer, SectionWithHeader,TextInput, GradientButton } from "../components";
 import * as Utility from '../Utility.js'
 import * as Global from '../Global.js'
+import * as API from '../API'
 
 export class PersonalSettings extends Component {
   state = {
     firstName: '',
     lastName: '',
     email: '',
+    showAlert: false,
+    alertMessage: ''
   }
 
   componentWillMount() {
     AsyncStorage.getItem('token')
     .then((token) => {
-      API.getUserInfo(token)
-      .then((response) => {
-        debugger;
-      })
-      .catch((err) => console.log(err))
+      this.loadPersonalInfo(token)
     })
     .catch((err) => console.log(err))
   }
 
-  renderTextField(label, notifyState){
+  loadPersonalInfo(token) {
+    API.getUserInfo(token)
+    .then((response) => {
+      const fullname = response.name ? response.name.split(" ") : ""
+
+      const firstName = fullname[0]
+      const lastName = fullname[1]
+
+      const email = response.email ? response.email : ""
+
+      this.setState({firstName, lastName, email})
+    })
+    .catch((err) => console.log(err))
+  }
+
+  renderTextField(label, currentText, notifyState){
     return(
       <TextInput
-        textColor="#2B2B2B"
-        baseColor="#858B8C"
+        textColor={"#2B2B2B"}
+        baseColor={"#858B8C"}
         tintColor={Global.SECOND_COLOR}
+        value={currentText}
         label={label}
-        onChangeText={(newText) => notifyState(newText)}
+        onChangeText={notifyState}
       />
     )
   }
 
+  renderAlert() {
+    return <AwesomeAlert
+      show={this.state.showAlert}
+      message={this.state.alertMessage}
+      closeOnTouchOutside={true}
+      closeOnHardwareBackPress={true}
+      showConfirmButton={true}
+      confirmButtonColor="#448AFF"
+      confirmText="Okay"
+      onConfirmPressed={() => this.hideAlert()}
+    />
+  }
+
+  showAlert(message) {
+    this.setState({
+      showAlert: true,
+      alertMessage: message
+    })
+  }
+
+  hideAlert() {
+    this.setState({
+      showAlert: false,
+      alertMessage: ''
+    })
+  }
+
   render() {
+    const { firstName, lastName, email } = this.state
     return (
       <MainContainer  isTransparent={true} >
         <SectionWithHeader header="Personal Information" >
-            {this.renderTextField("First Name", (newText) => {
+            {this.renderTextField("First Name", firstName, (newText) => {
               this.setState({firstName: newText})
             })}
 
-            {this.renderTextField("Last Name", (newText) => {
+            {this.renderTextField("Last Name", lastName, (newText) => {
               this.setState({lastName: newText})
             })}
 
-            {this.renderTextField("Email", (newText) => {
+            {this.renderTextField("Email", email, (newText) => {
               this.setState({email: newText})
             })}
         </SectionWithHeader>
-        <GradientButton isValid={true} label={"Save"} />
+        <GradientButton isValid={true} label={"Save"} onClick={() => {
+          AsyncStorage.getItem('token')
+          .then((token) => {
+            API.updateUserInfo(this.state, token)
+            .then((response) => {
+              this.showAlert(response.message)
+            })
+            .catch((err) => this.showAlert(err.message))
+          })
+        }}/>
+
+        {this.renderAlert()}
       </MainContainer>
     )
   }
