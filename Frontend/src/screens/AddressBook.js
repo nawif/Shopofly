@@ -46,15 +46,17 @@ export class AddressBook extends Component {
       </TouchableOpacity>
     )
   }
-
+  onAddressSelect(addressId) {
+    this.setState({ selectedAddress: null })
+  }
   render() {
-    const { listOfAddresses } = this.state
+    const { listOfAddresses, selectedAddress } = this.state
 
     return (
       <View style={styles.container} >
         <View style={styles.spacer} />
            {this.renderButton()}
-        <AddressesList addresses={ listOfAddresses } />
+        <AddressesList addresses={ listOfAddresses } selectedAddress={selectedAddress} onAddressSelect={this.onAddressSelect.bind(this)}/>
       </View>
     )
   }

@@ -5,7 +5,7 @@ export class ButtonWithIcon extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.container}  onPress={this.props.onPress} >
-        <Image style={styles.icon} source={this.props.icon}  />
+        <Image style={styles.icon} source={this.props.icon}/>
         <Text style={styles.title} >{this.props.title}</Text>
       </TouchableOpacity>
     )

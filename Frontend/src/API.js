@@ -44,11 +44,7 @@ export const getUserInfo = (token) => {
 
 // Get Item endpoint [GET]
 export const getItem = (url, token) => {
-  return axios({
-    method: 'GET',
-    url: url,
-    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token }
-  })
+  return axios.get(`${url}?token=${token}`)
   .then((res) => res.data)
 }
 
