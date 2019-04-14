@@ -34,9 +34,22 @@ export const getUserInfo = (token) => {
   return axios({
     method: 'POST',
     url: `${url}/auth/me`,
-    headers: { 'Content-type': 'application/json' },
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
+  })
+  .then((res) => res.data)
+}
+
+export const updateUserInfo = ({ phoneNumber, firstName, lastName, email, oldPassword, newPassword }, token) => {
+  return axios({
+    method: 'POST',
+    url: `${url}/users/update`,
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
     data: {
-      'token': token
+      "mobile_number": phoneNumber ? phoneNumber : null,
+    	"name": firstName || lastName ? `${firstName} ${lastName}` : null,
+      "email": email ? email : null,
+    	"old_password": oldPassword ? oldPassword : null,
+    	"new_password": newPassword ? newPassword : null
     }
   })
   .then((res) => res.data)

@@ -74,6 +74,8 @@ const renderItemDetails = (item) => {
     priceStyle,
     muteStyle
   } = styles
+
+  const price = item.summary.price
   return (
     <View style={leftStyle}>
       <Text style={storeName}>{ item.summary.manufacturer }</Text>
@@ -88,7 +90,7 @@ const renderItemDetails = (item) => {
         <Text style={storeValueStyle}>{item.summary.seller}</Text>
       </View>
 
-      <Text style={priceStyle}>SAR { item.summary.price } <Text style={muteStyle}>(Inclusive of VAT)</Text></Text>
+      <Text style={priceStyle}>SAR { price.substring(1, price.length) } <Text style={muteStyle}>(Inclusive of VAT)</Text></Text>
     </View>
 
   )

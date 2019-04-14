@@ -7,6 +7,8 @@ import {
   FlatList,
 } from 'react-native';
 
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 import * as Utility from '../../Utility'
 import * as API from '../../API'
 
@@ -32,6 +34,7 @@ export class PlaceOrder extends Component {
     vatApprox: 0,
     totalPrice: 0,
     selectedPayment: 'payofly',
+    showAlert: false,
   }
 
   componentWillMount() {
@@ -72,13 +75,14 @@ export class PlaceOrder extends Component {
 
           <DividerWithHeading label={'Deliver To'} height={headlineHeight} />
           <AddressBox
+            onAddressSelect={(text) => text}
             item={selectedAddress}
             title={selectedAddress.title}
             address={selectedAddress.address}
             phone={selectedAddress.phone}
             name={selectedAddress.name}
             hasOptions={false}
-            isSelected={false}
+
           />
 
           { cart ? this.renderItems() : null }
@@ -88,6 +92,19 @@ export class PlaceOrder extends Component {
 
         </ScrollView>
         { this.renderPlaceOrder() }
+
+        <AwesomeAlert
+          show={this.state.showAlert}
+          title={"Error"}
+          message={"Unfortunately, one or more of the items you ordered are not available currently."}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={true}
+          showConfirmButton={true}
+          confirmButtonColor="#448AFF"
+          confirmText="Okay"
+          onConfirmPressed={() => this.hideError()}
+          messageStyle={{ textAlign: 'left' }}
+        />
       </Container>
     )
   }
@@ -139,23 +156,25 @@ export class PlaceOrder extends Component {
         }
 
         cart.forEach(function(item) {
-          console.log("Ordered key: " + item.key);
           myOrder.items.push({
             id: item.key,
             quantity: item.currentQuantity,
           })
         })
 
-        console.log("SelectedAddress: " + selectedAddress.id)
         AsyncStorage.getItem('token')
         .then((token) => {
           API.checkout(token, myOrder)
           .then((response) => {
             AsyncStorage.setItem('cart', JSON.stringify([]))
             this.props.navigation.navigate('OrderConfirmation', { orderNumber: `#${response.orderNumber}` })
-            .catch((err) => console.log(err))
           })
-          .catch((err) => console.log(err))
+          .catch((err) => {
+            debugger;
+            if(err) {
+              this.showError()
+            }
+          })
         })
       }} />
     )
@@ -167,12 +186,24 @@ export class PlaceOrder extends Component {
       cart = JSON.parse(cart)
       const { subtotal, vatApprox, totalPrice } = Utility.getBillInfo(cart)
 
-      console.log("LENGTH OF CART IN PLACEORDER: " + cart.length);
       this.setState({ cart, subtotal, vatApprox, totalPrice })
     })
   	.catch((error) => console.log(error))
   }
+
+  showError() {
+    this.setState({
+      showAlert: true,
+    })
+  }
+
+  hideError() {
+    this.setState({
+      showAlert: false,
+    })
+  }
 }
+
 
 const styles = {
   radioGroup: {
