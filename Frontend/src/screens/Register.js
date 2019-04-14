@@ -60,7 +60,7 @@ export class Register extends Component {
 			this.setState({ isLoading: false })
 			console.log(data.token);
 				await AsyncStorage.setItem('token', data.token)
-				this.props.navigation.navigate('Item', { token: data.token })
+				this.props.navigation.navigate('Scan', { token: data.token })
     })
     .catch((error) => {
 			this.setState({
@@ -111,7 +111,7 @@ export class Register extends Component {
 
 				<ClickablesSection
 					label={'Register'}
-					marginTop={'20%'}
+					marginTop={20}
 					onClick={this.onRegister}
 					isLoading={this.state.isLoading}
 					anchorText="Already have an account?"

@@ -38,13 +38,13 @@ export  class AccountSettings extends Component {
                 <View style={styles.titleAndIcon} >
                     <Text style={styles.title} >Last Name</Text>
                 </View>
-                <Text style={styles.subtitle} > Alfaify </Text>
+                <Text style={styles.subtitle} > Aloqaily </Text>
             </View>
             <View style={styles.info} >
                 <View style={styles.titleAndIcon} >
                     <Text style={styles.title} >Email</Text>
                 </View>
-                <Text style={styles.subtitle} > osamalfaify@gamil.com </Text>
+                <Text style={styles.subtitle} > osamaloqaily@gamil.com </Text>
             </View>
 
             <DividerWithHeading 

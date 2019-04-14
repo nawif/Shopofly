@@ -20,7 +20,6 @@ import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 const defaultPaddingSummary = 4
 
 export class OrderDetails extends Component {
-
   render() {
     const {
       storeKeyStyle,

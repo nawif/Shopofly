@@ -44,11 +44,7 @@ export const getUserInfo = (token) => {
 
 // Get Item endpoint [GET]
 export const getItem = (url, token) => {
-  return axios({
-    method: 'GET',
-    url: url,
-    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token }
-  })
+  return axios.get(`${url}?token=${token}`)
   .then((res) => res.data)
 }
 
@@ -71,7 +67,6 @@ export const addAddress = (token) => {
 // Checkout endpoint [POST]
 export const checkout = (token, order) => {
   const itemsWithQuantity = []
-  // TODO: tell backend developers about payment method!
   order.items.forEach(function(item) {
     itemsWithQuantity.push({
       "key": item.id,
@@ -91,6 +86,15 @@ export const checkout = (token, order) => {
     url: `${url}/store/checkout`,
     headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
     data: body
+  })
+  .then((res) => res.data)
+}
+
+export const getListOfOrders = (token) => {
+  return axios({
+    method: 'GET',
+    url: `${url}/users/orders`,
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token }
   })
   .then((res) => res.data)
 }

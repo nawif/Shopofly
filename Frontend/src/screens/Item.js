@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View, AsyncStorage } from 'react-native'
 import AwesomeAlert from 'react-native-awesome-alerts'
+import { SinglePickerMaterialDialog } from 'react-native-material-dialog'
 
 import {
 	MySwiper,
@@ -17,9 +18,11 @@ import * as Utility from '../Utility'
 
 export class Item extends Component {
 	state = {
+		quantity: { label: '1', value: 1 },
 		isStarred: false,
 		currentQuantity: 1,
 		showAlert: false,
+		singlePickerVisible: false,
 	}
 
 	componentWillMount() {
@@ -61,7 +64,11 @@ export class Item extends Component {
     })
   	.catch((error) => console.log(error))
   }
-
+  qm = () => {
+	this.setState({
+		currentQuantity: this.state.quantity.value
+	})
+}
 	render() {
 		const { container } = styles;
 		const { item } = this.props.navigation.state.params
@@ -92,7 +99,11 @@ export class Item extends Component {
 					<ItemInfo summary={item.summary}/>
 
 					<CartOptions
-						currentQuantity={currentQuantity}
+						currentQuantity={this.state.quantity.value || currentQuantity}
+						onPress={() => this.setState({ 
+							singlePickerVisible: true, 
+							currentQuantity: this.state.quantity.value
+						})}
 						onAddToCart={() => {
 							Utility.addItem({
 									key: item.key,
@@ -105,6 +116,19 @@ export class Item extends Component {
 									this.setState({showAlert: true})
 								}
 							)
+						}}
+					/>
+					<SinglePickerMaterialDialog
+						title={'Choose quantity:'}
+						items={[{ label: '1', value: 1 }, { label: '2', value: 2 },{ label: '3', value: 3},{ label: '4', value: 4},{ label: '5', value: 5},{ label: '6', value: 6 }, { label: '7', value: 7 },{ label: '8', value: 8},{ label: '9', value: 9},{ label: '10', value: 10}]}
+						visible={this.state.singlePickerVisible}
+						selectedItem={this.state.quantity}
+						onCancel={() => this.setState({ singlePickerVisible: false })}
+						onOk={result => {
+							this.setState({ singlePickerVisible: false });
+							this.setState({ quantity: result.selectedItem });
+							this.setState({ currentQuantity: result.selectedItem.value })
+
 						}}
 					/>
 
