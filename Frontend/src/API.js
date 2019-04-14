@@ -55,6 +55,25 @@ export const updateUserInfo = ({ phoneNumber, firstName, lastName, email, oldPas
   .then((res) => res.data)
 }
 
+export const addnewaddress = ({ country, city, district, street, house_number, Label, FirstName, LastName, PhoneNumber }, token) => {
+  return axios({
+    method: 'POST',
+    url: `${url}/users/update`,
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
+    data: {
+      "Country": country ? country : null,
+    	"City": city ? city  : null,
+      "District": district ? district : null,
+      "Street": street ? street : null,
+      "House Number": house_number ? house_number : null,
+    	"Label": Label ? Label : null,
+      "FirstName": FirstName ? FirstName : null,
+      "LastName": LastName ? LastName : null,
+      "PhoneNumber": PhoneNumber ? PhoneNumber : null,
+    }
+  })
+  .then((res) => res.data)
+}
 // Get Item endpoint [GET]
 export const getItem = (url, token) => {
   return axios.get(`${url}?token=${token}`)
