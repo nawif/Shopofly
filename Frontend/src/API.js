@@ -34,10 +34,7 @@ export const getUserInfo = (token) => {
   return axios({
     method: 'POST',
     url: `${url}/auth/me`,
-    headers: { 'Content-type': 'application/json' },
-    data: {
-      'token': token
-    }
+    headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer ' + token },
   })
   .then((res) => res.data)
 }

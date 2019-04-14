@@ -3,7 +3,9 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
 } from 'react-native';
 
 import * as Global from '../Global'
@@ -30,33 +32,62 @@ export class OrderDetails extends Component {
       detailsSectionImage
     } = styles
 
-    const { order } = this.props
+    let isScreen = false;
+    let order = this.props.order
+
+    // If screen is loaded
+    if(!order) {
+      order = this.props.navigation.state.params.order
+      isScreen = true;
+    }
+
+    const itemsCount = order.items ? order.items.length : 0
 
     return (
         <Container>
-            <View style={simpleContainer}>
-                  <Image source={require('../../assets/images/Account/shopping-bag.png')}/>
-                  <Text style={storeKeyStyle}>Order
-                    <Text style={ orderId }>{order.orderId}</Text>
-                  </Text>
-                  <Text style={ orderIssuedDate }>{order.orderIssuedDate}</Text>
-            </View>
-            <Devider height={1} />
-            <View style={simpleContainer}>
-                  <Image source={require('../../assets/images/Account/box.png')}/>
-                  <Text style={storeKeyStyle}>Shipment Status </Text>
-            </View>
-            { this.renderOrderProgress(order.deliveryStatus) }
-            <View>
-                <ItemSummary item={order.items[0]} />
-            </View>
-            <Devider height={1} />
-            <TouchableOpacity onPress={this.props.onPress}>
-              <View style={simpleContainer} >
-                  <Text style={ detailsSectionText }> View Order Details </Text>
-                  <Image style={ detailsSectionImage } source={require('../../assets/images/Account/Shape.png')}/>
+            <ScrollView>
+              <View style={simpleContainer}>
+                    <Image source={require('../../assets/images/Account/shopping-bag.png')}/>
+                    <Text style={storeKeyStyle}>Order
+                      <Text style={ orderId }> #{ order.orderId }</Text>
+                    </Text>
+                    <Text style={ orderIssuedDate }>{order.orderIssuedDate}</Text>
               </View>
-            </TouchableOpacity>
+              <Devider height={1} />
+              <View style={simpleContainer}>
+                    <Image source={require('../../assets/images/Account/box.png')}/>
+                    <Text style={storeKeyStyle}>Shipment Status </Text>
+              </View>
+
+              { this.renderOrderProgress(order.deliveryStatus) }
+
+              { ! isScreen ? (
+                <ItemSummary item={order.items[0]} />
+              ) : (
+                <View>
+                    <FlatList
+                      data={order.items}
+                      keyExtractor={(item, index) => index.toString()}
+                      renderItem={({item, index}) => (
+                        <View key={index}>
+                          <ItemSummary item={order.items[index]} />
+                          { index != itemsCount-1 ?  <Devider height={20} /> : null }
+                        </View>
+                      )}
+                    />
+                </View>
+              )}
+
+              <Devider height={1} />
+              { isScreen ? null : (
+                <TouchableOpacity onPress={this.props.onPress}>
+                  <View style={simpleContainer} >
+                      <Text style={ detailsSectionText }> View Order Details </Text>
+                      <Image style={ detailsSectionImage } source={require('../../assets/images/Account/Shape.png')}/>
+                  </View>
+                </TouchableOpacity>
+              )}
+            </ScrollView>
         </Container>
     )
   }
