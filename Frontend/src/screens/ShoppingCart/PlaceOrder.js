@@ -72,7 +72,6 @@ export class PlaceOrder extends Component {
 
           <DividerWithHeading label={'Deliver To'} height={headlineHeight} />
           <AddressBox
-            canBeSelected={false}
             item={selectedAddress}
             title={selectedAddress.title}
             address={selectedAddress.address}

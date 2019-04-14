@@ -2,7 +2,7 @@ import React from 'react'
 import { View, ScrollView, Text, Image } from 'react-native'
 import { subtitleStyle } from '../../Styles'
 
-const defaultCardHeight = 130
+const defaultCardHeight = 200
 
 export const ItemReviews = ({ reviews }) => {
   const { container, alignStyle, cardsContainer, cardStyle } = styles
@@ -79,7 +79,7 @@ const styles = {
   },
   cardStyle: {
     flex: 1,
-    width: 160,
+    width: 200,
     height: defaultCardHeight,
     borderWidth: 1,
     borderRadius: 13,
@@ -98,7 +98,7 @@ const styles = {
   },
   reviewerStyle: {
     color: '#2B2B2B',
-    fontSize: 10,
+    fontSize: 14,
     fontFamily: 'Cairo-SemiBold'
   },
   ratingStyle: {
@@ -106,26 +106,26 @@ const styles = {
     alignItems: 'center',
   },
   ratingNumStyle: {
-    fontSize: 10,
+    fontSize: 14,
     fontFamily: 'Cairo-Bold',
     color: '#F3C60B',
     paddingLeft: 5
   },
   bodyStyle: {
     color: '#A1A1A1',
-    fontSize: 7,
+    fontSize: 12,
     fontFamily: 'Cairo-SemiBold',
     paddingTop: 10,
     paddingBottom: 10,
   },
   dateStyle: {
     color: '#CFCFCF',
-    fontSize: 7,
+    fontSize: 10,
     fontFamily: 'Cairo-SemiBold'
   },
   readStyle: {
     color: '#3061E9',
-    fontSize: 8,
+    fontSize: 10,
     fontFamily: 'Cairo-Bold'
   }
 }

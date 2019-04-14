@@ -24,7 +24,7 @@ export class AddNewAddress extends Component {
             {this.renderTextField("City")}
             {this.renderTextField("Label")}
         </SectionWithHeader>
-        <SectionWithHeader header="LOCATION INFORMATION" >
+        <SectionWithHeader header="PERSONAL INFORMATION" >
             {this.renderTextField("First Name")}
             {this.renderTextField("Last Name")}
             {this.renderTextField("Phone Number")}

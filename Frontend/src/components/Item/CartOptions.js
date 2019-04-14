@@ -17,7 +17,7 @@ export const CartOptions = ({ currentQuantity, onAddToCart, onPress }) => {
          style={styles.button}
          onPress={onPress}
        >
-        <Circle text={currentQuantity} />
+        <Circle text={currentQuantity}/>
         </TouchableOpacity>
         <GradientButton
           borderRadius={size}

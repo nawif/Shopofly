@@ -55,7 +55,7 @@ export const ItemDetails = ({ details }) => {
 
       <Devider height={1}/>
 
-      <ItemSpecifications specifications={specifications}/>
+
 
       <Devider />
     </View>
