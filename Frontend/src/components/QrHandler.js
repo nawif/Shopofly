@@ -64,9 +64,9 @@ export default class QrHandler extends Component {
             	confirmButtonColor="#448AFF"
             	confirmText="Preview"
               onConfirmPressed={() => this.loadItem()}
-              cancelButtonColor="#FF5722"
-            	cancelText="Close"
-              onCancelPressed={() => this.hideAlert()}
+              cancelButtonColor="#14BAAB"
+            	cancelText="View as AR"
+              onCancelPressed={() => this.props.enableAR(this.state.item.ar_url)}
               showCancelButton={true}
             	messageStyle={{ textAlign: 'left' }}
             />
@@ -92,6 +92,7 @@ export default class QrHandler extends Component {
 
             this.setState({
                 showAlert: true,
+                item,
                 alertMessage: `Name: ${item.itemName} \nPrice: ${item.price} \nfrom ${item.supplier.supplierName}`
              })
           })
