@@ -53,7 +53,7 @@ export  class AccountSettings extends Component {
 
     return (
     <ImageBackground source={require('../../assets/splash.png')} style={styles.container} >
-        <ImageAndTitle style={styles.header} title={`${firstName} ${lastName}`} image={{uri:'https://www.ftcksu.com/v1/users/getUserImage/2'}} />
+        <ImageAndTitle style={styles.header} title={`${firstName} ${lastName}`} image={{uri:'https://www.flynz.co.nz/wp-content/uploads/profile-placeholder.png'}} />
         <View style={styles.options}>
             <DividerWithHeading
                 label={'Personal Information'}

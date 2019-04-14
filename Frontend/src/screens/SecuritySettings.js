@@ -23,6 +23,7 @@ export class SecuritySettings extends Component {
         value={currentText}
         label={label}
         onChangeText={notifyState}
+        secureTextEntry
       />
     )
   }
