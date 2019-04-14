@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+
 import {
   Login,
   Register,
@@ -20,9 +21,9 @@ import {
   SecuritySettings,
   PersonalSettings,
   } from './screens'
+
 import images from '../assets/images'
 import { TabBarIcon } from './components'
-
 
 const scanNavigator = createStackNavigator({
   Scan: {
