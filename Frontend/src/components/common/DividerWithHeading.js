@@ -43,7 +43,7 @@ export const DividerWithHeading = (props) => {
               borderColor={'#F0F0F0'}
               paddingTop={0}
               paddingBottom={0.5}
-              marginLeft={'40%'}
+              marginLeft={150}
             />
           ) : null
            }

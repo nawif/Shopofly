@@ -75,14 +75,14 @@ export class PlaceOrder extends Component {
 
           <DividerWithHeading label={'Deliver To'} height={headlineHeight} />
           <AddressBox
-            canBeSelected={false}
+            onAddressSelect={(text) => text}
             item={selectedAddress}
             title={selectedAddress.title}
             address={selectedAddress.address}
             phone={selectedAddress.phone}
             name={selectedAddress.name}
             hasOptions={false}
-            isSelected={false}
+
           />
 
           { cart ? this.renderItems() : null }

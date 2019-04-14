@@ -89,7 +89,7 @@ export default class QrHandler extends Component {
           API.getItem(scannedText, token)
           .then((response) => {
             const item = response.data
-
+            const price = item.price
             this.setState({
                 showAlert: true,
                 item,
