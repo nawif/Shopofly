@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-
 import { defaultTextContainer } from '../../Styles'
 import { ButtonWithRadius } from './ButtonWithRadius'
 import images from '../../../assets/images'
@@ -21,23 +20,35 @@ export const ItemSummary = (props) => {
 }
 
 const renderSuitableButtons = (props) => {
-  const { buttonsContainer, quantityStyle } = styles
-  const { withQuantity, withAddToCart } = props
+  const { buttonsContainer, quantityStyle, numberStyle } = styles
+  const { withQuantity, withAddToCart, withRemoveFromCart, item } = props
   return (
     <View style={[defaultTextContainer, buttonsContainer]}>
-        { 
+        {
           withQuantity ? (
-            <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.quantity}</Text></Text>
+            <Text style={quantityStyle}>Quantity:  <Text style={numberStyle}>{item.currentQuantity}</Text></Text>
           ) : null
         }
-        { 
+        {
           withAddToCart ? (
-            <ButtonWithRadius icon={images.shoppingCartIcon} label='ADD TO CART' color='#A4A4A4' />
+            <ButtonWithRadius
+              icon={images.shoppingCartIcon}
+              label='ADD TO CART'
+              color='#A4A4A4'
+              onPress={props.onAddPress}
+            />
           ) : null
         }
-
-        <ButtonWithRadius icon={images.removeIcon} label='REMOVE' color='#D76B6B' />
-
+        {
+          withRemoveFromCart ? (
+            <ButtonWithRadius
+              icon={images.removeIcon}
+              label='REMOVE'
+              color='#D76B6B'
+              onPress={props.onRemovePress}
+            />
+          ) : null
+        }
     </View>
   )
 }
@@ -53,7 +64,7 @@ const renderImage = (item) => {
 }
 
 const renderItemDetails = (item) => {
-  const { 
+  const {
     leftStyle,
     storeName,
     titleStyle,
@@ -63,10 +74,12 @@ const renderItemDetails = (item) => {
     priceStyle,
     muteStyle
   } = styles
+
+  const price = item.summary.price
   return (
     <View style={leftStyle}>
-      <Text style={storeName}>{ item.seller }</Text>
-      <Text style={titleStyle}>{ item.title }</Text>
+      <Text style={storeName}>{ item.summary.manufacturer }</Text>
+      <Text style={titleStyle}>{ item.summary.itemName }</Text>
 
       <View style={groupStyle}>
         <Image
@@ -74,10 +87,10 @@ const renderItemDetails = (item) => {
           source={require('../../../assets/store.png')}
         />
         <Text style={storeKeyStyle}>Sold by</Text>
-        <Text style={storeValueStyle}>{item.storeDetails.store}</Text>
+        <Text style={storeValueStyle}>{item.summary.seller}</Text>
       </View>
 
-      <Text style={priceStyle}>SAR { item.price } <Text style={muteStyle}>(Onclusive of VAT)</Text></Text>
+      <Text style={priceStyle}>SAR { price.substring(1, price.length) } <Text style={muteStyle}>(Inclusive of VAT)</Text></Text>
     </View>
 
   )

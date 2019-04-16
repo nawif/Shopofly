@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { PRIMARY_COLOR } from '../../Global';
+import { ButtonWithRadius } from '../'
+import images from '../../../assets/images'
 
 export const DividerWithHeading = (props) => {
-
+  const { withEdit } = props
   const backgroundStyles = {
     height: props.height || 70,
     backgroundColor: '#F0F0F0',
@@ -16,8 +18,8 @@ export const DividerWithHeading = (props) => {
 
   const textStyle = {
     fontFamily: 'Cairo-Bold',
-    fontSize: 24,
-    color: PRIMARY_COLOR,
+    fontSize: props.fontSize || 24,
+    color: props.color || PRIMARY_COLOR,
   }
 
   const subtextStyle = {
@@ -32,6 +34,19 @@ export const DividerWithHeading = (props) => {
     <View style={backgroundStyles}>
         <Text style={textStyle}>{ props.label }</Text>
         <Text style={subtextStyle}>{ props.sublabel }</Text>
+        { 
+          withEdit ?(
+            <ButtonWithRadius
+              label='Edit'
+              color='#3061E9'
+              onPress={props.onPress}
+              borderColor={'#F0F0F0'}
+              paddingTop={0}
+              paddingBottom={0.5}
+              marginLeft={150}
+            />
+          ) : null
+           }
     </View>
   )
 }

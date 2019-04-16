@@ -7,16 +7,17 @@ export class OptionCardList extends Component {
   render() {
 
     return (
-    
+
         <View>
             <FlatList
                 style={{ height:'100%'}}
                 data={this.props.options}
-                renderItem={ ({item})  => 
-                        <TouchableOpacity onPress={item.action} >
-                            <OptionCard key={item.title} title={item.title} icon={item.icon} textStyle={item.textStyle}  />
+                ketExtractor={(item, index) => index.toString()}
+                renderItem={ ({item, index})  =>
+                        <TouchableOpacity onPress={item.action}>
+                            <OptionCard title={item.title} icon={item.icon} textStyle={item.textStyle}  />
                         </TouchableOpacity>
-                }  
+                }
             />
         </View>
     )

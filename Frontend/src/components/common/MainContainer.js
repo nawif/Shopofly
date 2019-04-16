@@ -27,12 +27,21 @@ class MainContainerComponent extends Component {
     this.props.setKeyboardState(false)
   }
 
+  _getBackgroundImages(){
+    if(this.props.isTransparent){
+      return null
+    }else
+        return require('../../../assets/splash.png');
+  }
+  
   render() {
     const { container } = styles
 
+    
+
   	return (
       <ImageBackground
-        source={require('../../../assets/splash.png')}
+        source={this._getBackgroundImages()}
         style={container}
       >
         { this.props.children }

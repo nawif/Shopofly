@@ -8,26 +8,22 @@ import {
 import {
   SaleBadge,
   CoreItemSpecs,
-} from './'
+} from '../'
 
-export const ItemInfo = ({}) => {
-  const item = {
-    seller:'Apple',
-    title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
-    rating: 4.8,
-    reviews: 4,
-    specification:{ dimensions:{width:'10',height:'10'} },
-    price: '2,890.00',
-    coreItemSpecs: [
-      { specKey: 'Color', specValue: 'Black' },
-      { specKey: 'Size', specValue: '64 GB'}
-    ]
-  }
+export const ItemInfo = ({ summary }) => {
+  const {
+    manufacturer,
+    itemName,
+    price,
+    rating,
+    reviews_count,
+    primary_specifications,
+  } = summary
 
   const {
     container,
     sellerStyle,
-    titleStyle,
+    itemNameStyle,
     reviewStyle,
     ratingStyle,
     reviewCountStyle,
@@ -40,26 +36,26 @@ export const ItemInfo = ({}) => {
 
   return (
     <View style={container}>
-      <Text style={sellerStyle}>{item.seller}</Text>
+      <Text style={sellerStyle}>{manufacturer}</Text>
 
-      <Text style={titleStyle}>{item.title}</Text>
+      <Text style={itemNameStyle}>{itemName}</Text>
 
       <View style={reviewStyle}>
         <Image
-          source={require('../../assets/star.png')}
+          source={require('../../../assets/star.png')}
         />
-        <Text style={ratingStyle}>{item.rating}</Text>
-        <Text style={reviewCountStyle}>{item.reviews} reviews</Text>
+        <Text style={ratingStyle}>{rating}</Text>
+        <Text style={reviewCountStyle}>{reviews_count} reviews</Text>
       </View>
 
-      <Text style={priceStyle}>SAR {item.price} <Text style={infoStyle}>(inclusive of vat)</Text></Text>
+      <Text style={priceStyle}>SAR {price.substring(1, price.length)} <Text style={infoStyle}>(inclusive of vat)</Text></Text>
 
       <View style={saleStyle}>
-        <Text style={oldPriceStyle}>SAR {item.price}</Text>
+        <Text style={oldPriceStyle}>SAR {price}</Text>
         <SaleBadge percentage={22} marginLeft={'2%'}/>
       </View>
 
-      <CoreItemSpecs specs={item.coreItemSpecs} />
+      <CoreItemSpecs specs={primary_specifications} />
     </View>
   )
 }
@@ -76,7 +72,7 @@ const styles = {
     color: '#3061E9',
     fontSize: 12,
   },
-  titleStyle: {
+  itemNameStyle: {
     color: 'black',
     fontSize: 16,
     marginTop: '2%',

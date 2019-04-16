@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-import { Devider } from './'
+import { Devider } from '../'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { ItemDescription, ItemSpecifications } from './local'
 
 const iconSize = 20
 
-export const ItemDetails = (props) => {
+export const ItemDetails = ({ details }) => {
   const {
     simpleContainer,
     iconStyle,
@@ -16,18 +16,12 @@ export const ItemDetails = (props) => {
     storeNameColor
   } = styles
 
-  const item = {
-    storeDetails: {
-      store: 'Extra Store',
-      warranty: '6 months',
-    },
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    specifications: [
-      { key: 'Key', value: 'Value'},
-      { key: 'Key', value: 'Value'},
-      { key: 'Key', value: 'Value'},
-    ],
-  }
+  const {
+    supplierName,
+    warranty,
+    description,
+    specifications,
+  } = details
 
   return (
     <View>
@@ -40,7 +34,7 @@ export const ItemDetails = (props) => {
             style={iconStyle}
           />
           <Text style={storeKeyStyle}>Sold by</Text>
-          <Text style={[storeValueStyle, storeNameColor]}>{item.storeDetails.store}</Text>
+          <Text style={[storeValueStyle, storeNameColor]}>{supplierName}</Text>
         </View>
 
         <Devider height={1} />
@@ -52,16 +46,16 @@ export const ItemDetails = (props) => {
             style={iconStyle}
           />
           <Text style={storeKeyStyle}>Warranty</Text>
-          <Text style={storeValueStyle}>{item.storeDetails.warranty}</Text>
+          <Text style={storeValueStyle}>{warranty}</Text>
         </View>
 
       <Devider />
 
-      <ItemDescription description={item.description}/>
+      <ItemDescription description={description}/>
 
       <Devider height={1}/>
 
-      <ItemSpecifications specifications={item.specifications}/>
+
 
       <Devider />
     </View>

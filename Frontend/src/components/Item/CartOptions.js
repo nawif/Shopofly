@@ -1,17 +1,24 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Circle, GradientButton } from './'
+import { View, AsyncStorage, TouchableOpacity } from 'react-native'
+import { Circle, GradientButton } from '../'
+import { SinglePickerMaterialDialog } from 'react-native-material-dialog'
 
-export const CartOptions = (props) => {
+export const CartOptions = ({ currentQuantity, onAddToCart, onPress }) => {
   const { container, cartOptionsStyle } = styles
   const size = 45
-
+  
+  this.state = { currentQuantity: currentQuantity }
+  
   return (
     <View style={container}>
       <View style={cartOptionsStyle}>
 
-        <Circle text={props.currentQuantity} size={size} />
-
+      <TouchableOpacity
+         style={styles.button}
+         onPress={onPress}
+       >
+        <Circle text={currentQuantity}/>
+        </TouchableOpacity>
         <GradientButton
           borderRadius={size}
           width={'93%'}
@@ -19,6 +26,7 @@ export const CartOptions = (props) => {
           fontFamily={'Cairo-SemiBold'}
           label={'ADD TO CART'}
           isValid={true}
+          onClick={onAddToCart}
         />
 
       </View>

@@ -1,10 +1,10 @@
 import React from 'react'
 import { TouchableOpacity, Text, ActivityIndicator, View } from 'react-native'
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo'
 import * as Global from '../../Global'
 
-const GradientButton = (props) => {
-	const { mainContainer } = styles
+export const GradientButton = (props) => {
+	// const { mainContainer } = styles
 
 	const containerStyles = {
 		width: props.width || '80%',
@@ -24,9 +24,15 @@ const GradientButton = (props) => {
 		alignSelf: 'center',
 		fontFamily: props.fontFamily || 'Roboto-Medium',
 		color: props.labelColor || 'white',
-		fontSize: 20,
-		paddingTop: props.padding || null,
-		paddingBottom: props.padding || null,
+		fontSize: props.fontSize ||20,
+		paddingTop: props.paddingTop || null,
+		paddingBottom: props.paddingBottom || null,
+		padding: props.padding || null
+	}
+	const mainContainer = {
+		flex:1,
+    justifyContent: 'center',
+		alignItems: 'center',
 	}
 
 	const firstColor = props.firstColor || Global.FIRST_COLOR
@@ -56,12 +62,10 @@ const GradientButton = (props) => {
 	)
 }
 
-const styles = {
-	mainContainer: {
-		flex:1,
-    justifyContent: 'center',
-    alignItems: 'center'
-	}
-}
-
-export { GradientButton }
+// const styles = {
+// 	mainContainer: {
+// 		flex:1,
+//     justifyContent: 'center',
+//     alignItems: 'center'
+// 	}
+// }

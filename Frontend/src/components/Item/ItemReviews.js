@@ -1,32 +1,11 @@
 import React from 'react'
 import { View, ScrollView, Text, Image } from 'react-native'
-import { subtitleStyle } from '../Styles'
+import { subtitleStyle } from '../../Styles'
 
-const defaultCardHeight = 130
+const defaultCardHeight = 200
 
-export const ItemReviews = (props) => {
+export const ItemReviews = ({ reviews }) => {
   const { container, alignStyle, cardsContainer, cardStyle } = styles
-
-  const cards = [
-    {
-      reviewer: 'Osama Aloqaily',
-      rating: 4.8,
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      date: '27 jan 2019'
-    },
-    {
-      reviewer: 'Nawaf Alquaid',
-      rating: 4.7,
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      date: '27 jan 2019'
-    },
-    {
-      reviewer: 'Osama Aloqaily',
-      rating: 4.8,
-      feedback: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      date: '27 jan 2019'
-    }
-  ]
 
 	return (
     <View>
@@ -38,14 +17,14 @@ export const ItemReviews = (props) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-          { getCards(cards) }
+          { getCards(reviews) }
         </ScrollView>
       </View>
     </View>
 	)
 }
 
-const getCards = (cards) => {
+const getCards = (reviews) => {
   const {
     cardStyle,
     reviewerStyle,
@@ -58,7 +37,7 @@ const getCards = (cards) => {
     readStyle,
   } = styles
 
-  return cards.map((element, index) => {
+  return reviews.map((element, index) => {
     return (
       <View style={cardStyle} key={index}>
         <View style={cardContainerStyle}>
@@ -66,7 +45,7 @@ const getCards = (cards) => {
             <Text style={reviewerStyle}>{element.reviewer}</Text>
 
             <View style={ratingStyle}>
-              <Image source={require('../../assets/star.png')}/>
+              <Image source={require('../../../assets/star.png')}/>
               <Text style={ratingNumStyle}>{element.rating}</Text>
             </View>
           </View>
@@ -100,7 +79,7 @@ const styles = {
   },
   cardStyle: {
     flex: 1,
-    width: 160,
+    width: 200,
     height: defaultCardHeight,
     borderWidth: 1,
     borderRadius: 13,
@@ -119,7 +98,7 @@ const styles = {
   },
   reviewerStyle: {
     color: '#2B2B2B',
-    fontSize: 10,
+    fontSize: 14,
     fontFamily: 'Cairo-SemiBold'
   },
   ratingStyle: {
@@ -127,26 +106,26 @@ const styles = {
     alignItems: 'center',
   },
   ratingNumStyle: {
-    fontSize: 10,
+    fontSize: 14,
     fontFamily: 'Cairo-Bold',
     color: '#F3C60B',
     paddingLeft: 5
   },
   bodyStyle: {
     color: '#A1A1A1',
-    fontSize: 7,
+    fontSize: 12,
     fontFamily: 'Cairo-SemiBold',
     paddingTop: 10,
     paddingBottom: 10,
   },
   dateStyle: {
     color: '#CFCFCF',
-    fontSize: 7,
+    fontSize: 10,
     fontFamily: 'Cairo-SemiBold'
   },
   readStyle: {
     color: '#3061E9',
-    fontSize: 8,
+    fontSize: 10,
     fontFamily: 'Cairo-Bold'
   }
 }

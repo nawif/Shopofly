@@ -4,17 +4,17 @@ import { connect } from 'react-redux'
 
 const InputSectionComponent = (props) => {
   const propsStyles = {
-    height: '30%',
+    // height: '30%',
     width: '85%',
     flexDirection: 'column',
 		justifyContent: 'space-around',
     alignContent: props.alignContent || 'space-around',
     alignSelf: 'center',
-    marginTop: props.keyboardState ? 30 : null
+    marginBottom: props.keyboardState ? 30 : null,
   }
 
 	return (
-    <View style={propsStyles}>
+    <View style={[propsStyles, props.style]}>
       { props.children }
     </View>
 	)

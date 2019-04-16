@@ -3,9 +3,9 @@ import {
   View,
   Text
 } from 'react-native'
-import { CoreSpec } from './'
+import { CoreSpec } from '../'
 
-const CoreItemSpecs = ({ specs }) => {
+export const CoreItemSpecs = ({ specs }) => {
   return getSpecifications(specs)
 }
 
@@ -48,5 +48,3 @@ const styles = {
     justifyContent: 'space-between'
   }
 }
-
-export { CoreItemSpecs }

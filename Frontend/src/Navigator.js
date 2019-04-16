@@ -1,7 +1,27 @@
 import React from 'react'
 import { Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import { Login, Register, Item, Scan, Profile, Checkout, AddressBook, StarredItems } from './screens'
+
+import {
+  Login,
+  Register,
+  Item,
+  Scan,
+  Profile,
+  PlaceOrder,
+  AddressBook,
+  StarredItems,
+  SelectAddress,
+  Cart,
+  AddNewAddress,
+  OrderDetails,
+  OrderList,
+  OrderConfirmation,
+  AccountSettings,
+  SecuritySettings,
+  PersonalSettings,
+  } from './screens'
+
 import images from '../assets/images'
 import { TabBarIcon } from './components'
 
@@ -40,7 +60,132 @@ const profileNavigator = createStackNavigator({
       }
     }
   },
+  AddNewAddress: {
+    screen: AddNewAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  OrderDetails: {
+    screen: OrderDetails,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  OrderList: {
+    screen: OrderList,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  AccountSettings: {
+    screen: AccountSettings,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  PersonalSettings: {
+    screen: PersonalSettings,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  SecuritySettings: {
+    screen: SecuritySettings,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
 })
+
+
+
+// TODO: make main screen as cart step 1
+const cartNavigator = createStackNavigator({
+  Cart: {
+    screen: Cart,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SelectAddress: {
+    screen: SelectAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  PlaceOrder: {
+    screen: PlaceOrder,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  AddNewAddress: {
+    screen: AddNewAddress,
+    navigationOptions: {
+      headerTitle: (
+          <Image style={{ height: 40, resizeMode: 'contain' }} source={require('../assets/headerLogo.png')}/>
+      ),
+      headerStyle: {
+        height: 60,
+      }
+    }
+  },
+  OrderConfirmation: {
+    screen: OrderConfirmation,
+    navigationOptions: {
+      header: null,
+
+    }
+  }
+})
+
+// hide tabbar for orderConfirmation
+cartNavigator.navigationOptions = ({navigation}) => {
+  return {
+    tabBarVisible: navigation.state.routes[navigation.state.index].routeName == 'OrderConfirmation' ? false : true
+  }
+}
 
 /* Main Tab Navigator */
 let tabNavigator = createBottomTabNavigator(
@@ -49,7 +194,7 @@ let tabNavigator = createBottomTabNavigator(
     Scan: scanNavigator,
     Profile: profileNavigator,
     Starred: StarredItems,
-    Cart: Checkout
+    Cart: cartNavigator,
   },
 
   /* Configuration */

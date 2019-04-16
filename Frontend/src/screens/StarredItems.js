@@ -1,48 +1,98 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native' 
+import { View, FlatList, AsyncStorage, Text } from 'react-native'
 import { DividerWithHeading, ItemSummary, Devider } from '../components'
+import AwesomeAlert from 'react-native-awesome-alerts'
+
+import * as Utility from '../Utility'
 
 export class StarredItems extends Component {
-    state = { starredItems: [] }
+    state = { starredItems: [], showAlert: false }
 
-    componentDidMount() {
-        this.loadItems()
+    componentWillMount() {
+      this.didFocusListener = this.props.navigation.addListener(
+        'didFocus',
+        () => { this.loadItems() },
+      )
     }
 
     loadItems() {
-        const item = {
-            seller:'Apple',
-            title:'iPhone XS With FaceTime Space Gray 64GB 4G LTE',
-            price: '2,890.00',
-            storeDetails: {
-            store: 'Extra Store',
-            },
-            quantity: 3,
-            image: 'https://www.jagojet.com/media/catalog/product/cache/4/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/g/r/gray-1_2.png'
-        }
-
-        this.setState({ starredItems: [item, item, item] })
+      AsyncStorage.getItem('starredItems')
+      .then((starredItems) => {
+        const items = JSON.parse(starredItems)
+        this.setState({starredItems: items})
+      })
     }
-    
+
 
     render() {
-        const { starredItems } = this.state
-        return (
-            <View style={{ flex: 1 }}>
-                <DividerWithHeading label='Starred Items' sublabel={starredItems.length + '  Items'} height={100} />
-                <FlatList
-                    data={starredItems}
-                    keyExtractor={ (item, index) => index.toString()}
-                    renderItem={({item, index}) => (
-                        <View key={index}>
-                            <ItemSummary item={item} withAddToCart />
-                            { index != starredItems.length-1 ? <Devider /> : null }
-                        </View>
-                    )
-                        
-                    }
-                />
-            </View>
-        )
+      const { itemsEmptyStyle } = styles
+      const { starredItems } = this.state
+      const itemCount = starredItems ? starredItems.length : 0
+
+      return (
+          <View style={{ flex: 1 }}>
+              <DividerWithHeading label='Starred Items' sublabel={itemCount + '  Items'} height={100} />
+              { itemCount > 0 ? (
+                this.renderItemsList(starredItems, itemCount)
+              ) : (
+                <Text style={itemsEmptyStyle}>You have no starred items yet.</Text>
+              )}
+              { this.renderAlert() }
+          </View>
+      )
     }
+
+    renderItemsList(starredItems, itemCount) {
+      return (
+        <FlatList
+            data={starredItems}
+            keyExtractor={ (item, index) => index.toString()}
+            renderItem={({item, index}) => (
+                <View key={index}>
+                    <ItemSummary item={item}
+                      withAddToCart
+                      withRemoveFromCart
+
+                      onAddPress={() => {
+                        Utility.addItem(item, 'cart', (newCart) => {
+                          this.setState({showAlert: true})
+                        })
+                      }}
+
+                      onRemovePress={() => {
+                        Utility.removeItem(index, 'starredItems', (newStarredItems) => {
+                          this.setState({starredItems: newStarredItems})
+                        })
+                      }}
+                    />
+                    { index != itemCount-1 ? <Devider /> : null }
+                </View>
+            )
+
+            }
+        />
+      )
+    }
+
+    renderAlert() {
+      return <AwesomeAlert
+  			show={this.state.showAlert}
+  			message={"Successfully added item to cart!"}
+  			closeOnTouchOutside={true}
+  			closeOnHardwareBackPress={true}
+  			showConfirmButton={true}
+  			confirmButtonColor="#448AFF"
+  			confirmText="Okay"
+  			onConfirmPressed={() => this.setState({showAlert: false})}
+  		/>
+    }
+}
+
+const styles = {
+  itemsEmptyStyle: {
+    alignSelf: 'center',
+    fontFamily: 'Cairo-Bold',
+    fontSize: 18,
+    marginTop: 50,
+  }
 }
